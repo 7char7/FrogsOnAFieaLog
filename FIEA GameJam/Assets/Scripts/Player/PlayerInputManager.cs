@@ -8,6 +8,7 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] private PlayerLook playerLook;
     [SerializeField] private Gun gun;
     [SerializeField] private Pickaxe pickaxe;
+    [SerializeField] private Torch torch;
     [SerializeField] private ToolManager toolManager;
 
     private InputSystem_Actions inputActions;
@@ -34,6 +35,11 @@ public class PlayerInputManager : MonoBehaviour
         if (pickaxe == null)
         {
             pickaxe = GetComponentInChildren<Pickaxe>();
+        }
+
+        if (torch == null)
+        {
+            torch = GetComponentInChildren<Torch>();
         }
 
         if (toolManager == null)
@@ -89,6 +95,16 @@ public class PlayerInputManager : MonoBehaviour
             Debug.LogError("Pickaxe null");
         }
 
+        if (torch != null)
+        {
+            inputActions.Player.PlaceTorch.performed += torch.OnPlaceTorch;
+            inputActions.Player.PlaceTorch.canceled += torch.OnPlaceTorch;
+        }
+        else
+        {
+            Debug.LogError("Torch null");
+        }
+
         if (toolManager != null)
         {
             inputActions.Player.SwitchTool.performed += toolManager.OnSwitchTool;
@@ -126,6 +142,12 @@ public class PlayerInputManager : MonoBehaviour
         {
             inputActions.Player.Mine.started -= pickaxe.StartMining;
             inputActions.Player.Mine.canceled -= pickaxe.StopMining;
+        }
+
+        if (torch != null)
+        {
+            inputActions.Player.PlaceTorch.performed -= torch.OnPlaceTorch;
+            inputActions.Player.PlaceTorch.canceled -= torch.OnPlaceTorch;
         }
 
         if (toolManager != null)

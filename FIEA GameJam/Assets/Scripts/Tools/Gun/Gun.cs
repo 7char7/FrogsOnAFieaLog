@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEditor.Rendering.LookDev;
-using Unity.VisualScripting;
 
 public abstract class Gun : MonoBehaviour
 {

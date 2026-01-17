@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Torch
   m_EditorClassIdentifier: Assembly-CSharp::Stats
   instanceStats: []
-  stats: []
+  stats:
+  - statType: 13
+    statValue: 5
   appliedUpgrades: []

@@ -95,6 +95,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PlaceTorch",
+                    "type": "Button",
+                    "id": "072caf00-9f4f-4ab6-814a-afdce1eeffaa",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -425,6 +434,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchTool",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1a5b669-c9cc-4522-aace-c7a2afa63509",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlaceTorch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

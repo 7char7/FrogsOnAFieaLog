@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e2d29db318e204b8f304d56f8ec88e, type: 3}
   m_Name: MaxTorches
   m_EditorClassIdentifier: Assembly-CSharp::StatsUpgrade
-  upgradeName: 
+  upgradeName: Number of Torches
   upgradeDescription: 
   unitsToUpgrade: []
-  upgradeToApply: []
+  upgradeToApply:
+  - statType: 13
+    statValue: 5
   isPercentageUpgrade: 0
