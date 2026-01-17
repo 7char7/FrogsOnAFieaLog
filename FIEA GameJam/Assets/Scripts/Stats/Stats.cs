@@ -20,7 +20,7 @@ public enum Stat
 }
 
 
-[CreateAssetMenu(fileName = "New Stats", menuName = "ScriptableObject/Stats")]
+[CreateAssetMenu(fileName = "New Stats", menuName = "Scriptable Objects/Stats")]
 public class Stats : ScriptableObject
 {
     public List<StatInfo> instanceStats = new List<StatInfo>();

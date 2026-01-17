@@ -16,14 +16,14 @@ public class Shotgun : Gun
         {
             RaycastHit hit;
             Vector3 shootDirection = GetShootingDirection();
-            if (Physics.Raycast(cameraTransform.position, GetShootingDirection(), out hit, range))
+            if (Physics.Raycast(cameraTransform.position, GetShootingDirection(), out hit, gunStatsScriptableObject.GetStat(Stat.range)))
             {
                 CreateBulletTrail(hit.point);
                 Debug.Log("Hit " + hit.transform.name);
             }
             else
             {
-                CreateBulletTrail(cameraTransform.position + shootDirection.normalized * range);
+                CreateBulletTrail(cameraTransform.position + shootDirection.normalized * gunStatsScriptableObject.GetStat(Stat.range));
             }
         }
     }

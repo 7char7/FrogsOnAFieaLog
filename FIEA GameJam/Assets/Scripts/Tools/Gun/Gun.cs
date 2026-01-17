@@ -8,17 +8,9 @@ using Unity.VisualScripting;
 public abstract class Gun : MonoBehaviour
 {
     [SerializeField] protected Transform cameraTransform;
+    public Stats gunStatsScriptableObject;
 
-    [Header("Gun Settings")]
-    public float range;
-    public float damage;
-    public float fireRate;
-    WaitForSeconds fireRateWait;
-    public int maxAmmo;
-    public int currentAmmo;
-    public float reloadTime;
-    WaitForSeconds reloadWait;
-    public float spreadAngle;
+    public float currentAmmo;
 
     [Header("Bullet Trail")]
     [SerializeField] GameObject trailPrefab;
@@ -28,24 +20,26 @@ public abstract class Gun : MonoBehaviour
 
     protected virtual void Awake()
     {
-        fireRateWait = new WaitForSeconds(1f / fireRate);
-        reloadWait = new WaitForSeconds(reloadTime);
-        currentAmmo = maxAmmo;
+        gunStatsScriptableObject = Instantiate(gunStatsScriptableObject);
+        currentAmmo = gunStatsScriptableObject.GetStat(Stat.maxAmmo);
     }
 
     public virtual void Shoot()
     {
+        if (!CanShoot())
+            return;
+        
         currentAmmo--;
         RaycastHit hit;
         Vector3 shootDirection = GetShootingDirection();
-        if (Physics.Raycast(cameraTransform.position, GetShootingDirection(), out hit, range))
+        if (Physics.Raycast(cameraTransform.position, GetShootingDirection(), out hit, gunStatsScriptableObject.GetStat(Stat.range)))
         {
             CreateBulletTrail(hit.point);
             Debug.Log("Hit " + hit.transform.name);
         }
         else
         {
-            CreateBulletTrail(cameraTransform.position + shootDirection.normalized * range);
+            CreateBulletTrail(cameraTransform.position + shootDirection.normalized * gunStatsScriptableObject.GetStat(Stat.range));
         }
     }
 
@@ -56,23 +50,23 @@ public abstract class Gun : MonoBehaviour
 
     protected virtual IEnumerator Reload()
     {
-        if (currentAmmo == maxAmmo)
+        if (currentAmmo == gunStatsScriptableObject.GetStat(Stat.maxAmmo))
             yield return null;
 
         Debug.Log("Reloading...");
-        yield return reloadWait;
-        currentAmmo = maxAmmo;
+        yield return new WaitForSeconds(1f / gunStatsScriptableObject.GetStat(Stat.reloadSpeed));
+        currentAmmo = gunStatsScriptableObject.GetStat(Stat.maxAmmo);
         Debug.Log("Reloaded");
     }
 
     protected Vector3 GetShootingDirection()
     {
-        Vector3 targetPosition = cameraTransform.position + cameraTransform.forward * range;
+        Vector3 targetPosition = cameraTransform.position + cameraTransform.forward * gunStatsScriptableObject.GetStat(Stat.range);
 
         targetPosition = new Vector3(
-            targetPosition.x + Random.Range(-spreadAngle, spreadAngle),
-            targetPosition.y + Random.Range(-spreadAngle, spreadAngle),
-            targetPosition.z + Random.Range(-spreadAngle, spreadAngle)
+            targetPosition.x + Random.Range(-gunStatsScriptableObject.GetStat(Stat.bulletSpread), gunStatsScriptableObject.GetStat(Stat.bulletSpread)),
+            targetPosition.y + Random.Range(-gunStatsScriptableObject.GetStat(Stat.bulletSpread), gunStatsScriptableObject.GetStat(Stat.bulletSpread)),
+            targetPosition.z + Random.Range(-gunStatsScriptableObject.GetStat(Stat.bulletSpread), gunStatsScriptableObject.GetStat(Stat.bulletSpread))
         );
 
         return targetPosition - cameraTransform.position;
@@ -83,7 +77,7 @@ public abstract class Gun : MonoBehaviour
         while (true)
         {
             Shoot();
-            yield return fireRateWait;
+            yield return new WaitForSeconds(1f / gunStatsScriptableObject.GetStat(Stat.fireRate));
         }
     }
 
