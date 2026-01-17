@@ -2,11 +2,14 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Pickaxe : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private Transform cameraTransform;
-    public Stats pickaxeStatsScriptableObject; 
+    [SerializeField] private Image crystalHealthBar;
+    public Stats pickaxeStatsScriptableObject;
 
     [Header("General Settings")]
     [SerializeField] private float reachDistance;
@@ -14,25 +17,40 @@ public class Pickaxe : MonoBehaviour
     [SerializeField] private float miningSpeed;
     [SerializeField] private float miningDamage;
     private Coroutine miningCoroutine;
+    private float nextMineTime;
 
     void Awake()
     {
+        crystalHealthBar.gameObject.SetActive(false);
         pickaxeStatsScriptableObject = Instantiate(pickaxeStatsScriptableObject);
+        nextMineTime = 0f;
     }
 
-    public IEnumerator Mine()
+    public void Mine()
+    {
+        if (Time.time < nextMineTime)
+            return;
+
+        RaycastHit hit;
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, reachDistance))
+        {
+            if (hit.transform.CompareTag("Mineable"))
+            {
+                Debug.Log("Mining " + hit.transform.name);
+                Crystal crystal = hit.transform.GetComponent<Crystal>();
+                crystal.MineCrystal(pickaxeStatsScriptableObject.GetStat(Stat.miningDamage));
+                UpdateCrystalHealthBar(crystal);
+            }
+        }
+
+        nextMineTime = Time.time + (1f / pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
+    }
+
+    public IEnumerator HandleMine()
     {
         while (true)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, reachDistance))
-            {
-                if (hit.transform.CompareTag("Mineable"))
-                {
-                    Debug.Log("Mining " + hit.transform.name);
-                    hit.transform.GetComponent<Crystal>().MineCrystal(pickaxeStatsScriptableObject.GetStat(Stat.miningDamage));
-                }
-            }
+            Mine();
             yield return new WaitForSeconds(1f / pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
         }
     }
@@ -44,7 +62,7 @@ public class Pickaxe : MonoBehaviour
 
         if (context.started)
         {
-            miningCoroutine = StartCoroutine(Mine());
+            miningCoroutine = StartCoroutine(HandleMine());
         }
     }
 
@@ -57,6 +75,17 @@ public class Pickaxe : MonoBehaviour
                 StopCoroutine(miningCoroutine);
             }
         }
+    }
+
+    private void UpdateCrystalHealthBar(Crystal crystal)
+    {
+        float currentHealth = crystal.GetCurrentCrystalHealth();
+        float maxHealth = crystal.GetMaxCrystalHealth();
+        crystalHealthBar.fillAmount = 1 - currentHealth / maxHealth;
+        crystalHealthBar.gameObject.SetActive(true);
+
+        if (currentHealth <= 0)
+            crystalHealthBar.gameObject.SetActive(false);
     }
 }
 

@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: Pickaxe
   m_EditorClassIdentifier: Assembly-CSharp::Stats
   instanceStats: []
-  stats: []
+  stats:
+  - statType: 8
+    statValue: 5
+  - statType: 7
+    statValue: 0.5
   appliedUpgrades: []

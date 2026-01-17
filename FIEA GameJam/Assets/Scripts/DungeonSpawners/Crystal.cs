@@ -5,7 +5,8 @@ public class Crystal : MonoBehaviour
     [Header("Crystal Properties")]
     [SerializeField] private CrystalType crystalType;
     [SerializeField] private int baseValue = 10;
-    [SerializeField] private float crystalHealth = 100f;
+    [SerializeField] private float maxCrystalHealth = 100f;
+    [SerializeField] private float currentCrystalHealth = 100f;
     [SerializeField] private float miningTime = 1f;
 
     [Header("Visual Feedback")]
@@ -22,17 +23,17 @@ public class Crystal : MonoBehaviour
 
     public void MineCrystal(float damage)
     {
-        if (crystalHealth >= 0f)
+        if (currentCrystalHealth >= 0f)
         {
-            crystalHealth -= damage;
+            currentCrystalHealth -= damage;
 
-            if (crystalHealth <= 0f)
+            if (currentCrystalHealth <= 0f)
             {
                 if (wispParticlePrefab != null)
                 {
                     Instantiate(wispParticlePrefab, transform.position, Quaternion.identity);
                 }
-                
+
                 Destroy(this.gameObject);
             }
         }
@@ -44,27 +45,41 @@ public class Crystal : MonoBehaviour
         {
             case CrystalType.Common:
                 baseValue = 10;
-                crystalHealth = 20f;
+                maxCrystalHealth = 20f;
+                currentCrystalHealth = maxCrystalHealth;
                 miningTime = 0.5f;
                 break;
             case CrystalType.Uncommon:
                 baseValue = 25;
-                crystalHealth = 50f;
+                maxCrystalHealth = 50f;
+                currentCrystalHealth = maxCrystalHealth;
                 miningTime = 1f;
                 break;
             case CrystalType.Rare:
                 baseValue = 50;
-                crystalHealth = 100f;
+                maxCrystalHealth = 100f;
+                currentCrystalHealth = maxCrystalHealth;
                 miningTime = 1.5f;
                 break;
             case CrystalType.Legendary:
                 baseValue = 100;
-                crystalHealth = 200f;
+                maxCrystalHealth = 200f;
+                currentCrystalHealth = maxCrystalHealth;
                 miningTime = 2f;
                 break;
         }
     }
+    public float GetCurrentCrystalHealth()
+    {
+        return currentCrystalHealth;
+    }
+
+    public float GetMaxCrystalHealth()
+    {
+        return maxCrystalHealth;
+    }
 }
+
 
 public enum CrystalType
 {
