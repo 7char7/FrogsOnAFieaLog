@@ -16,7 +16,12 @@ public enum Stat
     // Pickaxe
     miningSpeed,
     miningDamage,
-    reachDistance
+    reachDistance,
+
+    // Player
+    maxHealth,
+    movementSpeed,
+    defense
 }
 
 

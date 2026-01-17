@@ -6,10 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     public Rigidbody rb;
-
-    [Header("Settings")]
-    public float moveSpeed = 5f;
-    public float sprintSpeed = 6f;
+    [SerializeField] private Stats playerStatsScriptableObject;
 
     private Vector2 moveInput;
 
@@ -17,6 +14,11 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isSprinting = false;
     public bool IsSprinting => isSprinting;
+
+    void Awake()
+    {
+        playerStatsScriptableObject = GetComponent<PlayerManager>().playerStatsScriptableObject;
+    }
 
     void FixedUpdate()
     {
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     void HandleMovement()
     {
         Vector3 moveDir = transform.forward * moveInput.y + transform.right * moveInput.x;
-        float baseSpeed = isSprinting ? sprintSpeed : moveSpeed;
+        float baseSpeed = isSprinting ? playerStatsScriptableObject.GetStat(Stat.movementSpeed) * 1.5f : playerStatsScriptableObject.GetStat(Stat.movementSpeed);
         float currentSpeed = baseSpeed;
         Vector3 targetVel = moveDir * currentSpeed;
 

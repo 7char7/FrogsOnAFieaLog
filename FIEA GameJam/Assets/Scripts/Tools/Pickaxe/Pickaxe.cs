@@ -9,6 +9,7 @@ public class Pickaxe : MonoBehaviour
 
     [Header("General Settings")]
     [SerializeField] private float reachDistance;
+    [SerializeField] private float fortune;
     [SerializeField] private float miningSpeed;
     [SerializeField] private float miningDamage;
     private Coroutine miningCoroutine;
