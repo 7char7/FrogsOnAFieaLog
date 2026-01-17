@@ -17,5 +17,5 @@ MonoBehaviour:
   - statType: 8
     statValue: 5
   - statType: 7
-    statValue: 0.5
+    statValue: 1
   appliedUpgrades: []

@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2191838324809924006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1991455242255472947}
+  - component: {fileID: 1536822253271101555}
+  - component: {fileID: 7677626174326146992}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1991455242255472947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2191838324809924006}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 572.18384, y: 0, z: 3986.256}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1536822253271101555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2191838324809924006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf8c6c792e1f4846a8329d9d808f4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  gemsMinedRed: 0
+  gemsMinedGreen: 0
+  gemsMinedBlue: 0
+  shotgunLevel: 5
+  playerHealthLevel: 2
+  torchLimitLevel: 1
+  money: 250
+--- !u!114 &7677626174326146992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2191838324809924006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8663af9d87953a84da85a0b64ea192c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeHandler
+  shotgunUpgrades:
+  - {fileID: 11400000, guid: 60993a76769b3fe4b8319afe3e2a5c61, type: 2}
+  - {fileID: 11400000, guid: b3f7b864fbe845749b31056ddd43e147, type: 2}
+  - {fileID: 11400000, guid: 8f1bff11b7a44bd498795a411c8e5ba6, type: 2}
+  - {fileID: 11400000, guid: 85386b2b5b7e1cc4aabaf2b9dd8990d5, type: 2}
+  - {fileID: 11400000, guid: 8a784d7940349424ba1672fe5a71f1cf, type: 2}
+  - {fileID: 11400000, guid: ce8d4ef8a30bc6248b8e655fe3de9c07, type: 2}
+  currentShotgunLevel: 0
+  maxShotgunLevel: 10
+  pickaxeUpgrades: []
+  currentPickaxeLevel: 0
+  maxPickaxeLevel: 10
+  playerMaxHealthUpgrade: {fileID: 11400000, guid: b7a1b53e7be489548b463dee71245ae0, type: 2}
+  currentPlayerMaxHealthLevel: 0
+  maxPlayerMaxHealthLevel: 10
+  playerMovementSpeedUpgrade: {fileID: 11400000, guid: 559c17365743b97458951a3fac3495a4, type: 2}
+  currentPlayerMovementSpeedLevel: 0
+  maxPlayerMovementSpeedLevel: 10
+  playerDefenseUpgrade: {fileID: 11400000, guid: e59d3dbee293a494cae598be5b3aaabc, type: 2}
+  currentPlayerDefenseLevel: 0
+  maxPlayerDefenseLevel: 10
