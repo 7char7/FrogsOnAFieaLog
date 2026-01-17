@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   detectionRadius: 18
-  fieldOfView: 120
+  fieldOfView: 360
   detectionLayers:
     serializedVersion: 2
     m_Bits: 64
