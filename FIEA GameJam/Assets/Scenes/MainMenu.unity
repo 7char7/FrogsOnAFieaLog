@@ -1092,6 +1092,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
+      propertyPath: money
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
+      propertyPath: shotgunLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
+      propertyPath: torchLimitLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
+      propertyPath: playerHealthLevel
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1991455242255472947, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
       propertyPath: m_LocalPosition.x
       value: 572.18384

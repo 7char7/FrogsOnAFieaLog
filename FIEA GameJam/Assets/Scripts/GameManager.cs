@@ -10,9 +10,12 @@ public class GameManager : MonoBehaviour
     public int gemsMinedBlue;
 
     //upgrades 
-    public int shotgunLevel = 1;
-    public int playerHealthLevel = 1;
-    public int torchLimitLevel = 1;
+    public int shotgunLevel = 0;
+    public int pickaxeLevel = 0;
+    public int playerHealthLevel = 0;
+    public int playerSpeedlevel = 0;
+    public int playerDefencelevel = 0;
+    public int torchLimitLevel = 0;
 
     //money
     public int money = 0;

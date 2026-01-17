@@ -7,7 +7,10 @@ public class UpgradeButton : MonoBehaviour
     {
         Shotgun,
         PlayerHealth,
-        TorchLimit
+        TorchLimit,
+        Speed,
+        Defence,
+        Pickaxe
     }
 
     [SerializeField] private UpgradeType upgradeType;
@@ -24,7 +27,7 @@ public class UpgradeButton : MonoBehaviour
 
     public void OnBuy()
     {
-        int level = 1;
+        int level = 0;
 
         switch (upgradeType)
         {
@@ -36,6 +39,15 @@ public class UpgradeButton : MonoBehaviour
                 break;
             case UpgradeType.TorchLimit:
                 level = shopMenu.torchLimitShopLevel;
+                break;
+            case UpgradeType.Pickaxe:
+                level = shopMenu.shotgunShopLevel;
+                break;
+            case UpgradeType.Defence:
+                level = shopMenu.shotgunShopLevel;
+                break;
+            case UpgradeType.Speed:
+                level = shopMenu.shotgunShopLevel;
                 break;
         }
 
@@ -55,6 +67,15 @@ public class UpgradeButton : MonoBehaviour
                     break;
                 case UpgradeType.TorchLimit:
                     shopMenu.torchLimitShopLevel += 1;
+                    break;
+                case UpgradeType.Pickaxe:
+                    shopMenu.pickaxeShopLevel += 1;
+                    break;
+                case UpgradeType.Defence:
+                    shopMenu.playerDefenceShopLevel += 1;
+                    break;
+                case UpgradeType.Speed:
+                    shopMenu.playerSpeedShopLevel += 1;
                     break;
             }
 
@@ -79,6 +100,15 @@ public class UpgradeButton : MonoBehaviour
                 break;
             case UpgradeType.TorchLimit:
                 level = shopMenu.torchLimitShopLevel;
+                break;
+            case UpgradeType.Pickaxe:
+                level = shopMenu.pickaxeShopLevel;
+                break;
+            case UpgradeType.Defence:
+                level = shopMenu.playerDefenceShopLevel;
+                break;
+            case UpgradeType.Speed:
+                level = shopMenu.playerSpeedShopLevel;
                 break;
         }
 
