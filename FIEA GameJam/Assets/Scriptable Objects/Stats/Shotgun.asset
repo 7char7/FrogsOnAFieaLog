@@ -15,16 +15,16 @@ MonoBehaviour:
   instanceStats: []
   stats:
   - statType: 0
-    statValue: 0
+    statValue: 10
   - statType: 1
-    statValue: 0
+    statValue: 10
   - statType: 2
-    statValue: 0
+    statValue: 30
   - statType: 3
-    statValue: 0
+    statValue: 5
   - statType: 4
-    statValue: 0
+    statValue: 50
   - statType: 5
-    statValue: 0
+    statValue: 6
   - statType: 6
-    statValue: 0
+    statValue: 5

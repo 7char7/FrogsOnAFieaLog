@@ -372,8 +372,8 @@ MonoBehaviour:
   playerMovement: {fileID: 2053621862567442592}
   playerLook: {fileID: 161529629832679790}
   gun: {fileID: 4158937915156888574}
-  pickaxe: {fileID: 0}
-  toolManager: {fileID: 0}
+  pickaxe: {fileID: 6003109289879971118}
+  toolManager: {fileID: 5566239306450604908}
 --- !u!114 &161529629832679790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,6 +783,10 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 7355968410065743519}
+    - target: {fileID: 2880183587723465119, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: gunStatsScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 8d8a6e392fe4d8c40af80e309e0bffad, type: 2}
     - target: {fileID: 3354751660669162420, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.058
