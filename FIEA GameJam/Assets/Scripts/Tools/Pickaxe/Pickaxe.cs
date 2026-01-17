@@ -18,6 +18,9 @@ public class Pickaxe : MonoBehaviour
     [SerializeField] private float miningDamage;
     private Coroutine miningCoroutine;
     private float nextMineTime;
+    
+    //bool to make animation not play while player by char
+    private bool isSwinging;
 
     void Awake()
     {
@@ -60,6 +63,10 @@ public class Pickaxe : MonoBehaviour
                     Debug.Log($"[PICKAXE] Mining {crystal.name}");
                     crystal.MineCrystal(pickaxeStatsScriptableObject.GetStat(Stat.miningDamage));
                     UpdateCrystalHealthBar(crystal);
+
+                    //added by char
+                    if (!isSwinging)
+                        StartCoroutine(Swing());
                 }
                 else
                 {
@@ -76,7 +83,7 @@ public class Pickaxe : MonoBehaviour
             Debug.Log($"[PICKAXE] No hit detected within reach distance {reachDistance}");
         }
 
-        nextMineTime = Time.time + (1f / pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
+        nextMineTime = Time.time + (pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
     }
 
     public IEnumerator HandleMine()
@@ -84,7 +91,7 @@ public class Pickaxe : MonoBehaviour
         while (true)
         {
             Mine();
-            yield return new WaitForSeconds(1f / pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
+            yield return new WaitForSeconds(pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
         }
     }
 
@@ -120,5 +127,37 @@ public class Pickaxe : MonoBehaviour
         if (currentHealth <= 0)
             crystalHealthBar.gameObject.SetActive(false);
     }
+
+    //plays animation by char
+    private IEnumerator Swing()
+    {
+        isSwinging = true;
+
+        float swingDuration = pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed);
+        float halfDuration = swingDuration / 2f;
+        float t = 0f;
+
+        while (t < halfDuration)
+        {
+            t += Time.deltaTime;
+            float angle = Mathf.Lerp(0f, 50f, t / halfDuration);
+            transform.localRotation = Quaternion.Euler(angle, 0f, 0f);
+            yield return null;
+        }
+
+        t = 0f;
+
+        while (t < halfDuration)
+        {
+            t += Time.deltaTime;
+            float angle = Mathf.Lerp(50f, 0f, t / halfDuration);
+            transform.localRotation = Quaternion.Euler(angle, 0f, 0f);
+            yield return null;
+        }
+
+        transform.localRotation = Quaternion.identity;
+        isSwinging = false;
+    }
+
 }
 

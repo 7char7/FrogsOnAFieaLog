@@ -49,6 +49,24 @@ public class UpgradeHandler : MonoBehaviour
         }
     }
 
+    public void ApplyPickaxeUpgrade()
+    {
+        if (currentPickaxeLevel >= maxPickaxeLevel)
+        {
+            Debug.Log("Pickaxe is already at max level");
+            return;
+        }
+        currentPickaxeLevel++;
+        Debug.Log("Applying Pickaxe Upgrades");
+
+        Pickaxe pickaxe = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Pickaxe>();
+
+        foreach (var upgrade in pickaxeUpgrades)
+        {
+            pickaxe.pickaxeStatsScriptableObject.UnlockUpgrade(upgrade);
+        }
+    }
+
     public void ApplyPlayerHealthUpgrade()
     {
         if (currentPlayerMaxHealthLevel >= maxPlayerMaxHealthLevel)
