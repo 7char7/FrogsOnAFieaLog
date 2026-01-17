@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 656980410585625430}
   - component: {fileID: 5566239306450604908}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9176001298241242379}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2715833770467877493}
   - component: {fileID: 1776489946239867662}
   - component: {fileID: 116223342681169423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 5614562829495079977}
   - component: {fileID: 161529629832679790}
   - component: {fileID: 2053621862567442592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 5012268032544093706}
   - component: {fileID: 3370119978930393519}
   - component: {fileID: 6781748284838152077}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: CrosshairCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 2685248901615410504}
   - component: {fileID: 7613195208897612105}
   - component: {fileID: 8838477224109745973}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FPOV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,7 +584,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 127
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 3007589644591184013}
   - component: {fileID: 2723430823774685183}
   - component: {fileID: 7231129892267731461}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +732,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5464489170256137522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Headlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -763,6 +763,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 656980410585625430}
     m_Modifications:
+    - target: {fileID: 1561445860146053746, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2224934416309999816, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.69
@@ -798,6 +802,10 @@ PrefabInstance:
     - target: {fileID: 6003314854756465762, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: m_Name
       value: Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 6003314854756465762, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6398074305607548116, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: m_LocalPosition.x
@@ -838,6 +846,14 @@ PrefabInstance:
     - target: {fileID: 6398074305607548116, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6845577479921117439, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7431686440805887227, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -913,9 +929,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7003560828813695540, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7967245850495110243, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
       propertyPath: m_Name
       value: Pickaxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967245850495110243, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

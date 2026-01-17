@@ -152,15 +152,15 @@ public class DungeonVisualizer : MonoBehaviour
             crystalSpawner.SpawnCrystalsInDungeon();
         }
 
+        if (navMeshBaker != null)
+        {
+            navMeshBaker.BakeNavMesh();
+        }
+
         if (enemySpawner != null)
         {
             enemySpawner.Initialize(generator, dungeonParent, playerPosition, playerSpawnRoom);
             enemySpawner.SpawnEnemiesInDungeon();
-        }
-
-        if (navMeshBaker != null)
-        {
-            navMeshBaker.BakeNavMesh();
         }
     }
 

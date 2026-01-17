@@ -28,7 +28,7 @@ public class DungeonNavMeshBaker : MonoBehaviour
     {
         navMeshSurface.collectObjects = CollectObjects.Children;
         navMeshSurface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
-        navMeshSurface.layerMask = LayerMask.GetMask("Default");
+        navMeshSurface.layerMask = LayerMask.GetMask("Default", "Floor");
     }
 
     public void BakeNavMesh()

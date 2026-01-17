@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Spawn Settings")]
     [SerializeField] private bool spawnEnemies = true;
     [SerializeField] private bool allowEnemiesInStartRoom = false;
-    [SerializeField] private float enemyHeight = 1f;
+    [SerializeField] private float enemyHeight = 0.5f;
     [SerializeField] private float minDistanceFromWalls = 1.5f;
     [SerializeField] private float minDistanceBetweenEnemies = 3f;
     [SerializeField] private float minDistanceFromPlayer = 8f;
@@ -145,6 +146,7 @@ public class EnemySpawner : MonoBehaviour
                 if (enemyPrefab != null)
                 {
                     GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.Euler(0, Random.Range(0f, 360f), 0), enemyParent);
+                    Debug.Log($"[EnemySpawner] Spawned {enemy.name} at {spawnPosition}");
                     spawnedPositions.Add(spawnPosition);
                     spawnedCount++;
                 }
@@ -182,8 +184,18 @@ public class EnemySpawner : MonoBehaviour
             float x = Random.Range(room.Left + minDistanceFromWalls, room.Right - minDistanceFromWalls);
             float z = Random.Range(room.Bottom + minDistanceFromWalls, room.Top - minDistanceFromWalls);
 
-            Vector3 position = new Vector3(x, enemyHeight, z);
-
+            Vector3 randomPosition = new Vector3(x, enemyHeight, z);
+            Vector3 position;
+            
+            if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+            {
+                position = hit.position;
+            }
+            else
+            {
+                position = randomPosition;
+            }
+            
             if (IsValidSpawnPosition(position))
             {
                 return position;
