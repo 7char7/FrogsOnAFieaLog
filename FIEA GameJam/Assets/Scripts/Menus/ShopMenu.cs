@@ -3,7 +3,7 @@ using TMPro;
 
 public class ShopMenu : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI balanceText;
+    public TextMeshProUGUI balanceText;
     public int shotgunShopLevel;
     public int torchLimitShopLevel;
     public int playerHealthShopLevel;
