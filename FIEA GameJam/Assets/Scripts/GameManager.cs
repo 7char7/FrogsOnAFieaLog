@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
 
     //upgrades 
     public int shotgunLevel = 1;
-    public int playerHealth = 1;
+    public int playerHealthLevel = 1;
+    public int torchLimitLevel = 1;
 
     //money
     public int money = 0;

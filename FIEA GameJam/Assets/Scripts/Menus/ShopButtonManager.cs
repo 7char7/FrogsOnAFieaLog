@@ -23,4 +23,6 @@ public class ShopButtonManager : MonoBehaviour
             display.SetActive(false);
         }
     }
+
+
 }

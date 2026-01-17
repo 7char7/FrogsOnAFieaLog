@@ -1103,9 +1103,10 @@ MonoBehaviour:
   gemsMinedRed: 0
   gemsMinedGreen: 0
   gemsMinedBlue: 0
-  shotgunLevel: 1
-  playerHealth: 1
-  money: 0
+  shotgunLevel: 5
+  playerHealthLevel: 2
+  torchLimitLevel: 1
+  money: 250
 --- !u!4 &2079564176
 Transform:
   m_ObjectHideFlags: 0
