@@ -11,6 +11,7 @@ public class Crystal : MonoBehaviour
 
     [Header("Visual Feedback")]
     [SerializeField] private GameObject wispParticlePrefab;
+    [SerializeField] private GameObject shatteredCrystalPrefab;
     [SerializeField] private float rotationSpeed = 30f;
 
     public CrystalType Type => crystalType;
@@ -32,6 +33,11 @@ public class Crystal : MonoBehaviour
                 if (wispParticlePrefab != null)
                 {
                     Instantiate(wispParticlePrefab, transform.position, Quaternion.identity);
+                }
+
+                if (shatteredCrystalPrefab != null)
+                {
+                    Instantiate(shatteredCrystalPrefab, transform.position, transform.rotation);
                 }
 
                 Destroy(this.gameObject);

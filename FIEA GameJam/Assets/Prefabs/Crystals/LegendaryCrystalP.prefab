@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4181548676589122322}
   - component: {fileID: 8909873781454379761}
   m_Layer: 0
-  m_Name: CommonCrystal
+  m_Name: LegendaryCrystalP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5432cb845ddcb8b4a8748cb40659865d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Crystal
-  crystalType: 0
-  baseValue: 10
-  crystalHealth: 20
-  miningTime: 0.5
+  crystalType: 3
+  baseValue: 100
+  crystalHealth: 200
+  miningTime: 2
   wispParticlePrefab: {fileID: 0}
-  shatteredCrystalPrefab: {fileID: 5427025954695001617, guid: 2f3fac4a8afa2da4a8c7de2a931c2395, type: 3}
+  shatteredCrystalPrefab: {fileID: 5427025954695001617, guid: 100d12a174974c24fbbbf2bf02861881, type: 3}
   rotationSpeed: 30
 --- !u!65 &8909873781454379761
 BoxCollider:
@@ -122,6 +122,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df67604020abf624b8d74c5571b16948, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 32f07bd04fadb394cb2aa7fe08b6ee82, type: 2}
     - target: {fileID: 919132149155446097, guid: df67604020abf624b8d74c5571b16948, type: 3}
       propertyPath: m_Name
       value: Crystal
