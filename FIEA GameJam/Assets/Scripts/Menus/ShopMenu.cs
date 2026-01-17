@@ -30,8 +30,8 @@ public class ShopMenu : MonoBehaviour
         shotgunShopLevel = GameManager.Instance.shotgunLevel;
         torchLimitShopLevel = GameManager.Instance.torchLimitLevel;
         playerHealthShopLevel = GameManager.Instance.playerHealthLevel;
-        playerDefenceShopLevel = GameManager.Instance.playerDefencelevel;
-        playerSpeedShopLevel = GameManager.Instance.playerSpeedlevel;
+        playerDefenceShopLevel = GameManager.Instance.playerDefenceLevel;
+        playerSpeedShopLevel = GameManager.Instance.playerSpeedLevel;
         pickaxeShopLevel = GameManager.Instance.pickaxeLevel;
     }
     public void updateValues()
@@ -39,8 +39,8 @@ public class ShopMenu : MonoBehaviour
         GameManager.Instance.shotgunLevel = shotgunShopLevel; 
         GameManager.Instance.torchLimitLevel = torchLimitShopLevel;
         GameManager.Instance.playerHealthLevel = playerHealthShopLevel;
-        GameManager.Instance.playerSpeedlevel = playerSpeedShopLevel;
-        GameManager.Instance.playerDefencelevel = playerDefenceShopLevel;
+        GameManager.Instance.playerSpeedLevel = playerSpeedShopLevel;
+        GameManager.Instance.playerDefenceLevel = playerDefenceShopLevel;
         GameManager.Instance.pickaxeLevel = pickaxeShopLevel;
     }
     public void OnPlayButtonPressed()

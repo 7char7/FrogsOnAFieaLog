@@ -10,13 +10,25 @@ public class MineTimer : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI timerText;
     
+    [Header("Scene Settings")]
+    [SerializeField] private string shopSceneName = "Shop";
+    
     private float currentTime;
     private bool isTimerRunning;
+    private ResourceManager resourceManager;
+    private GameManager gameManager;
     
     private void Start()
     {
         currentTime = mineTimeLimit;
         isTimerRunning = true;
+        resourceManager = ResourceManager.Instance;
+        gameManager = GameManager.Instance;
+        
+        if (gameManager != null)
+        {
+            gameManager.StartNewRun();
+        }
     }
     
     private void Update()
@@ -55,8 +67,17 @@ public class MineTimer : MonoBehaviour
     
     private void OnTimerExpired()
     {
-        Debug.Log("Time's up! Returning to menu...");
-        SceneManager.LoadScene("MainMenu");
+        if (resourceManager == null || gameManager == null)
+        {
+            Debug.LogWarning("ResourceManager or GameManager not found!");
+            SceneManager.LoadScene(shopSceneName);
+            return;
+        }
+        
+        gameManager.CompleteRunFailure();
+        
+        RestoreCursor();
+        SceneManager.LoadScene(shopSceneName);
     }
     
     public void PauseTimer()
@@ -72,5 +93,11 @@ public class MineTimer : MonoBehaviour
     public void AddTime(float seconds)
     {
         currentTime += seconds;
+    }
+    
+    private void RestoreCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

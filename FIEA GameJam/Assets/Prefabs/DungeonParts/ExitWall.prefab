@@ -135,8 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a74208a71d2bb4bbaba624521982bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExitWall
-  requireAllCrystals: 0
-  exitSceneName: Shop
+  shopSceneName: Shop
 --- !u!65 &812843853001351880
 BoxCollider:
   m_ObjectHideFlags: 0

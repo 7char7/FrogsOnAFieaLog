@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Crystal : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Crystal : MonoBehaviour
     [SerializeField] private GameObject wispParticlePrefab;
     [SerializeField] private GameObject shatteredCrystalPrefab;
     [SerializeField] private float rotationSpeed = 30f;
+    [SerializeField] private float shatterDelay = 0.3f;
 
     public CrystalType Type => crystalType;
     public int Value => baseValue;
@@ -30,18 +32,35 @@ public class Crystal : MonoBehaviour
 
             if (currentCrystalHealth <= 0f)
             {
-                if (wispParticlePrefab != null)
-                {
-                    Instantiate(wispParticlePrefab, transform.position, Quaternion.identity);
-                }
-
-                if (shatteredCrystalPrefab != null)
-                {
-                    Instantiate(shatteredCrystalPrefab, transform.position, transform.rotation);
-                }
-
-                Destroy(this.gameObject);
+                StartCoroutine(ShatterCrystalAfterDelay());
             }
+        }
+    }
+
+    private IEnumerator ShatterCrystalAfterDelay()
+    {
+        yield return new WaitForSeconds(shatterDelay);
+
+        if (wispParticlePrefab != null)
+        {
+            Instantiate(wispParticlePrefab, transform.position, Quaternion.identity);
+        }
+
+        if (shatteredCrystalPrefab != null)
+        {
+            GameObject shattered = Instantiate(shatteredCrystalPrefab, transform.position, transform.rotation);
+            InitializeFragments(shattered);
+        }
+
+        Destroy(this.gameObject);
+    }
+
+    private void InitializeFragments(GameObject shatteredCrystal)
+    {
+        CrystalFragment[] fragments = shatteredCrystal.GetComponentsInChildren<CrystalFragment>();
+        foreach (CrystalFragment fragment in fragments)
+        {
+            fragment.Initialize(crystalType, baseValue);
         }
     }
 

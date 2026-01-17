@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   torchStatsScriptableObject: {fileID: 11400000, guid: d3aa7fb25b44ca146b3e356d4f313661, type: 2}
-  cameraTransform: {fileID: 0}
+  cameraTransform: {fileID: 7355968410065743519}
   torch: {fileID: 1235146065428141406, guid: db2b0e46de822a543be517bd7ab3cda3, type: 3}
   currentNumberOfTorches: 0
-  placeDistance: 1.5
+  placeDistance: 4
 --- !u!1 &1563052204135449751
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +427,7 @@ MonoBehaviour:
   playerLook: {fileID: 161529629832679790}
   gun: {fileID: 4158937915156888574}
   pickaxe: {fileID: 6003109289879971118}
-  torch: {fileID: 0}
+  torch: {fileID: 7280524504463826370}
   toolManager: {fileID: 5566239306450604908}
 --- !u!114 &161529629832679790
 MonoBehaviour:
@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 8838477224109745973}
   m_Layer: 6
   m_Name: FPOV
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -15,10 +15,29 @@ public class Torch : MonoBehaviour
     {
         torchStatsScriptableObject = Instantiate(torchStatsScriptableObject);
         currentNumberOfTorches = torchStatsScriptableObject.GetStat(Stat.numberOfTorches);
+        
+        if (cameraTransform == null)
+        {
+            Camera mainCamera = Camera.main;
+            if (mainCamera != null)
+            {
+                cameraTransform = mainCamera.transform;
+            }
+            else
+            {
+                Debug.LogError("Torch: Could not find main camera!");
+            }
+        }
     }
 
     private void PlaceTorch()
     {
+        if (cameraTransform == null)
+        {
+            Debug.LogWarning("Torch: Camera transform is not assigned!");
+            return;
+        }
+
         RaycastHit hit;
 
         if (!Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, placeDistance))

@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       propertyPath: m_LocalPosition.x
@@ -102,42 +102,63 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1842509403759355343, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 894966842914795608}
+    - targetCorrespondingSourceObject: {fileID: 1842509403759355343, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1261482340010927699}
     - targetCorrespondingSourceObject: {fileID: -8784764271784412001, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 428259603178895206}
     - targetCorrespondingSourceObject: {fileID: -8784764271784412001, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3719497041175984020}
+    - targetCorrespondingSourceObject: {fileID: -8784764271784412001, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8690265525818031086}
     - targetCorrespondingSourceObject: {fileID: -6194606037463371886, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7075388346683237328}
     - targetCorrespondingSourceObject: {fileID: -6194606037463371886, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1233081705825612635}
+    - targetCorrespondingSourceObject: {fileID: -6194606037463371886, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4065604855350587008}
     - targetCorrespondingSourceObject: {fileID: -8197572410572905490, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2129651743167338385}
     - targetCorrespondingSourceObject: {fileID: -8197572410572905490, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2009375469483294514}
+    - targetCorrespondingSourceObject: {fileID: -8197572410572905490, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8276501985966535355}
     - targetCorrespondingSourceObject: {fileID: 7643144133899828542, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2905969023727297744}
     - targetCorrespondingSourceObject: {fileID: 7643144133899828542, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2477584500225264136}
+    - targetCorrespondingSourceObject: {fileID: 7643144133899828542, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8834129218960293676}
     - targetCorrespondingSourceObject: {fileID: -1373314446713785888, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 964130254866403859}
     - targetCorrespondingSourceObject: {fileID: -1373314446713785888, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3551753368802862363}
+    - targetCorrespondingSourceObject: {fileID: -1373314446713785888, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7208350171149020062}
     - targetCorrespondingSourceObject: {fileID: 2926751463745245055, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2864953684893841420}
     - targetCorrespondingSourceObject: {fileID: 2926751463745245055, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5202318404612737116}
+    - targetCorrespondingSourceObject: {fileID: 2926751463745245055, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8192343134864562071}
   m_SourcePrefab: {fileID: 100100000, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
 --- !u!1 &3125712832361986720 stripped
 GameObject:
@@ -193,6 +214,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7208350171149020062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3125712832361986720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b34be02b5bebe44b3385cbfa2d57da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrystalFragment
+  magnetRange: 5
+  magnetSpeed: 8
+  accelerationMultiplier: 2
+  collectionDistance: 0.5
+  attractionDelay: 0.3
+  crystalType: 1
+  fragmentValue: 1
 --- !u!1 &3278661846048126590 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7643144133899828542, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
@@ -247,6 +287,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8834129218960293676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278661846048126590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b34be02b5bebe44b3385cbfa2d57da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrystalFragment
+  magnetRange: 5
+  magnetSpeed: 8
+  accelerationMultiplier: 2
+  collectionDistance: 0.5
+  attractionDelay: 0.3
+  crystalType: 1
+  fragmentValue: 1
 --- !u!1 &4722021991162951647 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8784764271784412001, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
@@ -301,6 +360,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8690265525818031086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722021991162951647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b34be02b5bebe44b3385cbfa2d57da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrystalFragment
+  magnetRange: 5
+  magnetSpeed: 8
+  accelerationMultiplier: 2
+  collectionDistance: 0.5
+  attractionDelay: 0.3
+  crystalType: 1
+  fragmentValue: 1
 --- !u!1 &5309073090857461934 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8197572410572905490, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
@@ -355,6 +433,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8276501985966535355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5309073090857461934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b34be02b5bebe44b3385cbfa2d57da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrystalFragment
+  magnetRange: 5
+  magnetSpeed: 8
+  accelerationMultiplier: 2
+  collectionDistance: 0.5
+  attractionDelay: 0.3
+  crystalType: 1
+  fragmentValue: 1
 --- !u!1 &6773460026133720719 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1842509403759355343, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
@@ -409,6 +506,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1261482340010927699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773460026133720719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b34be02b5bebe44b3385cbfa2d57da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrystalFragment
+  magnetRange: 5
+  magnetSpeed: 8
+  accelerationMultiplier: 2
+  collectionDistance: 0.5
+  attractionDelay: 0.3
+  crystalType: 1
+  fragmentValue: 1
 --- !u!1 &7897506333202048210 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6194606037463371886, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
@@ -463,6 +579,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4065604855350587008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897506333202048210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b34be02b5bebe44b3385cbfa2d57da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrystalFragment
+  magnetRange: 5
+  magnetSpeed: 8
+  accelerationMultiplier: 2
+  collectionDistance: 0.5
+  attractionDelay: 0.3
+  crystalType: 1
+  fragmentValue: 1
 --- !u!1 &8001817336338531391 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2926751463745245055, guid: 43509130152c9c4438f36bc7ca630294, type: 3}
@@ -517,3 +652,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8192343134864562071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001817336338531391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b34be02b5bebe44b3385cbfa2d57da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrystalFragment
+  magnetRange: 5
+  magnetSpeed: 8
+  accelerationMultiplier: 2
+  collectionDistance: 0.5
+  attractionDelay: 0.3
+  crystalType: 1
+  fragmentValue: 1
