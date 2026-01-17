@@ -9,6 +9,7 @@ public class DungeonVisualizer : MonoBehaviour
     [Header("Visualization Settings")]
     [SerializeField] private GameObject floorPrefab;
     [SerializeField] private GameObject wallPrefab;
+    [SerializeField] private GameObject exitWallPrefab;
     [SerializeField] private GameObject ceilingPrefab;
     [SerializeField] private float tileSize = 1f;
     [SerializeField] private bool generateWalls = true;
@@ -25,6 +26,9 @@ public class DungeonVisualizer : MonoBehaviour
     [SerializeField] private Material floorMaterial_Red;
     [SerializeField] private Material wallMaterial_Red;
     [SerializeField] private Material ceilingMaterial_Red;
+
+    [Header("Exit Wall Material")]
+    [SerializeField] private Material exitWallMaterial;
 
     [Header("Player Spawning")]
     [SerializeField] private GameObject playerPrefab;
@@ -56,17 +60,22 @@ public class DungeonVisualizer : MonoBehaviour
     {
         if (floorPrefab == null)
         {
-            floorPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/FloorTile.prefab");
+            floorPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/DungeonParts/FloorTile.prefab");
         }
 
         if (wallPrefab == null)
         {
-            wallPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/WallTile.prefab");
+            wallPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/DungeonParts/WallTile.prefab");
+        }
+
+        if (exitWallPrefab == null)
+        {
+            exitWallPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/DungeonParts/ExitWall.prefab");
         }
 
         if (ceilingPrefab == null)
         {
-            ceilingPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/CeilingTile.prefab");
+            ceilingPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/DungeonParts/CeilingTile.prefab");
         }
 
         if (playerPrefab == null)
@@ -248,6 +257,14 @@ public class DungeonVisualizer : MonoBehaviour
         Transform wallParent = new GameObject("Walls").transform;
         wallParent.SetParent(dungeonParent);
 
+        Room startRoom = generator.Rooms.Count > 0 ? generator.Rooms[0] : null;
+        Vector2Int? exitWallPosition = null;
+
+        if (startRoom != null)
+        {
+            exitWallPosition = FindBackWallPosition(startRoom);
+        }
+
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -256,34 +273,54 @@ public class DungeonVisualizer : MonoBehaviour
                 {
                     if (x == 0 || !grid[x - 1, y])
                     {
-                        CreateWall(x * tileSize - tileSize / 2, y * tileSize, Vector3.forward, wallParent, x, y);
+                        bool isExitWall = exitWallPosition.HasValue && IsExitWallAtPosition(exitWallPosition.Value, x, y, WallDirection.Left);
+                        CreateWall(x * tileSize - tileSize / 2, y * tileSize, Vector3.forward, wallParent, x, y, isExitWall);
                     }
                     if (x == width - 1 || !grid[x + 1, y])
                     {
-                        CreateWall(x * tileSize + tileSize / 2, y * tileSize, Vector3.forward, wallParent, x, y);
+                        bool isExitWall = exitWallPosition.HasValue && IsExitWallAtPosition(exitWallPosition.Value, x, y, WallDirection.Right);
+                        CreateWall(x * tileSize + tileSize / 2, y * tileSize, Vector3.forward, wallParent, x, y, isExitWall);
                     }
                     if (y == 0 || !grid[x, y - 1])
                     {
-                        CreateWall(x * tileSize, y * tileSize - tileSize / 2, Vector3.right, wallParent, x, y);
+                        bool isExitWall = exitWallPosition.HasValue && IsExitWallAtPosition(exitWallPosition.Value, x, y, WallDirection.Bottom);
+                        CreateWall(x * tileSize, y * tileSize - tileSize / 2, Vector3.right, wallParent, x, y, isExitWall);
                     }
                     if (y == height - 1 || !grid[x, y + 1])
                     {
-                        CreateWall(x * tileSize, y * tileSize + tileSize / 2, Vector3.right, wallParent, x, y);
+                        bool isExitWall = exitWallPosition.HasValue && IsExitWallAtPosition(exitWallPosition.Value, x, y, WallDirection.Top);
+                        CreateWall(x * tileSize, y * tileSize + tileSize / 2, Vector3.right, wallParent, x, y, isExitWall);
                     }
                 }
             }
         }
     }
 
-    private void CreateWall(float x, float z, Vector3 direction, Transform parent, int gridX, int gridY)
+    private void CreateWall(float x, float z, Vector3 direction, Transform parent, int gridX, int gridY, bool isExitWall = false)
     {
         Vector3 position = new Vector3(x, wallHeight / 2, z);
         Quaternion rotation = Quaternion.LookRotation(direction);
 
-        GameObject wall = Instantiate(wallPrefab, position, rotation, parent);
+        GameObject prefabToUse = isExitWall && exitWallPrefab != null ? exitWallPrefab : wallPrefab;
+        GameObject wall = Instantiate(prefabToUse, position, rotation, parent);
         wall.transform.localScale = new Vector3(tileSize, wallHeight, tileSize);
 
-        Material wallMat = GetMaterialForDepth(depthGrid[gridX, gridY], wallMaterial_Base, wallMaterial_Blue, wallMaterial_Red);
+        if (isExitWall)
+        {
+            wall.name = "ExitWall";
+            ConfigureExitWallCollider(wall);
+        }
+
+        Material wallMat;
+        if (isExitWall && exitWallMaterial != null)
+        {
+            wallMat = exitWallMaterial;
+        }
+        else
+        {
+            wallMat = GetMaterialForDepth(depthGrid[gridX, gridY], wallMaterial_Base, wallMaterial_Blue, wallMaterial_Red);
+        }
+
         if (wallMat != null)
         {
             MeshRenderer renderer = wall.GetComponentInChildren<MeshRenderer>();
@@ -480,6 +517,47 @@ public class DungeonVisualizer : MonoBehaviour
             playerSpawnHeight,
             spawnRoom.Center.y * tileSize
         );
+    }
+
+    private void ConfigureExitWallCollider(GameObject exitWall)
+    {
+        BoxCollider[] colliders = exitWall.GetComponentsInChildren<BoxCollider>();
+        
+        foreach (BoxCollider collider in colliders)
+        {
+            if (collider.gameObject == exitWall)
+            {
+                collider.isTrigger = true;
+                collider.center = Vector3.zero;
+                collider.size = new Vector3(1.5f, 3f, 1.5f);
+            }
+            else
+            {
+                collider.enabled = false;
+            }
+        }
+    }
+
+    private enum WallDirection
+    {
+        Left,
+        Right,
+        Top,
+        Bottom
+    }
+
+    private Vector2Int FindBackWallPosition(Room room)
+    {
+        return new Vector2Int(room.Center.x, room.Bottom);
+    }
+
+    private bool IsExitWallAtPosition(Vector2Int exitWallPos, int x, int y, WallDirection direction)
+    {
+        if (direction == WallDirection.Bottom)
+        {
+            return x == exitWallPos.x && y == exitWallPos.y;
+        }
+        return false;
     }
 
     private void OnDrawGizmos()

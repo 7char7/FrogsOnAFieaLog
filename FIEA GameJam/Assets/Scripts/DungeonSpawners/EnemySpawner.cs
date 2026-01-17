@@ -146,7 +146,6 @@ public class EnemySpawner : MonoBehaviour
                 if (enemyPrefab != null)
                 {
                     GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.Euler(0, Random.Range(0f, 360f), 0), enemyParent);
-                    Debug.Log($"[EnemySpawner] Spawned {enemy.name} at {spawnPosition}");
                     spawnedPositions.Add(spawnPosition);
                     spawnedCount++;
                 }
