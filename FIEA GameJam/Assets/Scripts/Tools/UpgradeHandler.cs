@@ -31,6 +31,20 @@ public class UpgradeHandler : MonoBehaviour
     [SerializeField] private int currentPlayerDefenseLevel = 0;
     [SerializeField] private int maxPlayerDefenseLevel = 10;
 
+    //apply all upgrades
+    public void ApplyUpgrades()
+    {
+        currentShotgunLevel = GameManager.Instance.shotgunLevel;
+        currentPickaxeLevel = GameManager.Instance.pickaxeLevel;
+        currentPlayerMaxHealthLevel = GameManager.Instance.playerHealthLevel;
+        currentPlayerMovementSpeedLevel = GameManager.Instance.playerSpeedlevel;
+        currentPlayerDefenseLevel = GameManager.Instance.playerDefencelevel;
+        ApplyShotgunUpgrade();
+        ApplyPickaxeUpgrade();
+        ApplyPlayerHealthUpgrade();
+        ApplyPlayerMovementSpeedUpgrade();
+        ApplyPlayerDefenseUpgrade();
+    }
     public void ApplyShotgunUpgrade()
     {
         if (currentShotgunLevel >= maxShotgunLevel)
@@ -38,7 +52,7 @@ public class UpgradeHandler : MonoBehaviour
             Debug.Log("Shotgun is already at max level");
             return;
         }
-        currentShotgunLevel++;
+        //currentShotgunLevel++;
         Debug.Log("Applying Shotgun Upgrades");
 
         Shotgun shotgun = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Shotgun>();
@@ -56,7 +70,7 @@ public class UpgradeHandler : MonoBehaviour
             Debug.Log("Pickaxe is already at max level");
             return;
         }
-        currentPickaxeLevel++;
+        //currentPickaxeLevel++;
         Debug.Log("Applying Pickaxe Upgrades");
 
         Pickaxe pickaxe = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Pickaxe>();
@@ -75,7 +89,7 @@ public class UpgradeHandler : MonoBehaviour
             return;
         }
 
-        currentPlayerMaxHealthLevel++;
+        //currentPlayerMaxHealthLevel++;
         Debug.Log("Applying Player Max Health Upgrade");
 
         PlayerManager playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
@@ -91,7 +105,7 @@ public class UpgradeHandler : MonoBehaviour
             return;
         }
 
-        currentPlayerMovementSpeedLevel++;
+        //currentPlayerMovementSpeedLevel++;
         Debug.Log("Applying Player Movement Speed Upgrade");
 
         PlayerManager playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
@@ -106,7 +120,7 @@ public class UpgradeHandler : MonoBehaviour
             return;
         }
 
-        currentPlayerDefenseLevel++;
+        //currentPlayerDefenseLevel++;
         Debug.Log("Applying Player Defense Upgrade");
 
          PlayerManager playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
