@@ -9,6 +9,7 @@ public class PlayerLook : MonoBehaviour
     public Transform head;
     public Camera camera;
     public Transform headlight;
+    public Transform tool;
 
     [Header("Settings")]
     public float mouseSensitivity = .04f;

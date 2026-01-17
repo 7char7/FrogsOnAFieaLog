@@ -141,7 +141,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Previous"",
                     ""type"": ""Button"",
                     ""id"": ""2776c80d-3c14-4091-8c56-d04ced07a2b0"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -177,6 +177,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Mine"",
                     ""type"": ""Button"",
                     ""id"": ""1c734ed7-80a0-42cd-b19c-c9a4fc22fd4b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchTool"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca14fc07-6b11-44d9-9e66-09d4a4148c5b"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -517,11 +526,22 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2e21c19b-3fa9-4525-a1b0-c38915fe585f"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Mine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b6fee48-a2f6-4d6b-a8af-f25c002517af"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchTool"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1119,6 +1139,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Mine = m_Player.FindAction("Mine", throwIfNotFound: true);
+        m_Player_SwitchTool = m_Player.FindAction("SwitchTool", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1222,6 +1243,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Mine;
+    private readonly InputAction m_Player_SwitchTool;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1273,6 +1295,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Mine".
         /// </summary>
         public InputAction @Mine => m_Wrapper.m_Player_Mine;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SwitchTool".
+        /// </summary>
+        public InputAction @SwitchTool => m_Wrapper.m_Player_SwitchTool;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1329,6 +1355,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Mine.started += instance.OnMine;
             @Mine.performed += instance.OnMine;
             @Mine.canceled += instance.OnMine;
+            @SwitchTool.started += instance.OnSwitchTool;
+            @SwitchTool.performed += instance.OnSwitchTool;
+            @SwitchTool.canceled += instance.OnSwitchTool;
         }
 
         /// <summary>
@@ -1370,6 +1399,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Mine.started -= instance.OnMine;
             @Mine.performed -= instance.OnMine;
             @Mine.canceled -= instance.OnMine;
+            @SwitchTool.started -= instance.OnSwitchTool;
+            @SwitchTool.performed -= instance.OnSwitchTool;
+            @SwitchTool.canceled -= instance.OnSwitchTool;
         }
 
         /// <summary>
@@ -1740,6 +1772,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMine(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchTool" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchTool(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

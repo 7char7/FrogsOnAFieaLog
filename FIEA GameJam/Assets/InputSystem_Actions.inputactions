@@ -55,7 +55,7 @@
                     "name": "Previous",
                     "type": "Button",
                     "id": "2776c80d-3c14-4091-8c56-d04ced07a2b0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -91,6 +91,15 @@
                     "name": "Mine",
                     "type": "Button",
                     "id": "1c734ed7-80a0-42cd-b19c-c9a4fc22fd4b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchTool",
+                    "type": "Button",
+                    "id": "ca14fc07-6b11-44d9-9e66-09d4a4148c5b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -431,11 +440,22 @@
                 {
                     "name": "",
                     "id": "2e21c19b-3fa9-4525-a1b0-c38915fe585f",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Mine",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b6fee48-a2f6-4d6b-a8af-f25c002517af",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchTool",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

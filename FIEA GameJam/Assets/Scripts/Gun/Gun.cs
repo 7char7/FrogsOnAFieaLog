@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEditor.Rendering.LookDev;
+using Unity.VisualScripting;
 
 public abstract class Gun : MonoBehaviour
 {
@@ -88,6 +89,9 @@ public abstract class Gun : MonoBehaviour
 
     public void StartFiring(InputAction.CallbackContext context)
     {
+        if (this.gameObject.activeSelf == false)
+            return;
+        
         if (context.started)
         {
             fireCoroutine = StartCoroutine(FireGun());
@@ -123,5 +127,6 @@ public abstract class Gun : MonoBehaviour
             trail.endColor = new Color(trail.endColor.r, trail.endColor.g, trail.endColor.b, alpha);
             yield return null;
         }
+        Destroy(trail.gameObject);
     }
 }
