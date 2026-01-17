@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8909873781454379761}
   m_Layer: 0
   m_Name: LegendaryCrystalP
-  m_TagString: Untagged
+  m_TagString: Mineable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Crystal
   crystalType: 3
   baseValue: 100
-  crystalHealth: 200
+  maxCrystalHealth: 200
+  currentCrystalHealth: 200
   miningTime: 2
   wispParticlePrefab: {fileID: 0}
   shatteredCrystalPrefab: {fileID: 5427025954695001617, guid: 100d12a174974c24fbbbf2bf02861881, type: 3}

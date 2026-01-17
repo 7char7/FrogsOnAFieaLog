@@ -432,9 +432,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrystalSpawner
   commonCrystalPrefab: {fileID: 5546624274817470400, guid: 0326c08ac147d054ebdfcd69e159e8e2, type: 3}
-  uncommonCrystalPrefab: {fileID: 1806848514364499929, guid: d90c3ba8506f123478c1e0493fc0e5d0, type: 3}
-  rareCrystalPrefab: {fileID: 5011981700940495700, guid: ae337b6551ec41b44acd7b049dd8b55e, type: 3}
-  legendaryCrystalPrefab: {fileID: 1407894969549246135, guid: fc4bdeef7382ca6468b8b0cf5dba4636, type: 3}
+  uncommonCrystalPrefab: {fileID: 5546624274817470400, guid: 5f74042f7ef5cb149a16bc9ec24f41d1, type: 3}
+  rareCrystalPrefab: {fileID: 5546624274817470400, guid: 48c99aa24e8c7594b97bc657cfff9c0f, type: 3}
+  legendaryCrystalPrefab: {fileID: 5546624274817470400, guid: 9e21234ad2e7aed46b63a8d3e4299aea, type: 3}
   crystalsPerRoom: {x: 2, y: 5}
   crystalHeight: 0.5
   minDistanceFromWalls: 1.5

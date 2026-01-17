@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8909873781454379761}
   m_Layer: 0
   m_Name: RareCrystalB
-  m_TagString: Untagged
+  m_TagString: Mineable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Crystal
   crystalType: 2
   baseValue: 50
-  crystalHealth: 100
+  maxCrystalHealth: 100
+  currentCrystalHealth: 100
   miningTime: 1.5
   wispParticlePrefab: {fileID: 0}
   shatteredCrystalPrefab: {fileID: 5427025954695001617, guid: d2a3082d348d57e48854fa7e3dbcee70, type: 3}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8909873781454379761}
   m_Layer: 0
   m_Name: UncommonCrystalG
-  m_TagString: Untagged
+  m_TagString: Mineable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Crystal
   crystalType: 1
   baseValue: 25
-  crystalHealth: 50
+  maxCrystalHealth: 50
+  currentCrystalHealth: 50
   miningTime: 1
   wispParticlePrefab: {fileID: 0}
   shatteredCrystalPrefab: {fileID: 5427025954695001617, guid: fd083cb1321d46b4f9a7b491a550ce2b, type: 3}
