@@ -135,6 +135,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3007589644591184013, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.6971
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007589644591184013, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.6971
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007589644591184013, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.6971
+      objectReference: {fileID: 0}
     - target: {fileID: 4066715249269529104, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
       propertyPath: m_Name
       value: Pickaxe Model
@@ -181,6 +193,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4935355526872037028, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231129892267731461, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231129892267731461, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231129892267731461, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231129892267731461, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231129892267731461, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
+      propertyPath: m_UseSpriteMesh
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1070,8 +1102,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3480668960297053943, guid: 893bfaff2b6ba754cba285ee7a63e356, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5626196818622497333}
   m_SourcePrefab: {fileID: 100100000, guid: 893bfaff2b6ba754cba285ee7a63e356, type: 3}
+--- !u!1 &5626196818622497332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3480668960297053943, guid: 893bfaff2b6ba754cba285ee7a63e356, type: 3}
+  m_PrefabInstance: {fileID: 5626196818622497331}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5626196818622497333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5626196818622497332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5432cb845ddcb8b4a8748cb40659865d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Crystal
+  crystalType: 0
+  baseValue: 10
+  crystalHealth: 20
+  miningTime: 0.5
+  wispParticlePrefab: {fileID: 0}
+  rotationSpeed: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

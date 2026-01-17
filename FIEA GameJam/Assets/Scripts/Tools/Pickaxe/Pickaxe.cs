@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Pickaxe : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
+    public Stats pickaxeStatsScriptableObject; 
 
     [Header("General Settings")]
     [SerializeField] private float reachDistance;
@@ -13,11 +14,10 @@ public class Pickaxe : MonoBehaviour
     [SerializeField] private float miningSpeed;
     [SerializeField] private float miningDamage;
     private Coroutine miningCoroutine;
-    WaitForSeconds miningWait;
 
     void Awake()
     {
-        miningWait = new WaitForSeconds(1f / miningSpeed);
+        pickaxeStatsScriptableObject = Instantiate(pickaxeStatsScriptableObject);
     }
 
     public IEnumerator Mine()
@@ -30,10 +30,10 @@ public class Pickaxe : MonoBehaviour
                 if (hit.transform.CompareTag("Mineable"))
                 {
                     Debug.Log("Mining " + hit.transform.name);
-                    // Add code to mine object
+                    hit.transform.GetComponent<Crystal>().MineCrystal(pickaxeStatsScriptableObject.GetStat(Stat.miningDamage));
                 }
             }
-            yield return miningWait;
+            yield return new WaitForSeconds(1f / pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
         }
     }
 
