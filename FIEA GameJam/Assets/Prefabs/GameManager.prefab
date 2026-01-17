@@ -73,7 +73,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce8d4ef8a30bc6248b8e655fe3de9c07, type: 2}
   currentShotgunLevel: 0
   maxShotgunLevel: 10
-  pickaxeUpgrades: []
+  pickaxeUpgrades:
+  - {fileID: 11400000, guid: 45e484321f581d444ad403dd32acfe08, type: 2}
+  - {fileID: 11400000, guid: 7f64eed3e115993418be95d53f25004c, type: 2}
   currentPickaxeLevel: 0
   maxPickaxeLevel: 10
   playerMaxHealthUpgrade: {fileID: 11400000, guid: b7a1b53e7be489548b463dee71245ae0, type: 2}

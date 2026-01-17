@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19e2d29db318e204b8f304d56f8ec88e, type: 3}
-  m_Name: PickaxeMiningDamage
+  m_Name: MaxTorches
   m_EditorClassIdentifier: Assembly-CSharp::StatsUpgrade
-  upgradeName: Pickaxe Mining Damage
+  upgradeName: 
   upgradeDescription: 
   unitsToUpgrade: []
-  upgradeToApply:
-  - statType: 8
-    statValue: 10
-  isPercentageUpgrade: 1
+  upgradeToApply: []
+  isPercentageUpgrade: 0

@@ -76,7 +76,7 @@ public class Pickaxe : MonoBehaviour
             Debug.Log($"[PICKAXE] No hit detected within reach distance {reachDistance}");
         }
 
-        nextMineTime = Time.time + (1f / pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
+        nextMineTime = Time.time + (pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
     }
 
     public IEnumerator HandleMine()
@@ -84,7 +84,7 @@ public class Pickaxe : MonoBehaviour
         while (true)
         {
             Mine();
-            yield return new WaitForSeconds(1f / pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
+            yield return new WaitForSeconds(pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));
         }
     }
 

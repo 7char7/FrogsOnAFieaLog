@@ -10,12 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 937183b4cf471414ca9ce726f8cecfb2, type: 3}
-  m_Name: Pickaxe
+  m_Name: Torch
   m_EditorClassIdentifier: Assembly-CSharp::Stats
   instanceStats: []
-  stats:
-  - statType: 8
-    statValue: 10
-  - statType: 7
-    statValue: 0.8
+  stats: []
   appliedUpgrades: []

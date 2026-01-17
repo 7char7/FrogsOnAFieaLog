@@ -21,7 +21,10 @@ public enum Stat
     // Player
     maxHealth,
     movementSpeed,
-    defense
+    defense,
+
+    // Torch
+    numberOfTorches
 }
 
 

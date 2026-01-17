@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19e2d29db318e204b8f304d56f8ec88e, type: 3}
-  m_Name: PickaxeMiningDamage
+  m_Name: PickaxeMiningSpeed
   m_EditorClassIdentifier: Assembly-CSharp::StatsUpgrade
-  upgradeName: Pickaxe Mining Damage
-  upgradeDescription: 
+  upgradeName: Mining Speed
+  upgradeDescription: Decreases mining speed by 10%
   unitsToUpgrade: []
   upgradeToApply:
-  - statType: 8
-    statValue: 10
+  - statType: 7
+    statValue: -10
   isPercentageUpgrade: 1
