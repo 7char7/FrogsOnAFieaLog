@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class ShopMenu : MonoBehaviour
@@ -32,5 +33,10 @@ public class ShopMenu : MonoBehaviour
         GameManager.Instance.shotgunLevel = shotgunShopLevel; 
         GameManager.Instance.torchLimitLevel = torchLimitShopLevel;
         GameManager.Instance.playerHealthLevel = playerHealthShopLevel;
+    }
+    public void OnPlayButtonPressed()
+    {
+        updateValues();
+        SceneManager.LoadScene("MainScene");
     }
 }
