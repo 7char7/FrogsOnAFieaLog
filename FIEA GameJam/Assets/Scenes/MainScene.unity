@@ -197,9 +197,9 @@ MonoBehaviour:
   generateWalls: 1
   wallHeight: 3
   generateCeiling: 1
-  floorMaterial_Base: {fileID: 2100000, guid: 57ed966aa177c334dbbcefe2f9bc3fc4, type: 2}
+  floorMaterial_Base: {fileID: 2100000, guid: 11bd6bfe53b8fff44935f6bfe689190a, type: 2}
   wallMaterial_Base: {fileID: 2100000, guid: 57ed966aa177c334dbbcefe2f9bc3fc4, type: 2}
-  ceilingMaterial_Base: {fileID: 2100000, guid: 57ed966aa177c334dbbcefe2f9bc3fc4, type: 2}
+  ceilingMaterial_Base: {fileID: 2100000, guid: 07f963d63ffd9c241a35525df85c9f10, type: 2}
   floorMaterial_Blue: {fileID: 2100000, guid: 321ccd068ba49a6439b9b3803709030d, type: 2}
   wallMaterial_Blue: {fileID: 2100000, guid: 321ccd068ba49a6439b9b3803709030d, type: 2}
   ceilingMaterial_Blue: {fileID: 2100000, guid: 321ccd068ba49a6439b9b3803709030d, type: 2}
