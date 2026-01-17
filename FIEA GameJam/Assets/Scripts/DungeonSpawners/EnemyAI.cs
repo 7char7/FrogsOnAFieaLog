@@ -38,7 +38,6 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         enemy = GetComponent<Enemy>();
-        Debug.Log($"[EnemyAI] {gameObject.name} Awake: agent={agent != null}, enemy={enemy != null}");
     }
 
     private void Start()
@@ -46,7 +45,6 @@ public class EnemyAI : MonoBehaviour
         agent.speed = enemy.MoveSpeed;
         agent.stoppingDistance = 0f;
 
-        Debug.Log($"[EnemyAI] {gameObject.name} Start: pos={transform.position}, agent.speed={agent.speed}, isOnNavMesh={agent.isOnNavMesh}, enabled={agent.enabled}");
 
         FindPlayer();
 
@@ -56,27 +54,22 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"[EnemyAI] {gameObject.name} is NOT on NavMesh! Position: {transform.position}");
         }
     }
 
     private void Update()
     {
-        Debug.Log($"[EnemyAI] {gameObject.name} Update() CALLED - enabled={enabled}, gameObject.activeInHierarchy={gameObject.activeInHierarchy}");
 
         if (!agent.isOnNavMesh || !agent.enabled)
         {
-            Debug.LogWarning($"[EnemyAI] {gameObject.name} Update: EARLY RETURN - isOnNavMesh={agent.isOnNavMesh}, enabled={agent.enabled}");
             return;
         }
 
         if (player == null)
         {
-            Debug.LogWarning($"[EnemyAI] {gameObject.name} Update: player is NULL, finding player...");
             FindPlayer();
             if (player == null)
             {
-                Debug.LogWarning($"[EnemyAI] {gameObject.name} Update: player STILL NULL after FindPlayer!");
                 return;
             }
         }
@@ -107,13 +100,11 @@ public class EnemyAI : MonoBehaviour
 
         if (agent.pathPending)
         {
-            Debug.Log($"[EnemyAI] {gameObject.name} UpdatePatrol: pathPending=true, waiting...");
             return;
         }
 
         if (agent.hasPath)
         {
-            Debug.Log($"[EnemyAI] {gameObject.name} UpdatePatrol: hasPath=true, remainingDistance={agent.remainingDistance}, velocity={agent.velocity.magnitude}");
 
             if (agent.remainingDistance <= waypointReachDistance)
             {
@@ -128,7 +119,6 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"[EnemyAI] {gameObject.name} UpdatePatrol: hasPath=false, pathPending=false, requesting new target");
             SetNewPatrolTarget();
         }
     }
@@ -282,11 +272,9 @@ public class EnemyAI : MonoBehaviour
         {
             patrolTarget = hit.position;
             bool pathSet = agent.SetDestination(patrolTarget);
-            Debug.Log($"[EnemyAI] {gameObject.name} SetPatrolTarget: target={patrolTarget}, pathSet={pathSet}, hasPath={agent.hasPath}, pathPending={agent.pathPending}");
         }
         else
         {
-            Debug.LogWarning($"[EnemyAI] {gameObject.name} SetPatrolTarget: Failed to sample NavMesh position!");
         }
     }
 
