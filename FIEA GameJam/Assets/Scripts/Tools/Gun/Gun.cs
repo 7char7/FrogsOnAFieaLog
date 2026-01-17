@@ -11,6 +11,7 @@ public abstract class Gun : MonoBehaviour
     public Stats gunStatsScriptableObject;
 
     public float currentAmmo;
+    protected float nextFireTime;
 
     [Header("Bullet Trail")]
     [SerializeField] GameObject trailPrefab;
@@ -22,11 +23,12 @@ public abstract class Gun : MonoBehaviour
     {
         gunStatsScriptableObject = Instantiate(gunStatsScriptableObject);
         currentAmmo = gunStatsScriptableObject.GetStat(Stat.maxAmmo);
+        nextFireTime = 0f;
     }
 
     public virtual void Shoot()
     {
-        if (!CanShoot())
+        if (Time.time < nextFireTime || currentAmmo <= 0)
             return;
         
         currentAmmo--;
@@ -41,11 +43,8 @@ public abstract class Gun : MonoBehaviour
         {
             CreateBulletTrail(cameraTransform.position + shootDirection.normalized * gunStatsScriptableObject.GetStat(Stat.range));
         }
-    }
 
-    protected bool CanShoot()
-    {
-        return currentAmmo > 0;
+        nextFireTime = Time.time + (1f / gunStatsScriptableObject.GetStat(Stat.fireRate));
     }
 
     protected virtual IEnumerator Reload()
@@ -77,7 +76,7 @@ public abstract class Gun : MonoBehaviour
         while (true)
         {
             Shoot();
-            yield return new WaitForSeconds(1f / gunStatsScriptableObject.GetStat(Stat.fireRate));
+            yield return null;
         }
     }
 

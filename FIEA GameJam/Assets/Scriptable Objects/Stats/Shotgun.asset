@@ -15,7 +15,7 @@ MonoBehaviour:
   instanceStats: []
   stats:
   - statType: 0
-    statValue: 10
+    statValue: 3
   - statType: 1
     statValue: 10
   - statType: 2
@@ -25,6 +25,7 @@ MonoBehaviour:
   - statType: 4
     statValue: 50
   - statType: 5
-    statValue: 6
+    statValue: 50
   - statType: 6
     statValue: 5
+  appliedUpgrades: []

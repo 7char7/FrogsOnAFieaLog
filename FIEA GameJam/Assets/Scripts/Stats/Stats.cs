@@ -25,11 +25,10 @@ public class Stats : ScriptableObject
 {
     public List<StatInfo> instanceStats = new List<StatInfo>();
     public List<StatInfo> stats = new List<StatInfo>();
-    private List<StatsUpgrade> appliedUpgrades = new List<StatsUpgrade>();
+    public List<StatsUpgrade> appliedUpgrades = new List<StatsUpgrade>();
 
     public float GetStat(Stat stat)
     {
-
         if (instanceStats != null)
         {
             foreach (var s in instanceStats)
@@ -57,10 +56,7 @@ public class Stats : ScriptableObject
 
     public void UnlockUpgrade(StatsUpgrade upgrade)
     {
-        if (!appliedUpgrades.Contains(upgrade))
-        {
-            appliedUpgrades.Add(upgrade);
-        }
+        appliedUpgrades.Add(upgrade);
     }
 
     private float GetUpgradedValue(Stat stat, float baseValue)
