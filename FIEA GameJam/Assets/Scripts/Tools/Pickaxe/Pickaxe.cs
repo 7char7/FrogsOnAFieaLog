@@ -31,16 +31,49 @@ public class Pickaxe : MonoBehaviour
         if (Time.time < nextMineTime)
             return;
 
+        Debug.Log($"[PICKAXE] Mine called - Camera Position: {cameraTransform.position}, Forward: {cameraTransform.forward}, Reach Distance: {reachDistance}");
+
         RaycastHit hit;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, reachDistance))
+        bool didHit = Physics.SphereCast(cameraTransform.position, 0.3f, cameraTransform.forward, out hit, reachDistance, ~0, QueryTriggerInteraction.Collide);
+        
+        Debug.DrawRay(cameraTransform.position, cameraTransform.forward * reachDistance, didHit ? Color.green : Color.red, 1f);
+        
+        if (didHit)
         {
-            if (hit.transform.CompareTag("Mineable"))
+            Debug.Log($"[PICKAXE] HIT something! Name: {hit.transform.name}, Tag: {hit.transform.tag}, Distance: {hit.distance}, Layer: {LayerMask.LayerToName(hit.transform.gameObject.layer)}");
+            
+            Transform targetTransform = hit.transform;
+            
+            if (!targetTransform.CompareTag("Mineable") && targetTransform.parent != null && targetTransform.parent.CompareTag("Mineable"))
             {
-                Debug.Log("Mining " + hit.transform.name);
-                Crystal crystal = hit.transform.GetComponent<Crystal>();
-                crystal.MineCrystal(pickaxeStatsScriptableObject.GetStat(Stat.miningDamage));
-                UpdateCrystalHealthBar(crystal);
+                Debug.Log($"[PICKAXE] Child hit, checking parent: {targetTransform.parent.name}");
+                targetTransform = targetTransform.parent;
             }
+            
+            if (targetTransform.CompareTag("Mineable"))
+            {
+                Debug.Log($"[PICKAXE] Trying to mine {targetTransform.name}, looking for Crystal component...");
+                Crystal crystal = targetTransform.GetComponentInParent<Crystal>();
+                
+                if (crystal != null)
+                {
+                    Debug.Log($"[PICKAXE] Mining {crystal.name}");
+                    crystal.MineCrystal(pickaxeStatsScriptableObject.GetStat(Stat.miningDamage));
+                    UpdateCrystalHealthBar(crystal);
+                }
+                else
+                {
+                    Debug.LogError($"[PICKAXE] Hit object '{targetTransform.name}' tagged 'Mineable' but has no Crystal component in parent hierarchy!");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[PICKAXE] Hit object '{hit.transform.name}' but tag is '{hit.transform.tag}' not 'Mineable'");
+            }
+        }
+        else
+        {
+            Debug.Log($"[PICKAXE] No hit detected within reach distance {reachDistance}");
         }
 
         nextMineTime = Time.time + (1f / pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed));

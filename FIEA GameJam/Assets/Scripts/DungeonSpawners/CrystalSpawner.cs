@@ -122,7 +122,7 @@ public class CrystalSpawner : MonoBehaviour
             float x = Random.Range(room.Left + minDistanceFromWalls, room.Right - minDistanceFromWalls);
             float z = Random.Range(room.Bottom + minDistanceFromWalls, room.Top - minDistanceFromWalls);
 
-            Vector3 position = new Vector3(x, crystalHeight, z);
+            Vector3 position = new Vector3(x, 0f, z);
 
             if (IsValidSpawnPosition(position))
             {
