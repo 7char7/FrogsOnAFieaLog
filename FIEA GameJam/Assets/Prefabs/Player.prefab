@@ -372,7 +372,8 @@ MonoBehaviour:
   playerMovement: {fileID: 2053621862567442592}
   playerLook: {fileID: 161529629832679790}
   gun: {fileID: 4158937915156888574}
-  toolManager: {fileID: 0}
+  pickaxe: {fileID: 6003109289879971118}
+  toolManager: {fileID: 5566239306450604908}
 --- !u!114 &161529629832679790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,8 +388,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLook
   head: {fileID: 9176001298241242379}
   camera: {fileID: 2685248901615410504}
-  headlight: {fileID: 0}
-  tool: {fileID: 0}
+  headlight: {fileID: 5464489170256137522}
+  tool: {fileID: 656980410585625430}
   mouseSensitivity: 0.04
   maxLookX: 85
   minLookX: -85
@@ -554,7 +555,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0.38888884, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -762,17 +763,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 656980410585625430}
     m_Modifications:
+    - target: {fileID: 2224934416309999816, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224934416309999816, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224934416309999816, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224934416309999816, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2880183587723465119, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 7355968410065743519}
+    - target: {fileID: 2880183587723465119, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: gunStatsScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 8d8a6e392fe4d8c40af80e309e0bffad, type: 2}
+    - target: {fileID: 3354751660669162420, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.058
+      objectReference: {fileID: 0}
+    - target: {fileID: 3354751660669162420, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.686
+      objectReference: {fileID: 0}
     - target: {fileID: 6003314854756465762, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: m_Name
       value: Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 6398074305607548116, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.056
       objectReference: {fileID: 0}
     - target: {fileID: 6398074305607548116, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: m_LocalPosition.y
@@ -780,7 +809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6398074305607548116, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.349
       objectReference: {fileID: 0}
     - target: {fileID: 6398074305607548116, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: m_LocalRotation.w
@@ -846,15 +875,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5326113583969117287, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.019
       objectReference: {fileID: 0}
     - target: {fileID: 5326113583969117287, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.073
       objectReference: {fileID: 0}
     - target: {fileID: 5326113583969117287, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.158
+      value: 0.169
       objectReference: {fileID: 0}
     - target: {fileID: 5326113583969117287, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
       propertyPath: m_LocalRotation.w
@@ -891,7 +920,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7967245850495110243, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6003109289879971118}
   m_SourcePrefab: {fileID: 100100000, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
 --- !u!4 &1203677827208356931 stripped
 Transform:
@@ -903,3 +935,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7967245850495110243, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
   m_PrefabInstance: {fileID: 6439719270427918372}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6003109289879971118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4021482939176930375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df59e0182da44fc459c0144a2e0d66f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickaxe
+  cameraTransform: {fileID: 7355968410065743519}
+  reachDistance: 2
+  miningSpeed: 5
+  miningDamage: 0
