@@ -12,17 +12,9 @@ public class ShopMenu : MonoBehaviour
     public int playerDefenceShopLevel;
     public int pickaxeShopLevel;
 
-    private void Update()
-    {
-        
-    }
     private void Awake()
     {
         refreshValues();
-    }
-    private void Start()
-    {
-        
     }
     public void refreshValues()
     {
