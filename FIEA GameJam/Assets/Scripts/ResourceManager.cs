@@ -148,4 +148,17 @@ public class ResourceManager : MonoBehaviour
             _ => 0
         };
     }
+    
+    public bool SpendPoints(int amount)
+    {
+        if (totalPoints >= amount)
+        {
+            totalPoints -= amount;
+            OnPointsChanged?.Invoke(currentRunPoints, 0);
+            Debug.Log($"Spent {amount} points. Remaining: {totalPoints}");
+            return true;
+        }
+        Debug.Log($"Not enough points! Need {amount}, have {totalPoints}");
+        return false;
+    }
 }

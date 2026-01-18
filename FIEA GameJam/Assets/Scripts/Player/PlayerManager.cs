@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerManager : MonoBehaviour
@@ -10,10 +11,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private float currentHealth;
     [SerializeField] private HealthBarManager healthBarManager;
+    [SerializeField] private string shopSceneName = "Shop";
+    [SerializeField] private float deathDelay = 1.5f;
+    
     private Color fullHealthColor = Color.green;
     private Color midHealthColor = Color.yellow;
     private Color zeroHealthColor = Color.red;
     private Coroutine healthBarCoroutine;
+    private bool isDead = false;
 
     void Awake()
     {
@@ -50,9 +55,9 @@ public class PlayerManager : MonoBehaviour
             AudioManager.Instance.PlayPlayerDamagedSound();
         }
         
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
-            //Die();
+            Die();
         }
     }
     
@@ -67,5 +72,39 @@ public class PlayerManager : MonoBehaviour
         {
             CameraShake.Instance.Shake(0.2f, 0.3f, 2f);
         }
+    }
+    
+    private void Die()
+    {
+        isDead = true;
+        Debug.Log("Player died!");
+        
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.CompleteRunFailure();
+        }
+        
+        StartCoroutine(HandleDeath());
+    }
+    
+    private IEnumerator HandleDeath()
+    {
+        yield return new WaitForSeconds(deathDelay);
+        
+        if (SceneFadeManager.Instance != null)
+        {
+            SceneFadeManager.Instance.FadeToScene(shopSceneName, true);
+        }
+        else
+        {
+            RestoreCursor();
+            SceneManager.LoadScene(shopSceneName);
+        }
+    }
+    
+    private void RestoreCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

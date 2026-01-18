@@ -3,34 +3,50 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
-   //loads main menu
-    public void LoadMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
+   public void LoadMainMenu()
+   {
+       if (SceneFadeManager.Instance != null)
+       {
+           SceneFadeManager.Instance.FadeToScene("MainMenu", true);
+       }
+       else
+       {
+           SceneManager.LoadScene("MainMenu");
+       }
+   }
 
-    //loads the shop/upgrades
-    public void LoadShop()
-    {
-        SceneManager.LoadScene("Shop");
-    }
+   public void LoadShop()
+   {
+       SceneManager.LoadScene("Shop");
+   }
 
-    //loads summary page after dying or extracting
-    public void LoadSummary()
-    {
-        SceneManager.LoadScene("Summary");
-    }
+   public void LoadSummary()
+   {
+       if (SceneFadeManager.Instance != null)
+       {
+           SceneFadeManager.Instance.FadeToScene("Summary", true);
+       }
+       else
+       {
+           SceneManager.LoadScene("Summary");
+       }
+   }
 
-    //loads testing gameplay scene
-    public void LoadFakePlaying()
-    {
-        SceneManager.LoadScene("FakePlaying");
-    }
+   public void LoadFakePlaying()
+   {
+       if (SceneFadeManager.Instance != null)
+       {
+           SceneFadeManager.Instance.FadeToScene("FakePlaying", false);
+       }
+       else
+       {
+           SceneManager.LoadScene("FakePlaying");
+       }
+   }
 
-    // Update is called once per frame
-    public void Quit()
-    {
-        Application.Quit();
-    }
+   public void Quit()
+   {
+       Application.Quit();
+   }
 
 }

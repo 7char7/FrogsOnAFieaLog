@@ -70,14 +70,30 @@ public class MineTimer : MonoBehaviour
         if (resourceManager == null || gameManager == null)
         {
             Debug.LogWarning("ResourceManager or GameManager not found!");
-            SceneManager.LoadScene(shopSceneName);
+            
+            if (SceneFadeManager.Instance != null)
+            {
+                SceneFadeManager.Instance.FadeToScene(shopSceneName, true);
+            }
+            else
+            {
+                RestoreCursor();
+                SceneManager.LoadScene(shopSceneName);
+            }
             return;
         }
         
         gameManager.CompleteRunFailure();
         
-        RestoreCursor();
-        SceneManager.LoadScene(shopSceneName);
+        if (SceneFadeManager.Instance != null)
+        {
+            SceneFadeManager.Instance.FadeToScene(shopSceneName, true);
+        }
+        else
+        {
+            RestoreCursor();
+            SceneManager.LoadScene(shopSceneName);
+        }
     }
     
     public void PauseTimer()

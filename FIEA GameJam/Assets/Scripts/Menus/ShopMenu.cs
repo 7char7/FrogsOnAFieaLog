@@ -26,7 +26,8 @@ public class ShopMenu : MonoBehaviour
     }
     public void refreshValues()
     {
-        balanceText.text = "Balance: " + GameManager.Instance.money;
+        int currentBalance = ResourceManager.Instance != null ? ResourceManager.Instance.TotalPoints : 0;
+        balanceText.text = "Balance: " + currentBalance;
         shotgunShopLevel = GameManager.Instance.shotgunLevel;
         torchLimitShopLevel = GameManager.Instance.torchLimitLevel;
         playerHealthShopLevel = GameManager.Instance.playerHealthLevel;
@@ -47,7 +48,15 @@ public class ShopMenu : MonoBehaviour
     public void OnPlayButtonPressed()
     {
         updateValues();
-        SceneManager.LoadScene("MainScene");
+        
+        if (SceneFadeManager.Instance != null)
+        {
+            SceneFadeManager.Instance.FadeToScene("MainScene", false);
+        }
+        else
+        {
+            SceneManager.LoadScene("MainScene");
+        }
     }
 
     public void OnShopOpened()

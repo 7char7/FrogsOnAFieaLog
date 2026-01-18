@@ -65,59 +65,60 @@ public class UpgradeButton : MonoBehaviour
 
         int cost = 100 + 25 * level;
 
-        if (GameManager.Instance.money >= cost)
+        if (ResourceManager.Instance != null && ResourceManager.Instance.TotalPoints >= cost)
         {
-            GameManager.Instance.money -= cost;
-
-            switch (upgradeType)
+            if (ResourceManager.Instance.SpendPoints(cost))
             {
-                case UpgradeType.Shotgun:
-                    shopMenu.shotgunShopLevel += 1;
-                    if (indicatorImage[level].color != Color.green)
-                    {
-                        indicatorImage[level].color = Color.green;
-                    }
-                    break;
-                case UpgradeType.PlayerHealth:
-                    shopMenu.playerHealthShopLevel += 1;
-                    if (indicatorImage[level].color != Color.green)
-                    {
-                        indicatorImage[level].color = Color.green;
-                    }
-                    break;
-                case UpgradeType.TorchLimit:
-                    shopMenu.torchLimitShopLevel += 1;
-                    if (indicatorImage[level].color != Color.green)
-                    {
-                        indicatorImage[level].color = Color.green;
-                    }
-                    break;
-                case UpgradeType.Pickaxe:
-                    shopMenu.pickaxeShopLevel += 1;
-                    if (indicatorImage[level].color != Color.green)
-                    {
-                        indicatorImage[level].color = Color.green;
-                    }
-                    break;
-                case UpgradeType.Defence:
-                    shopMenu.playerDefenceShopLevel += 1;
-                    if (indicatorImage[level].color != Color.green)
-                    {
-                        indicatorImage[level].color = Color.green;
-                    }
-                    break;
-                case UpgradeType.Speed:
-                    shopMenu.playerSpeedShopLevel += 1;
-                    if (indicatorImage[level].color != Color.green)
-                    {
-                        indicatorImage[level].color = Color.green;
-                    }
-                    break;
-            }
+                switch (upgradeType)
+                {
+                    case UpgradeType.Shotgun:
+                        shopMenu.shotgunShopLevel += 1;
+                        if (indicatorImage[level].color != Color.green)
+                        {
+                            indicatorImage[level].color = Color.green;
+                        }
+                        break;
+                    case UpgradeType.PlayerHealth:
+                        shopMenu.playerHealthShopLevel += 1;
+                        if (indicatorImage[level].color != Color.green)
+                        {
+                            indicatorImage[level].color = Color.green;
+                        }
+                        break;
+                    case UpgradeType.TorchLimit:
+                        shopMenu.torchLimitShopLevel += 1;
+                        if (indicatorImage[level].color != Color.green)
+                        {
+                            indicatorImage[level].color = Color.green;
+                        }
+                        break;
+                    case UpgradeType.Pickaxe:
+                        shopMenu.pickaxeShopLevel += 1;
+                        if (indicatorImage[level].color != Color.green)
+                        {
+                            indicatorImage[level].color = Color.green;
+                        }
+                        break;
+                    case UpgradeType.Defence:
+                        shopMenu.playerDefenceShopLevel += 1;
+                        if (indicatorImage[level].color != Color.green)
+                        {
+                            indicatorImage[level].color = Color.green;
+                        }
+                        break;
+                    case UpgradeType.Speed:
+                        shopMenu.playerSpeedShopLevel += 1;
+                        if (indicatorImage[level].color != Color.green)
+                        {
+                            indicatorImage[level].color = Color.green;
+                        }
+                        break;
+                }
 
-            shopMenu.updateValues(); // Write new level to GameManager
-            UpdateCostText();        // Update cost for next level
-            shopMenu.balanceText.text = "Balance: " + GameManager.Instance.money;
+                shopMenu.updateValues();
+                UpdateCostText();
+                shopMenu.refreshValues();
+            }
         }
     }
 

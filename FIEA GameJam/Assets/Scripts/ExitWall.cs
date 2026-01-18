@@ -51,8 +51,15 @@ public class ExitWall : MonoBehaviour
 
     private void ReturnToShop()
     {
-        RestoreCursor();
-        SceneManager.LoadScene(shopSceneName);
+        if (SceneFadeManager.Instance != null)
+        {
+            SceneFadeManager.Instance.FadeToScene(shopSceneName, true);
+        }
+        else
+        {
+            RestoreCursor();
+            SceneManager.LoadScene(shopSceneName);
+        }
     }
 
     private void RestoreCursor()
