@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     
     public bool HasWon { get; private set; }
     public bool HasLost { get; private set; }
+    
+    private bool isRunComplete = false;
 
     /* ======================
      * Gem Tracking (Legacy)
@@ -68,6 +70,8 @@ public class GameManager : MonoBehaviour
 
     public void StartNewRun()
     {
+        isRunComplete = false;
+        
         Debug.Log(
             $"Starting run {currentRun} of {maxRuns}. " +
             $"Total accumulated: {ResourceManager.Instance?.TotalPoints ?? 0}"
@@ -76,6 +80,14 @@ public class GameManager : MonoBehaviour
 
     public void CompleteRunSuccess()
     {
+        if (isRunComplete)
+        {
+            Debug.LogWarning("Run already completed - ignoring duplicate call to CompleteRunSuccess");
+            return;
+        }
+        
+        isRunComplete = true;
+        
         if (ResourceManager.Instance == null) return;
 
         ResourceManager.Instance.SaveRunProgress();
@@ -113,6 +125,14 @@ public class GameManager : MonoBehaviour
 
     public void CompleteRunFailure()
     {
+        if (isRunComplete)
+        {
+            Debug.LogWarning("Run already completed - ignoring duplicate call to CompleteRunFailure");
+            return;
+        }
+        
+        isRunComplete = true;
+        
         if (ResourceManager.Instance == null) return;
 
         int lostPoints = ResourceManager.Instance.CurrentRunPoints;
@@ -176,6 +196,7 @@ public class GameManager : MonoBehaviour
         currentRun = 1;
         HasWon = false;
         HasLost = false;
+        isRunComplete = false;
         
         shotgunLevel = 0;
         pickaxeLevel = 0;
@@ -199,6 +220,7 @@ public class GameManager : MonoBehaviour
         currentRun = 1;
         HasWon = false;
         HasLost = false;
+        isRunComplete = false;
         
         money = 0;
         
