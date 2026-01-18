@@ -29,12 +29,12 @@ public class GameManager : MonoBehaviour
      * Upgrades
      * ====================== */
     [Header("Upgrades")]
-    public int shotgunLevel = 1;
-    public int pickaxeLevel = 1;
-    public int playerHealthLevel = 1;
-    public int playerSpeedLevel = 1;
-    public int playerDefenceLevel = 1;
-    public int torchLimitLevel = 1;
+    public int shotgunLevel = 0;
+    public int pickaxeLevel = 0;
+    public int playerHealthLevel = 0;
+    public int playerSpeedLevel = 0;
+    public int playerDefenceLevel = 0;
+    public int torchLimitLevel = 0;
 
     /* ======================
      * Money

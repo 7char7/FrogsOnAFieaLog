@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.InputSystem;
+using System;
 
 public class ShopMenu : MonoBehaviour
 {
@@ -11,10 +13,16 @@ public class ShopMenu : MonoBehaviour
     public int playerSpeedShopLevel;
     public int playerDefenceShopLevel;
     public int pickaxeShopLevel;
+    [SerializeField] private GameObject upgradePanel;
+    [SerializeField] private GameObject playButton;
+    [SerializeField] private GameObject enterShopButton;
+
+    public event Action OnRefreshValues;
 
     private void Awake()
     {
         refreshValues();
+        upgradePanel.SetActive(false);
     }
     public void refreshValues()
     {
@@ -25,10 +33,11 @@ public class ShopMenu : MonoBehaviour
         playerDefenceShopLevel = GameManager.Instance.playerDefenceLevel;
         playerSpeedShopLevel = GameManager.Instance.playerSpeedLevel;
         pickaxeShopLevel = GameManager.Instance.pickaxeLevel;
+        OnRefreshValues?.Invoke();
     }
     public void updateValues()
     {
-        GameManager.Instance.shotgunLevel = shotgunShopLevel; 
+        GameManager.Instance.shotgunLevel = shotgunShopLevel;
         GameManager.Instance.torchLimitLevel = torchLimitShopLevel;
         GameManager.Instance.playerHealthLevel = playerHealthShopLevel;
         GameManager.Instance.playerSpeedLevel = playerSpeedShopLevel;
@@ -39,5 +48,26 @@ public class ShopMenu : MonoBehaviour
     {
         updateValues();
         SceneManager.LoadScene("MainScene");
+    }
+
+    public void OnShopOpened()
+    {
+        if (!upgradePanel.activeSelf)
+        {
+            upgradePanel.SetActive(true);
+            playButton.SetActive(false);
+            enterShopButton.SetActive(false);
+            refreshValues();
+        }
+    }
+
+    public void OnShopClosed()
+    {
+        if (upgradePanel.activeSelf)
+        {
+            upgradePanel.SetActive(false);
+            playButton.SetActive(true);
+            enterShopButton.SetActive(true);
+        }
     }
 }
