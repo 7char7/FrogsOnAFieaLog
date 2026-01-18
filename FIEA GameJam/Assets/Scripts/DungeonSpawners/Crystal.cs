@@ -32,8 +32,17 @@ public class Crystal : MonoBehaviour
 
             if (currentCrystalHealth <= 0f)
             {
+                OnCrystalFullyMined();
                 StartCoroutine(ShatterCrystalAfterDelay());
             }
+        }
+    }
+
+    private void OnCrystalFullyMined()
+    {
+        if (CrystalAlertManager.Instance != null)
+        {
+            CrystalAlertManager.Instance.AlertEnemiesOfCrystalMined(crystalType, transform.position);
         }
     }
 

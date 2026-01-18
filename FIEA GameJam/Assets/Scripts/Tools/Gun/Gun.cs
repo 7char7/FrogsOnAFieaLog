@@ -14,7 +14,8 @@ public abstract class Gun : MonoBehaviour
     [Header("Bullet Trail")]
     [SerializeField] GameObject trailPrefab;
     [SerializeField] Transform bulletSpawnPoint;
-    [SerializeField] float fadeDuration;
+    [SerializeField] float fadeDuration = 0.1f;
+    [SerializeField] float trailWidth = 0.02f;
     protected Coroutine fireCoroutine;
 
     protected virtual void Awake()
@@ -58,15 +59,15 @@ public abstract class Gun : MonoBehaviour
 
     protected Vector3 GetShootingDirection()
     {
-        Vector3 targetPosition = cameraTransform.position + cameraTransform.forward * gunStatsScriptableObject.GetStat(Stat.range);
-
-        targetPosition = new Vector3(
-            targetPosition.x + Random.Range(-gunStatsScriptableObject.GetStat(Stat.bulletSpread), gunStatsScriptableObject.GetStat(Stat.bulletSpread)),
-            targetPosition.y + Random.Range(-gunStatsScriptableObject.GetStat(Stat.bulletSpread), gunStatsScriptableObject.GetStat(Stat.bulletSpread)),
-            targetPosition.z + Random.Range(-gunStatsScriptableObject.GetStat(Stat.bulletSpread), gunStatsScriptableObject.GetStat(Stat.bulletSpread))
-        );
-
-        return targetPosition - cameraTransform.position;
+        float spreadAngle = gunStatsScriptableObject.GetStat(Stat.bulletSpread);
+        
+        float randomX = Random.Range(-spreadAngle, spreadAngle);
+        float randomY = Random.Range(-spreadAngle, spreadAngle);
+        
+        Quaternion spreadRotation = Quaternion.Euler(randomY, randomX, 0f);
+        Vector3 spreadDirection = spreadRotation * cameraTransform.forward;
+        
+        return spreadDirection;
     }
 
     public virtual IEnumerator FireGun()
@@ -103,21 +104,44 @@ public abstract class Gun : MonoBehaviour
 
     protected void CreateBulletTrail(Vector3 hitPoint)
     {
+        if (trailPrefab == null)
+            return;
+            
         LineRenderer trail = Instantiate(trailPrefab).GetComponent<LineRenderer>();
-        trail.SetPositions(new Vector3[] { bulletSpawnPoint.position, hitPoint });
-        StartCoroutine(FadeTrail(trail));
+        if (trail == null)
+            return;
+            
+        trail.positionCount = 2;
+        trail.SetPosition(0, bulletSpawnPoint.position);
+        trail.SetPosition(1, hitPoint);
+        
+        trail.startWidth = trailWidth;
+        trail.endWidth = trailWidth * 0.5f;
+        
+        StartCoroutine(FadeTrailBackToFront(trail, bulletSpawnPoint.position, hitPoint));
     }
 
-    IEnumerator FadeTrail(LineRenderer trail)
+    IEnumerator FadeTrailBackToFront(LineRenderer trail, Vector3 startPos, Vector3 endPos)
     {
-        float alpha = 1f;
-        while (alpha > 0f)
+        float elapsedTime = 0f;
+        Color startColor = trail.startColor;
+        Color endColor = trail.endColor;
+        
+        while (elapsedTime < fadeDuration)
         {
-            alpha -= Time.deltaTime / fadeDuration;
-            trail.startColor = new Color(trail.startColor.r, trail.startColor.g, trail.startColor.b, alpha);
-            trail.endColor = new Color(trail.endColor.r, trail.endColor.g, trail.endColor.b, alpha);
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / fadeDuration;
+            
+            float newAlpha = 1f - progress;
+            trail.startColor = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
+            trail.endColor = new Color(endColor.r, endColor.g, endColor.b, newAlpha);
+            
+            Vector3 newStartPos = Vector3.Lerp(startPos, endPos, progress);
+            trail.SetPosition(0, newStartPos);
+            
             yield return null;
         }
+        
         Destroy(trail.gameObject);
     }
 }

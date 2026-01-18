@@ -119,6 +119,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &484277098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 484277100}
+  - component: {fileID: 484277099}
+  m_Layer: 0
+  m_Name: CrystalAlertManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &484277099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484277098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad0578d92eecbc489e303151695eb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrystalAlertManager
+  commonUncommonAlertRadius: 15
+  rareAlertRadius: 25
+  legendaryAlertRadius: 35
+--- !u!4 &484277100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484277098}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &577694692
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +287,7 @@ MonoBehaviour:
   vignetteSmoothness: 0.4
   filmGrainIntensity: 0.35
   chromaticAberrationIntensity: 0.25
-  postExposure: -0.5
+  postExposure: 0.61
   contrast: 15
   saturation: -30
   shadowsTint: {r: 0.6, g: 0.7, b: 0.8, a: 1}
@@ -881,3 +928,4 @@ SceneRoots:
   - {fileID: 618994663}
   - {fileID: 577694694}
   - {fileID: 1601637200}
+  - {fileID: 484277100}

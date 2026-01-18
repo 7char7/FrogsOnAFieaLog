@@ -19,7 +19,7 @@ MonoBehaviour:
   - statType: 1
     statValue: 10
   - statType: 2
-    statValue: 30
+    statValue: 7
   - statType: 3
     statValue: 5
   - statType: 4
@@ -27,5 +27,5 @@ MonoBehaviour:
   - statType: 5
     statValue: 50
   - statType: 6
-    statValue: 5
+    statValue: 8
   appliedUpgrades: []
