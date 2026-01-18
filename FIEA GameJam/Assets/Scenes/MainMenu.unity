@@ -1142,6 +1142,10 @@ PrefabInstance:
       value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
+      propertyPath: pickaxeLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
       propertyPath: shotgunLevel
       value: 0
       objectReference: {fileID: 0}
@@ -1150,7 +1154,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
+      propertyPath: playerSpeedLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
       propertyPath: playerHealthLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
+      propertyPath: playerDefenceLevel
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1991455242255472947, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
