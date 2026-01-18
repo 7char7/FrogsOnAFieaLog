@@ -52,11 +52,6 @@ public class ToolValueUI : MonoBehaviour
             ShowAmmoUI();
             UpdateAmmoDisplay();
         }
-        else if (activeTool == torch.gameObject)
-        {
-            ShowTorchUI();
-            UpdateTorchDisplay();
-        }
         else
         {
             HideAllUI();
@@ -92,16 +87,12 @@ public class ToolValueUI : MonoBehaviour
     {
         if (ammoContainer != null)
             ammoContainer.SetActive(true);
-        if (torchContainer != null)
-            torchContainer.SetActive(false);
     }
 
     private void ShowTorchUI()
     {
         if (torchContainer != null)
             torchContainer.SetActive(true);
-        if (ammoContainer != null)
-            ammoContainer.SetActive(false);
     }
 
     private void HideAllUI()
