@@ -1823,6 +1823,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 656980410585625430}
     m_Modifications:
+    - target: {fileID: 3033045679968580485, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115057588157383580, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
+      propertyPath: torch
+      value: 
+      objectReference: {fileID: 371795016953712914, guid: 64495c9d8d8a2c44f9b239c95acca2a9, type: 3}
+    - target: {fileID: 3115057588157383580, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
+      propertyPath: torchHandModel
+      value: 
+      objectReference: {fileID: 138124927908135503}
     - target: {fileID: 3115057588157383580, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
       propertyPath: cameraTransform
       value: 
@@ -1875,11 +1887,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch
       objectReference: {fileID: 0}
+    - target: {fileID: 8395442182738572809, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
+--- !u!1 &138124927908135503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5753843072681188369, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
+  m_PrefabInstance: {fileID: 5634977480559713886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1677284119825637450 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6446233457064033812, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
