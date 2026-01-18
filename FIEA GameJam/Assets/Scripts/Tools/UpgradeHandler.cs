@@ -36,9 +36,10 @@ public class UpgradeHandler : MonoBehaviour
     [SerializeField] private int currentPlayerDefenseLevel = 0;
     [SerializeField] private int maxPlayerDefenseLevel = 10;
 
-    //apply all upgrades
     public void ApplyUpgrades()
     {
+        ResetAllUpgrades();
+
         currentShotgunLevel = GameManager.Instance.shotgunLevel;
         currentPickaxeLevel = GameManager.Instance.pickaxeLevel;
         currentTorchLevel = GameManager.Instance.torchLimitLevel;
@@ -48,15 +49,15 @@ public class UpgradeHandler : MonoBehaviour
 
         for (int i = 0; i < currentShotgunLevel; i++)
         {
-            ApplyShotgunUpgrade();
+            ApplyShotgunUpgrade(i);
         }
         for (int i = 0; i < currentPickaxeLevel; i++)
         {
-            ApplyPickaxeUpgrade();
+            ApplyPickaxeUpgrade(i);
         }
         for (int i = 0; i < currentTorchLevel; i++)
         {
-            ApplyTorchUpgrade();
+            ApplyTorchUpgrade(i);
         }
         for (int i = 0; i < currentPlayerMaxHealthLevel; i++)
         {
@@ -72,59 +73,74 @@ public class UpgradeHandler : MonoBehaviour
         }
     }
 
-
-    public void ApplyShotgunUpgrade()
+    private void ResetAllUpgrades()
     {
-        if (currentShotgunLevel >= maxShotgunLevel)
+        Shotgun shotgun = GameObject.FindGameObjectWithTag("Player")?.GetComponentInChildren<Shotgun>();
+        if (shotgun != null)
         {
-            Debug.Log("Shotgun is already at max level");
+            shotgun.gunStatsScriptableObject.ResetUpgrades();
+        }
+
+        Pickaxe pickaxe = GameObject.FindGameObjectWithTag("Player")?.GetComponentInChildren<Pickaxe>();
+        if (pickaxe != null)
+        {
+            pickaxe.pickaxeStatsScriptableObject.ResetUpgrades();
+        }
+
+        Torch torch = GameObject.FindGameObjectWithTag("Player")?.GetComponentInChildren<Torch>();
+        if (torch != null)
+        {
+            torch.torchStatsScriptableObject.ResetUpgrades();
+        }
+
+        PlayerManager playerManager = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerManager>();
+        if (playerManager != null)
+        {
+            playerManager.playerStatsScriptableObject.ResetUpgrades();
+        }
+    }
+
+
+    public void ApplyShotgunUpgrade(int level)
+    {
+        if (level >= maxShotgunLevel || level >= shotgunUpgrades.Count)
+        {
+            Debug.Log("Shotgun upgrade level out of range");
             return;
         }
-        //currentShotgunLevel++;
-        Debug.Log("Applying Shotgun Upgrades");
+
+        Debug.Log($"Applying Shotgun Upgrade Level {level}");
 
         Shotgun shotgun = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Shotgun>();
-
-        foreach (var upgrade in shotgunUpgrades)
-        {
-            shotgun.gunStatsScriptableObject.UnlockUpgrade(upgrade);
-        }
+        shotgun.gunStatsScriptableObject.UnlockUpgrade(shotgunUpgrades[level]);
     }
 
-    public void ApplyPickaxeUpgrade()
+    public void ApplyPickaxeUpgrade(int level)
     {
-        if (currentPickaxeLevel >= maxPickaxeLevel)
+        if (level >= maxPickaxeLevel || level >= pickaxeUpgrades.Count)
         {
-            Debug.Log("Pickaxe is already at max level");
+            Debug.Log("Pickaxe upgrade level out of range");
             return;
         }
-        //currentPickaxeLevel++;
-        Debug.Log("Applying Pickaxe Upgrades");
+
+        Debug.Log($"Applying Pickaxe Upgrade Level {level}");
 
         Pickaxe pickaxe = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Pickaxe>();
-
-        foreach (var upgrade in pickaxeUpgrades)
-        {
-            pickaxe.pickaxeStatsScriptableObject.UnlockUpgrade(upgrade);
-        }
+        pickaxe.pickaxeStatsScriptableObject.UnlockUpgrade(pickaxeUpgrades[level]);
     }
 
-    public void ApplyTorchUpgrade()
+    public void ApplyTorchUpgrade(int level)
     {
-        if (currentTorchLevel >= maxTorchLevel)
+        if (level >= maxTorchLevel || level >= torchUpgrades.Count)
         {
-            Debug.Log("Torch is already at max level");
+            Debug.Log("Torch upgrade level out of range");
             return;
         }
-        //currentTorchLevel++;
-        Debug.Log("Applying Torch Upgrades");
+
+        Debug.Log($"Applying Torch Upgrade Level {level}");
 
         Torch torch = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Torch>();
-
-        foreach (var upgrade in torchUpgrades)
-        {
-            torch.torchStatsScriptableObject.UnlockUpgrade(upgrade);
-        }
+        torch.torchStatsScriptableObject.UnlockUpgrade(torchUpgrades[level]);
     }
 
     public void ApplyPlayerHealthUpgrade()

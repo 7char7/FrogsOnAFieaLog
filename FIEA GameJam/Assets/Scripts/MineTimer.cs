@@ -85,14 +85,21 @@ public class MineTimer : MonoBehaviour
         
         gameManager.CompleteRunFailure();
         
-        if (SceneFadeManager.Instance != null)
+        if (gameManager.HasLost)
         {
-            SceneFadeManager.Instance.FadeToScene(shopSceneName, true);
+            gameManager.LoadLossScene();
         }
         else
         {
-            RestoreCursor();
-            SceneManager.LoadScene(shopSceneName);
+            if (SceneFadeManager.Instance != null)
+            {
+                SceneFadeManager.Instance.FadeToScene(shopSceneName, true);
+            }
+            else
+            {
+                RestoreCursor();
+                SceneManager.LoadScene(shopSceneName);
+            }
         }
     }
     

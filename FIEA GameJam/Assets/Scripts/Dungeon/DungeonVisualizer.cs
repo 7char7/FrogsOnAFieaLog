@@ -258,13 +258,16 @@ public class DungeonVisualizer : MonoBehaviour
         Transform wallParent = new GameObject("Walls").transform;
         wallParent.SetParent(dungeonParent);
 
-        Room startRoom = generator.Rooms.Count > 0 ? generator.Rooms[0] : null;
-        Vector2Int? exitWallPosition = null;
-
-        if (startRoom != null)
+        if (generator.Rooms == null || generator.Rooms.Count == 0)
         {
-            exitWallPosition = FindBackWallPosition(startRoom);
+            Debug.LogError("CRITICAL: No rooms generated! Exit wall cannot be placed!");
+            return;
         }
+
+        Room startRoom = generator.Rooms[0];
+        Vector2Int exitWallPosition = FindBackWallPosition(startRoom);
+        
+        Debug.Log($"Exit wall WILL be placed in starting room at position: {exitWallPosition}, room bounds: ({startRoom.Left}, {startRoom.Bottom}) to ({startRoom.Right}, {startRoom.Top})");
 
         for (int x = 0; x < width; x++)
         {
@@ -274,22 +277,22 @@ public class DungeonVisualizer : MonoBehaviour
                 {
                     if (x == 0 || !grid[x - 1, y])
                     {
-                        bool isExitWall = exitWallPosition.HasValue && IsExitWallAtPosition(exitWallPosition.Value, x, y, WallDirection.Left);
+                        bool isExitWall = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Left);
                         CreateWall(x * tileSize - tileSize / 2, y * tileSize, Vector3.forward, wallParent, x, y, isExitWall);
                     }
                     if (x == width - 1 || !grid[x + 1, y])
                     {
-                        bool isExitWall = exitWallPosition.HasValue && IsExitWallAtPosition(exitWallPosition.Value, x, y, WallDirection.Right);
+                        bool isExitWall = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Right);
                         CreateWall(x * tileSize + tileSize / 2, y * tileSize, Vector3.forward, wallParent, x, y, isExitWall);
                     }
                     if (y == 0 || !grid[x, y - 1])
                     {
-                        bool isExitWall = exitWallPosition.HasValue && IsExitWallAtPosition(exitWallPosition.Value, x, y, WallDirection.Bottom);
+                        bool isExitWall = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Bottom);
                         CreateWall(x * tileSize, y * tileSize - tileSize / 2, Vector3.right, wallParent, x, y, isExitWall);
                     }
                     if (y == height - 1 || !grid[x, y + 1])
                     {
-                        bool isExitWall = exitWallPosition.HasValue && IsExitWallAtPosition(exitWallPosition.Value, x, y, WallDirection.Top);
+                        bool isExitWall = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Top);
                         CreateWall(x * tileSize, y * tileSize + tileSize / 2, Vector3.right, wallParent, x, y, isExitWall);
                     }
                 }
@@ -303,6 +306,13 @@ public class DungeonVisualizer : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(direction);
 
         GameObject prefabToUse = isExitWall && exitWallPrefab != null ? exitWallPrefab : wallPrefab;
+        
+        if (prefabToUse == null)
+        {
+            Debug.LogError($"CRITICAL: {(isExitWall ? "Exit wall" : "Wall")} prefab is NULL!");
+            return;
+        }
+        
         GameObject wall = Instantiate(prefabToUse, position, rotation, parent);
         wall.transform.localScale = new Vector3(tileSize, wallHeight, tileSize);
 
@@ -310,6 +320,7 @@ public class DungeonVisualizer : MonoBehaviour
         {
             wall.name = "ExitWall";
             ConfigureExitWallCollider(wall);
+            Debug.Log($"EXIT WALL CREATED at position: {position}, grid coords: ({gridX}, {gridY})");
         }
 
         Material wallMat;

@@ -18,10 +18,15 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource sfxAudioSource;
 
     [Header("Volume Settings")]
-    [SerializeField][Range(0f, 1f)] private float sfxVolume = 1f;
+    [SerializeField][Range(0f, 1f)] private float masterVolume = 1f;
+    [SerializeField][Range(0f, 1f)] private float enemyVolume = 1f;
+    [SerializeField][Range(0f, 1f)] private float playerVolume = 1f;
+    [SerializeField][Range(0f, 1f)] private float weaponVolume = 1f;
+    [SerializeField][Range(0f, 1f)] private float footstepVolume = 0.5f;
+    [SerializeField][Range(0f, 1f)] private float miningVolume = 1f;
+    [SerializeField][Range(0f, 1f)] private float crystalVolume = 1f;
     
     [Header("Footstep Settings")]
-    [SerializeField][Range(0f, 1f)] private float footstepVolume = 0.5f;
     [SerializeField] private float footstepPitchMin = 0.9f;
     [SerializeField] private float footstepPitchMax = 1.1f;
     
@@ -46,14 +51,14 @@ public class AudioManager : MonoBehaviour
         }
 
         sfxAudioSource.playOnAwake = false;
-        sfxAudioSource.volume = sfxVolume;
+        sfxAudioSource.volume = masterVolume;
     }
 
     public void PlayEnemyHitSound()
     {
         if (enemyHitSE != null)
         {
-            sfxAudioSource.PlayOneShot(enemyHitSE, sfxVolume);
+            sfxAudioSource.PlayOneShot(enemyHitSE, masterVolume * enemyVolume);
         }
     }
 
@@ -61,7 +66,7 @@ public class AudioManager : MonoBehaviour
     {
         if (enemyAttackSE != null)
         {
-            sfxAudioSource.PlayOneShot(enemyAttackSE, sfxVolume);
+            sfxAudioSource.PlayOneShot(enemyAttackSE, masterVolume * enemyVolume);
         }
     }
 
@@ -89,7 +94,7 @@ public class AudioManager : MonoBehaviour
         
         if (playerDamagedSounds[newIndex] != null)
         {
-            sfxAudioSource.PlayOneShot(playerDamagedSounds[newIndex], sfxVolume);
+            sfxAudioSource.PlayOneShot(playerDamagedSounds[newIndex], masterVolume * playerVolume);
         }
     }
 
@@ -97,7 +102,7 @@ public class AudioManager : MonoBehaviour
     {
         if (shotgunSE != null)
         {
-            sfxAudioSource.PlayOneShot(shotgunSE, sfxVolume);
+            sfxAudioSource.PlayOneShot(shotgunSE, masterVolume * weaponVolume);
         }
     }
 
@@ -107,7 +112,7 @@ public class AudioManager : MonoBehaviour
         {
             float randomPitch = Random.Range(footstepPitchMin, footstepPitchMax);
             sfxAudioSource.pitch = randomPitch;
-            sfxAudioSource.PlayOneShot(footstepSE, footstepVolume);
+            sfxAudioSource.PlayOneShot(footstepSE, masterVolume * footstepVolume);
             sfxAudioSource.pitch = 1f;
         }
     }
@@ -116,7 +121,7 @@ public class AudioManager : MonoBehaviour
     {
         if (miningSound != null)
         {
-            sfxAudioSource.PlayOneShot(miningSound, sfxVolume);
+            sfxAudioSource.PlayOneShot(miningSound, masterVolume * miningVolume);
         }
     }
 
@@ -124,7 +129,7 @@ public class AudioManager : MonoBehaviour
     {
         if (crystalCollectSound != null)
         {
-            sfxAudioSource.PlayOneShot(crystalCollectSound, sfxVolume);
+            sfxAudioSource.PlayOneShot(crystalCollectSound, masterVolume * crystalVolume);
         }
     }
 
@@ -132,13 +137,43 @@ public class AudioManager : MonoBehaviour
     {
         if (crystalShatterSound != null)
         {
-            sfxAudioSource.PlayOneShot(crystalShatterSound, sfxVolume);
+            sfxAudioSource.PlayOneShot(crystalShatterSound, masterVolume * crystalVolume);
         }
     }
 
-    public void SetSFXVolume(float volume)
+    public void SetMasterVolume(float volume)
     {
-        sfxVolume = Mathf.Clamp01(volume);
-        sfxAudioSource.volume = sfxVolume;
+        masterVolume = Mathf.Clamp01(volume);
+        sfxAudioSource.volume = masterVolume;
+    }
+
+    public void SetEnemyVolume(float volume)
+    {
+        enemyVolume = Mathf.Clamp01(volume);
+    }
+
+    public void SetPlayerVolume(float volume)
+    {
+        playerVolume = Mathf.Clamp01(volume);
+    }
+
+    public void SetWeaponVolume(float volume)
+    {
+        weaponVolume = Mathf.Clamp01(volume);
+    }
+
+    public void SetFootstepVolume(float volume)
+    {
+        footstepVolume = Mathf.Clamp01(volume);
+    }
+
+    public void SetMiningVolume(float volume)
+    {
+        miningVolume = Mathf.Clamp01(volume);
+    }
+
+    public void SetCrystalVolume(float volume)
+    {
+        crystalVolume = Mathf.Clamp01(volume);
     }
 }

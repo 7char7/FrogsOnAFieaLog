@@ -379,7 +379,7 @@ MonoBehaviour:
   firePoint: {fileID: 2569064010189278581}
   fireRate: 1.2
   projectileSpeed: 20
-  aimAccuracy: 0.9
+  aimAccuracy: 1
   stoppingDistance: 8
   patrolRadius: 10
   waypointWaitTime: 2

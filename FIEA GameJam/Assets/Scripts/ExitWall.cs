@@ -46,7 +46,19 @@ public class ExitWall : MonoBehaviour
         Debug.Log($"Exiting mine. This run: {runPoints} points. Total will be: {totalPoints}/{quotaTarget}");
         
         gameManager.CompleteRunSuccess();
-        ReturnToShop();
+        
+        if (gameManager.HasWon)
+        {
+            gameManager.LoadWinScene();
+        }
+        else if (gameManager.HasLost)
+        {
+            gameManager.LoadLossScene();
+        }
+        else
+        {
+            ReturnToShop();
+        }
     }
 
     private void ReturnToShop()

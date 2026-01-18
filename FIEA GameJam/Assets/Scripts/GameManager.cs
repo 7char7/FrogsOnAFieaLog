@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,10 +13,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int maxRuns = 3;
     [SerializeField] private int currentRun = 1;
 
+    [Header("Scene Settings")]
+    [SerializeField] private string winSceneName = "WinScene";
+    [SerializeField] private string lossSceneName = "LossScene";
+
     public int QuotaTarget => quotaTarget;
     public int MaxRuns => maxRuns;
     public int CurrentRun => currentRun;
     public int RemainingRuns => maxRuns - currentRun + 1;
+    
+    public bool HasWon { get; private set; }
+    public bool HasLost { get; private set; }
 
     /* ======================
      * Gem Tracking (Legacy)
@@ -79,9 +87,7 @@ public class GameManager : MonoBehaviour
                 $"<color=green>🎉 YOU WIN! 🎉</color> Reached quota with {totalPoints} points!"
             );
 
-            money += totalPoints;
-            ResetRuns();
-            ResourceManager.Instance.ResetAllProgress();
+            HasWon = true;
         }
         else
         {
@@ -93,8 +99,7 @@ public class GameManager : MonoBehaviour
                     $"<color=red>Game Over!</color> Failed quota: {totalPoints}/{quotaTarget}"
                 );
 
-                ResetRuns();
-                ResourceManager.Instance.ResetAllProgress();
+                HasLost = true;
             }
             else
             {
@@ -127,8 +132,7 @@ public class GameManager : MonoBehaviour
                 $"<color=red>Game Over!</color> Final total: {totalPoints}/{quotaTarget}"
             );
 
-            ResetRuns();
-            ResourceManager.Instance.ResetAllProgress();
+            HasLost = true;
         }
         else
         {
@@ -136,8 +140,90 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ResetRuns()
+    public void LoadWinScene()
+    {
+        money += ResourceManager.Instance.TotalPoints;
+        ResetGameState();
+        
+        if (SceneFadeManager.Instance != null)
+        {
+            SceneFadeManager.Instance.FadeToScene(winSceneName, true);
+        }
+        else
+        {
+            RestoreCursor();
+            SceneManager.LoadScene(winSceneName);
+        }
+    }
+
+    public void LoadLossScene()
+    {
+        ResetGameState();
+        
+        if (SceneFadeManager.Instance != null)
+        {
+            SceneFadeManager.Instance.FadeToScene(lossSceneName, true);
+        }
+        else
+        {
+            RestoreCursor();
+            SceneManager.LoadScene(lossSceneName);
+        }
+    }
+
+    private void ResetGameState()
     {
         currentRun = 1;
+        HasWon = false;
+        HasLost = false;
+        
+        shotgunLevel = 0;
+        pickaxeLevel = 0;
+        playerHealthLevel = 0;
+        playerSpeedLevel = 0;
+        playerDefenceLevel = 0;
+        torchLimitLevel = 0;
+        
+        gemsMinedRed = 0;
+        gemsMinedGreen = 0;
+        gemsMinedBlue = 0;
+        
+        if (ResourceManager.Instance != null)
+        {
+            ResourceManager.Instance.ResetAllProgress();
+        }
+    }
+
+    public void CompleteReset()
+    {
+        currentRun = 1;
+        HasWon = false;
+        HasLost = false;
+        
+        money = 0;
+        
+        shotgunLevel = 0;
+        pickaxeLevel = 0;
+        playerHealthLevel = 0;
+        playerSpeedLevel = 0;
+        playerDefenceLevel = 0;
+        torchLimitLevel = 0;
+        
+        gemsMinedRed = 0;
+        gemsMinedGreen = 0;
+        gemsMinedBlue = 0;
+        
+        if (ResourceManager.Instance != null)
+        {
+            ResourceManager.Instance.ResetAllProgress();
+        }
+
+        Debug.Log("Complete game reset - all stats and progress cleared");
+    }
+
+    private void RestoreCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

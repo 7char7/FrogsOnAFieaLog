@@ -68,7 +68,18 @@ public class NarratorManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        bool wasInMainScene = isInMainScene;
         isInMainScene = scene.name == "MainScene";
+
+        if (wasInMainScene && !isInMainScene)
+        {
+            StopAllNarration();
+        }
+
+        if (!wasInMainScene && isInMainScene)
+        {
+            StopAllNarration();
+        }
 
         if (isInMainScene)
         {
@@ -202,6 +213,33 @@ public class NarratorManager : MonoBehaviour
         if (narratorAudioSource.isPlaying)
         {
             narratorAudioSource.Stop();
+        }
+    }
+
+    public void CompleteReset()
+    {
+        StopAllNarration();
+        messagesPlayedThisRun = 0;
+        lastMessageTime = -inLevelMessageCooldown;
+        isInMainScene = false;
+    }
+
+    private void StopAllNarration()
+    {
+        if (narratorAudioSource.isPlaying)
+        {
+            narratorAudioSource.Stop();
+        }
+
+        if (portraitCheckCoroutine != null)
+        {
+            StopCoroutine(portraitCheckCoroutine);
+            portraitCheckCoroutine = null;
+        }
+
+        if (NarratorPortraitUI.Instance != null)
+        {
+            NarratorPortraitUI.Instance.HidePortrait();
         }
     }
 }

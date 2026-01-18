@@ -963,6 +963,7 @@ MonoBehaviour:
   crystalHeight: 0.5
   minDistanceFromWalls: 1.5
   minDistanceBetweenCrystals: 2
+  minDistanceFromPlayer: 3
   spawnCrystals: 1
   grayZoneRareChance: 5
   blueZoneRareChance: 20
@@ -1372,8 +1373,13 @@ MonoBehaviour:
   crystalCollectSound: {fileID: 8300000, guid: 5b998a69b0ed817438aea4f385001cff, type: 3}
   crystalShatterSound: {fileID: 8300000, guid: 5aa2edd0299cd8447a5bb7c61bf3baf1, type: 3}
   sfxAudioSource: {fileID: 1666785627}
-  sfxVolume: 1
-  footstepVolume: 0.5
+  masterVolume: 0.92
+  enemyVolume: 0.578
+  playerVolume: 0.81
+  weaponVolume: 0.439
+  footstepVolume: 0.72
+  miningVolume: 0.733
+  crystalVolume: 0.733
   footstepPitchMin: 0.9
   footstepPitchMax: 1.1
 --- !u!1 &1712650212
