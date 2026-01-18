@@ -7,6 +7,14 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     public Rigidbody rb;
     [SerializeField] private Stats playerStatsScriptableObject;
+    [SerializeField] private PlayerLook playerLook;
+
+    [Header("Slide Settings")]
+    [SerializeField] private float slideSpeed = 12f;
+    [SerializeField] private float slideDecay = 5f;
+    [SerializeField] private float minSlideSpeed = 2f;
+    [SerializeField] private float slideDuration = 1f;
+    [SerializeField] private float slideCameraHeight = 0.5f;
 
     private Vector2 moveInput;
 
@@ -15,9 +23,19 @@ public class PlayerMovement : MonoBehaviour
     private bool isSprinting = false;
     public bool IsSprinting => isSprinting;
 
+    private bool isSliding = false;
+    public bool IsSliding => isSliding;
+    private float slideTimer = 0f;
+    private Vector3 slideDirection;
+
     void Awake()
     {
         playerStatsScriptableObject = GetComponent<PlayerManager>().playerStatsScriptableObject;
+        
+        if (playerLook == null)
+        {
+            playerLook = GetComponent<PlayerLook>();
+        }
     }
 
     void FixedUpdate()
@@ -25,7 +43,14 @@ public class PlayerMovement : MonoBehaviour
         if (Time.timeScale == 0f)
             return;
 
-        HandleMovement();
+        if (isSliding)
+        {
+            HandleSlide();
+        }
+        else
+        {
+            HandleMovement();
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -44,6 +69,63 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         isSprinting = context.ReadValueAsButton();
+    }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        if (Time.timeScale == 0f)
+            return;
+
+        if (context.performed)
+        {
+            if (isSprinting && moveInput.magnitude > 0.1f && !isSliding)
+            {
+                StartSlide();
+            }
+        }
+    }
+
+    void StartSlide()
+    {
+        isSliding = true;
+        slideTimer = 0f;
+        
+        slideDirection = (transform.forward * moveInput.y + transform.right * moveInput.x).normalized;
+        
+        isSprinting = false;
+
+        if (playerLook != null)
+        {
+            playerLook.SetCameraOffset(-slideCameraHeight);
+        }
+    }
+
+    void HandleSlide()
+    {
+        slideTimer += Time.fixedDeltaTime;
+
+        float currentSlideSpeed = Mathf.Lerp(slideSpeed, minSlideSpeed, slideTimer / slideDuration);
+
+        Vector3 targetVel = slideDirection * currentSlideSpeed;
+
+#if UNITY_6000_0_OR_NEWER
+        targetVel.y = rb.linearVelocity.y;
+        rb.linearVelocity = targetVel;
+#else
+        targetVel.y = rb.velocity.y;
+        rb.velocity = targetVel;
+#endif
+
+        if (slideTimer >= slideDuration || currentSlideSpeed <= minSlideSpeed)
+        {
+            isSliding = false;
+            slideTimer = 0f;
+
+            if (playerLook != null)
+            {
+                playerLook.SetCameraOffset(0f);
+            }
+        }
     }
 
     void HandleMovement()

@@ -226,6 +226,7 @@ public class DungeonVisualizer : MonoBehaviour
                         Vector3 position = new Vector3(x * tileSize, 0, y * tileSize);
                         GameObject floor = Instantiate(floorPrefab, position, Quaternion.identity, floorParent);
                         floor.transform.localScale = new Vector3(tileSize, tileSize, tileSize);
+                        floor.tag = "Ground";
 
                         Material floorMat = GetMaterialForDepth(depthGrid[x, y], floorMaterial_Base, floorMaterial_Blue, floorMaterial_Red);
                         if (floorMat != null)

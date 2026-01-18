@@ -15,6 +15,11 @@ public class Shotgun : Gun
     [SerializeField] private Light muzzleFlashLight;
     [SerializeField] private float muzzleFlashDuration = 0.05f;
 
+    [Header("Camera Shake")]
+    [SerializeField] private float shakeDuration = 0.2f;
+    [SerializeField] private float shakeMagnitude = 0.15f;
+    [SerializeField] private float shakeRotationMagnitude = 2f;
+
     public override void Shoot()
     {
         if (Time.time < nextFireTime || currentAmmo <= 0)
@@ -63,6 +68,11 @@ public class Shotgun : Gun
         if (muzzleFlashLight != null)
         {
             StartCoroutine(FlashMuzzleLight());
+        }
+
+        if (CameraShake.Instance != null)
+        {
+            CameraShake.Instance.Shake(shakeDuration, shakeMagnitude, shakeRotationMagnitude);
         }
 
         nextFireTime = Time.time + (1f / gunStatsScriptableObject.GetStat(Stat.fireRate));

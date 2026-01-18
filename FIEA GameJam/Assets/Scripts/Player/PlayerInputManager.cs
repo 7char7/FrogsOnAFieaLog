@@ -59,6 +59,8 @@ public class PlayerInputManager : MonoBehaviour
             inputActions.Player.Move.canceled += playerMovement.OnMove;
             inputActions.Player.Sprint.performed += playerMovement.OnSprint;
             inputActions.Player.Sprint.canceled += playerMovement.OnSprint;
+            inputActions.Player.Crouch.performed += playerMovement.OnCrouch;
+            inputActions.Player.Crouch.canceled += playerMovement.OnCrouch;
         }
         else
         {
@@ -124,6 +126,8 @@ public class PlayerInputManager : MonoBehaviour
             inputActions.Player.Move.canceled -= playerMovement.OnMove;
             inputActions.Player.Sprint.performed -= playerMovement.OnSprint;
             inputActions.Player.Sprint.canceled -= playerMovement.OnSprint;
+            inputActions.Player.Crouch.performed -= playerMovement.OnCrouch;
+            inputActions.Player.Crouch.canceled -= playerMovement.OnCrouch;
         }
 
         if (playerLook != null)

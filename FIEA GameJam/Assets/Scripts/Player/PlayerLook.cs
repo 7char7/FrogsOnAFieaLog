@@ -22,6 +22,10 @@ public class PlayerLook : MonoBehaviour
     private Vector3 headStartLocalPos;
     private Vector3 cameraStartLocalPos;
 
+    private float targetCameraYOffset = 0f;
+    private float currentCameraYOffset = 0f;
+    private const float CAMERA_OFFSET_SMOOTH_SPEED = 10f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,13 +44,9 @@ public class PlayerLook : MonoBehaviour
         if (Time.timeScale == 0f)
             return;
 
-        /*if (SettingsManager.instance != null)
-        {
-            mouseSensitivity = SettingsManager.instance.mouseSensitivity;
-        }*/
-
         HandleLook();
         HandleHandRotation();
+        UpdateCameraHeight();
     }
 
     public void OnLook(InputAction.CallbackContext context)
@@ -75,5 +75,18 @@ public class PlayerLook : MonoBehaviour
 
         Quaternion targetRot = Quaternion.LookRotation(camera.transform.forward, camera.transform.up);
         headlight.rotation = Quaternion.Slerp(headlight.rotation, targetRot, Time.deltaTime * 10f);
+    }
+
+    public void SetCameraOffset(float yOffset)
+    {
+        targetCameraYOffset = yOffset;
+    }
+
+    void UpdateCameraHeight()
+    {
+        if (camera == null) return;
+
+        currentCameraYOffset = Mathf.Lerp(currentCameraYOffset, targetCameraYOffset, Time.deltaTime * CAMERA_OFFSET_SMOOTH_SPEED);
+        camera.transform.localPosition = cameraStartLocalPos + new Vector3(0f, currentCameraYOffset, 0f);
     }
 }
