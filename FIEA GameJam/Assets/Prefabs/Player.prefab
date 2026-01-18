@@ -926,8 +926,16 @@ PrefabInstance:
       value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 2005654578580418790, guid: db2b0e46de822a543be517bd7ab3cda3, type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005654578580418790, guid: db2b0e46de822a543be517bd7ab3cda3, type: 3}
       propertyPath: m_Intensity
-      value: 3
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005654578580418790, guid: db2b0e46de822a543be517bd7ab3cda3, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4004371505549752358, guid: db2b0e46de822a543be517bd7ab3cda3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -935,7 +943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4004371505549752358, guid: db2b0e46de822a543be517bd7ab3cda3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.21
+      value: 2.071
       objectReference: {fileID: 0}
     - target: {fileID: 4004371505549752358, guid: db2b0e46de822a543be517bd7ab3cda3, type: 3}
       propertyPath: m_LocalPosition.z
