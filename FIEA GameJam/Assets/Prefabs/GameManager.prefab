@@ -45,11 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf8c6c792e1f4846a8329d9d808f4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  quotaTarget: 5000
+  maxRuns: 3
+  currentRun: 1
   gemsMinedRed: 0
   gemsMinedGreen: 0
   gemsMinedBlue: 0
   shotgunLevel: 5
+  pickaxeLevel: 1
   playerHealthLevel: 2
+  playerSpeedLevel: 1
+  playerDefenceLevel: 1
   torchLimitLevel: 1
   money: 250
 --- !u!114 &7677626174326146992
@@ -78,6 +84,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7f64eed3e115993418be95d53f25004c, type: 2}
   currentPickaxeLevel: 0
   maxPickaxeLevel: 10
+  torchUpgrades:
+  - {fileID: 11400000, guid: 2c68f36e4d386b9429dd0556070777c9, type: 2}
+  currentTorchLevel: 0
+  maxTorchLevel: 10
   playerMaxHealthUpgrade: {fileID: 11400000, guid: b7a1b53e7be489548b463dee71245ae0, type: 2}
   currentPlayerMaxHealthLevel: 0
   maxPlayerMaxHealthLevel: 10

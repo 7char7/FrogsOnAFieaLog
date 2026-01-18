@@ -41,6 +41,7 @@ public class UpgradeHandler : MonoBehaviour
     {
         currentShotgunLevel = GameManager.Instance.shotgunLevel;
         currentPickaxeLevel = GameManager.Instance.pickaxeLevel;
+        currentTorchLevel = GameManager.Instance.torchLimitLevel;
         currentPlayerMaxHealthLevel = GameManager.Instance.playerHealthLevel;
         currentPlayerMovementSpeedLevel = GameManager.Instance.playerSpeedLevel;
         currentPlayerDefenseLevel = GameManager.Instance.playerDefenceLevel;
