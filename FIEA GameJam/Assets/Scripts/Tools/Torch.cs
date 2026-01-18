@@ -2,12 +2,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class Torch : MonoBehaviour
 {
     public Stats torchStatsScriptableObject;
+    public event Action OnTorchCountChanged;
     [SerializeField] protected Transform cameraTransform;
     [SerializeField] private GameObject torch;
+    [SerializeField] private GameObject torchHandModel;
     [SerializeField] private float currentNumberOfTorches;
     [SerializeField] private float placeDistance = 1.5f;
 
@@ -55,6 +58,7 @@ public class Torch : MonoBehaviour
         if (currentNumberOfTorches <= 0)
         {
             Debug.Log("No torches left");
+            torchHandModel.SetActive(false);
             return;
         }
 
@@ -77,13 +81,20 @@ public class Torch : MonoBehaviour
 
         Instantiate(torch, spawnPosition, spawnRotation);
         currentNumberOfTorches--;
+        OnTorchCountChanged?.Invoke();
     }
 
     public void OnPlaceTorch(InputAction.CallbackContext context)
     {
+        if (gameObject.activeSelf == false)
+            return;
+
         if (context.performed)
-        {
             PlaceTorch();
-        }
+    }
+
+    public int GetTorchCount()
+    {
+        return Mathf.FloorToInt(currentNumberOfTorches);
     }
 }

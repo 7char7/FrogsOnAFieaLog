@@ -5,23 +5,23 @@ public class Enemy : MonoBehaviour
 {
     [Header("Enemy Properties")]
     [SerializeField] private EnemyType enemyType;
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] private int damage = 10;
+    [SerializeField] private float maxHealth = 100;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float damage = 10;
     [SerializeField] private float moveSpeed = 3f;
 
     [Header("Visual")]
     [SerializeField] private Color debugColor = Color.red;
     
     [Header("Events")]
-    public UnityEvent<int> OnDamageTaken;
+    public UnityEvent<float> OnDamageTaken;
     public UnityEvent OnDeath;
     
-    private int currentHealth;
 
     public EnemyType Type => enemyType;
-    public int Health => currentHealth;
-    public int MaxHealth => maxHealth;
-    public int Damage => damage;
+    public float Health => currentHealth;
+    public float MaxHealth => maxHealth;
+    public float Damage => damage;
     public float MoveSpeed => moveSpeed;
     
     private void Start()
@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
     
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
         currentHealth = Mathf.Max(0, currentHealth);

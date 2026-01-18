@@ -81,6 +81,8 @@ public class PlayerInputManager : MonoBehaviour
         {
             inputActions.Player.Shoot.started += gun.StartFiring;
             inputActions.Player.Shoot.canceled += gun.StopFiring;
+            inputActions.Player.Reload.performed += gun.ReloadGun;
+            inputActions.Player.Reload.canceled += gun.ReloadGun;
         }
         else
         {
@@ -140,6 +142,8 @@ public class PlayerInputManager : MonoBehaviour
         {
             inputActions.Player.Shoot.started -= gun.StartFiring;
             inputActions.Player.Shoot.canceled -= gun.StopFiring;
+            inputActions.Player.Reload.performed -= gun.ReloadGun;
+            inputActions.Player.Reload.canceled -= gun.ReloadGun;
         }
 
         if (pickaxe != null)

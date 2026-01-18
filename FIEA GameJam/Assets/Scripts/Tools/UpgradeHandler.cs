@@ -46,6 +46,7 @@ public class UpgradeHandler : MonoBehaviour
         currentPlayerDefenseLevel = GameManager.Instance.playerDefenceLevel;
         ApplyShotgunUpgrade();
         ApplyPickaxeUpgrade();
+        ApplyTorchUpgrade();
         ApplyPlayerHealthUpgrade();
         ApplyPlayerMovementSpeedUpgrade();
         ApplyPlayerDefenseUpgrade();
@@ -93,7 +94,7 @@ public class UpgradeHandler : MonoBehaviour
             Debug.Log("Torch is already at max level");
             return;
         }
-        currentTorchLevel++;
+        //currentTorchLevel++;
         Debug.Log("Applying Torch Upgrades");
 
         Torch torch = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Torch>();

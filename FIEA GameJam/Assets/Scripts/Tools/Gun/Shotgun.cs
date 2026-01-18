@@ -26,28 +26,13 @@ public class Shotgun : Gun
             return;
 
         currentAmmo--;
+        TriggerAmmoChanged();
         
         int pelletsPerShot = (int)gunStatsScriptableObject.GetStat(Stat.bulletsPerShot);
         for (int i = 0; i < pelletsPerShot; i++)
-        {
-            RaycastHit hit;
+        { 
             Vector3 shootDirection = GetShootingDirection();
-            
-            if (Physics.Raycast(cameraTransform.position, shootDirection, out hit, gunStatsScriptableObject.GetStat(Stat.range)))
-            {
-                CreateBulletTrail(hit.point);
-                
-                Enemy enemy = hit.transform.GetComponent<Enemy>();
-                if (enemy != null)
-                {
-                    int damagePerPellet = Mathf.CeilToInt(gunStatsScriptableObject.GetStat(Stat.damage) / pelletsPerShot);
-                    enemy.TakeDamage(damagePerPellet);
-                }
-            }
-            else
-            {
-                CreateBulletTrail(cameraTransform.position + shootDirection * gunStatsScriptableObject.GetStat(Stat.range));
-            }
+            HandleBullets(shootDirection, gunStatsScriptableObject.GetStat(Stat.damage) / pelletsPerShot);
         }
 
         if (shellParticles != null)

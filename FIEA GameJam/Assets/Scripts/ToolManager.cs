@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using System;
 
 public class ToolManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] tools;
     [SerializeField] private int startingToolIndex = 0;
     [SerializeField] private int currentToolIndex = 0;
+    public event Action<GameObject> OnToolSwitched;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +27,8 @@ public class ToolManager : MonoBehaviour
                 }
             }
         }
+
+        OnToolSwitched?.Invoke(tools[startingToolIndex]);
     }
 
     private void SwitchTool()
@@ -31,6 +36,7 @@ public class ToolManager : MonoBehaviour
         tools[currentToolIndex].SetActive(false);
         currentToolIndex = (currentToolIndex + 1) % tools.Length;
         tools[currentToolIndex].SetActive(true);
+        OnToolSwitched?.Invoke(tools[currentToolIndex]);
     }
 
     public void OnSwitchTool(InputAction.CallbackContext context)

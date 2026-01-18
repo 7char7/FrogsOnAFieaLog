@@ -8,7 +8,7 @@ public class EnemyProjectile : MonoBehaviour
     [SerializeField] private GameObject hitEffectPrefab;
     
     private Rigidbody rb;
-    private int damage;
+    private float damage;
     private bool initialized;
     
     private void Awake()
@@ -17,7 +17,7 @@ public class EnemyProjectile : MonoBehaviour
         rb.useGravity = false;
     }
     
-    public void Initialize(Vector3 direction, float speed, int projectileDamage)
+    public void Initialize(Vector3 direction, float speed, float projectileDamage)
     {
         damage = projectileDamage;
         rb.linearVelocity = direction * speed;

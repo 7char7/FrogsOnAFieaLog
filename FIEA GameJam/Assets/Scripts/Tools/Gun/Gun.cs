@@ -2,12 +2,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Collections;
+using System;
+using UnityEngine.XR;
 
 public abstract class Gun : MonoBehaviour
 {
     [SerializeField] protected Transform cameraTransform;
     public Stats gunStatsScriptableObject;
-
+    public event Action OnAmmoChanged;
     public float currentAmmo;
     protected float nextFireTime;
 
@@ -25,25 +27,49 @@ public abstract class Gun : MonoBehaviour
         nextFireTime = 0f;
     }
 
+    protected void TriggerAmmoChanged()
+    {
+        OnAmmoChanged?.Invoke();
+    }
+
     public virtual void Shoot()
     {
         if (Time.time < nextFireTime || currentAmmo <= 0)
             return;
         
         currentAmmo--;
-        RaycastHit hit;
+        TriggerAmmoChanged();
         Vector3 shootDirection = GetShootingDirection();
-        if (Physics.Raycast(cameraTransform.position, GetShootingDirection(), out hit, gunStatsScriptableObject.GetStat(Stat.range)))
+        HandleBullets(shootDirection, gunStatsScriptableObject.GetStat(Stat.damage));
+
+        nextFireTime = Time.time + (gunStatsScriptableObject.GetStat(Stat.fireRate));
+    }
+
+    protected void HandleBullets(Vector3 shootDirection, float damageAmount)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(cameraTransform.position, shootDirection, out hit, gunStatsScriptableObject.GetStat(Stat.range)))
         {
             CreateBulletTrail(hit.point);
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                Debug.Log("Hit Enemy: " + hit.transform.name);
+                hit.transform.GetComponentInParent<Enemy>().TakeDamage(damageAmount);
+            }
             Debug.Log("Hit " + hit.transform.name);
         }
         else
         {
             CreateBulletTrail(cameraTransform.position + shootDirection.normalized * gunStatsScriptableObject.GetStat(Stat.range));
         }
+    }
 
-        nextFireTime = Time.time + (1f / gunStatsScriptableObject.GetStat(Stat.fireRate));
+    public void ReloadGun(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            StartCoroutine(Reload());
+        }
     }
 
     protected virtual IEnumerator Reload()
@@ -52,8 +78,9 @@ public abstract class Gun : MonoBehaviour
             yield return null;
 
         Debug.Log("Reloading...");
-        yield return new WaitForSeconds(1f / gunStatsScriptableObject.GetStat(Stat.reloadSpeed));
+        yield return new WaitForSeconds(gunStatsScriptableObject.GetStat(Stat.reloadSpeed));
         currentAmmo = gunStatsScriptableObject.GetStat(Stat.maxAmmo);
+        TriggerAmmoChanged();
         Debug.Log("Reloaded");
     }
 
@@ -61,8 +88,8 @@ public abstract class Gun : MonoBehaviour
     {
         float spreadAngle = gunStatsScriptableObject.GetStat(Stat.bulletSpread);
         
-        float randomX = Random.Range(-spreadAngle, spreadAngle);
-        float randomY = Random.Range(-spreadAngle, spreadAngle);
+        float randomX = UnityEngine.Random.Range(-spreadAngle, spreadAngle);
+        float randomY = UnityEngine.Random.Range(-spreadAngle, spreadAngle);
         
         Quaternion spreadRotation = Quaternion.Euler(randomY, randomX, 0f);
         Vector3 spreadDirection = spreadRotation * cameraTransform.forward;
