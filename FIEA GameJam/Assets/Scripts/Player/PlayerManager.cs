@@ -3,11 +3,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using JetBrains.Annotations;
 
 public class PlayerManager : MonoBehaviour
 {
     public Stats playerStatsScriptableObject;
-
+    public GameObject shotgunObject;
+    public GameObject pickaxeObject;
+    public GameObject torchObject;
     [SerializeField] private Image healthBar;
     [SerializeField] private float currentHealth;
     [SerializeField] private HealthBarManager healthBarManager;

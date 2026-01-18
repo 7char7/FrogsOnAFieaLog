@@ -83,7 +83,7 @@ public class UpgradeHandler : MonoBehaviour
         //currentShotgunLevel++;
         Debug.Log("Applying Shotgun Upgrades");
 
-        Shotgun shotgun = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Shotgun>();
+        Shotgun shotgun = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().shotgunObject.GetComponentInChildren<Shotgun>();
 
         foreach (var upgrade in shotgunUpgrades)
         {
@@ -101,7 +101,7 @@ public class UpgradeHandler : MonoBehaviour
         //currentPickaxeLevel++;
         Debug.Log("Applying Pickaxe Upgrades");
 
-        Pickaxe pickaxe = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Pickaxe>();
+        Pickaxe pickaxe = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().pickaxeObject.GetComponentInChildren<Pickaxe>();
 
         foreach (var upgrade in pickaxeUpgrades)
         {
@@ -119,7 +119,7 @@ public class UpgradeHandler : MonoBehaviour
         //currentTorchLevel++;
         Debug.Log("Applying Torch Upgrades");
 
-        Torch torch = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Torch>();
+        Torch torch = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().torchObject.GetComponentInChildren<Torch>();
 
         foreach (var upgrade in torchUpgrades)
         {

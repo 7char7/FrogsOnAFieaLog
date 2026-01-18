@@ -65,7 +65,7 @@ public class Shotgun : Gun
             CameraShake.Instance.Shake(shakeDuration, shakeMagnitude, shakeRotationMagnitude);
         }
 
-        nextFireTime = Time.time + (1f / gunStatsScriptableObject.GetStat(Stat.fireRate));
+        nextFireTime = Time.time + (gunStatsScriptableObject.GetStat(Stat.fireRate));
     }
     
     private IEnumerator FlashMuzzleLight()

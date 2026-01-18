@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5326113583969117287}
-  - component: {fileID: 1434003596872026759}
+  - component: {fileID: 8909758176823497599}
   m_Layer: 6
   m_Name: Pickaxe
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 7672574499693756558}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1434003596872026759
+--- !u!114 &8909758176823497599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

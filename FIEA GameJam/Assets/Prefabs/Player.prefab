@@ -643,7 +643,7 @@ MonoBehaviour:
   playerMovement: {fileID: 2053621862567442592}
   playerLook: {fileID: 161529629832679790}
   gun: {fileID: 4158937915156888574}
-  pickaxe: {fileID: 6003109289879971118}
+  pickaxe: {fileID: 2520796801010389851}
   torch: {fileID: 7280524504463826370}
   toolManager: {fileID: 5566239306450604908}
 --- !u!114 &161529629832679790
@@ -703,6 +703,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   playerStatsScriptableObject: {fileID: 11400000, guid: 91a6a3c701db127489f9710ea4bacf20, type: 2}
+  shotgunObject: {fileID: 5557436737114543619}
+  pickaxeObject: {fileID: 4021482939176930375}
+  torchObject: {fileID: 1560688254318389154}
   healthBar: {fileID: 8608900498206948393}
   currentHealth: 0
   healthBarManager: {fileID: 0}
@@ -2222,6 +2225,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5753843072681188369, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
   m_PrefabInstance: {fileID: 5634977480559713886}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1560688254318389154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6601111137840003580, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
+  m_PrefabInstance: {fileID: 5634977480559713886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1677284119825637450 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6446233457064033812, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
@@ -2232,7 +2240,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3115057588157383580, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
   m_PrefabInstance: {fileID: 5634977480559713886}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1560688254318389154}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63d5dc86f2c7988449ea3841dfdff414, type: 3}
@@ -2286,45 +2294,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7003560828813695540, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
-      propertyPath: m_Name
-      value: Pickaxe Model
-      objectReference: {fileID: 0}
-    - target: {fileID: 7003560828813695540, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 7967245850495110243, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
       propertyPath: m_Name
       value: Pickaxe
       objectReference: {fileID: 0}
-    - target: {fileID: 7967245850495110243, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
+    - target: {fileID: 8909758176823497599, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 7355968410065743519}
+    - target: {fileID: 8909758176823497599, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
+      propertyPath: crystalHealthBar
+      value: 
+      objectReference: {fileID: 7031958065652696569}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7967245850495110243, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6003109289879971118}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
 --- !u!4 &1203677827208356931 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5326113583969117287, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
   m_PrefabInstance: {fileID: 6439719270427918372}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4021482939176930375 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7967245850495110243, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
-  m_PrefabInstance: {fileID: 6439719270427918372}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6003109289879971118
+--- !u!114 &2520796801010389851 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8909758176823497599, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
+  m_PrefabInstance: {fileID: 6439719270427918372}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4021482939176930375}
   m_Enabled: 1
@@ -2332,11 +2327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df59e0182da44fc459c0144a2e0d66f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickaxe
-  cameraTransform: {fileID: 7355968410065743519}
-  crystalHealthBar: {fileID: 7031958065652696569}
-  pickaxeStatsScriptableObject: {fileID: 11400000, guid: b8ec2c6a447fa7248b24b96737dc6f03, type: 2}
-  reachDistance: 2
-  fortune: 0
-  miningSpeed: 5
-  miningDamage: 0
-  swingAnimationDuration: 0.3
+--- !u!1 &4021482939176930375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7967245850495110243, guid: c3f6824fe20110a4f99216eacd63b710, type: 3}
+  m_PrefabInstance: {fileID: 6439719270427918372}
+  m_PrefabAsset: {fileID: 0}

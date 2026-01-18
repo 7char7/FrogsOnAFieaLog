@@ -867,7 +867,7 @@ MonoBehaviour:
   floorMaterial_Red: {fileID: 2100000, guid: 99bb596a859bf774fb87dd4fe06b45f1, type: 2}
   wallMaterial_Red: {fileID: 2100000, guid: 99bb596a859bf774fb87dd4fe06b45f1, type: 2}
   ceilingMaterial_Red: {fileID: 2100000, guid: 99bb596a859bf774fb87dd4fe06b45f1, type: 2}
-  exitWallMaterial: {fileID: 2100000, guid: 17b926d00f6a9cf4c94b9c1e540aa31a, type: 2}
+  exitWallMaterial: {fileID: 2100000, guid: ad80ef0afef8f5b4e9441ff8259cf292, type: 2}
   playerPrefab: {fileID: 2781453191828868784, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
   spawnPlayer: 1
   playerSpawnHeight: 1.5
