@@ -53,7 +53,11 @@ public class Torch : MonoBehaviour
         {
             if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Ground"))
             {
-                torchIndicator.gameObject.SetActive(true);
+                if (currentNumberOfTorches > 0)
+                {
+                    torchIndicator.gameObject.SetActive(true);
+                    return;
+                }
                 return;
             }
         }
@@ -113,7 +117,8 @@ public class Torch : MonoBehaviour
         currentNumberOfTorches--;
         if (currentNumberOfTorches <= 0)
         {
-            this.gameObject.SetActive(false);
+            torchHandModel.SetActive(false);
+            torchIndicator.gameObject.SetActive(false);
         }
         OnTorchCountChanged?.Invoke();
     }

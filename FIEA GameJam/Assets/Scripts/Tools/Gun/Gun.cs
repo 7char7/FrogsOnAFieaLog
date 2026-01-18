@@ -28,8 +28,12 @@ public abstract class Gun : MonoBehaviour
     protected virtual void Awake()
     {
         gunStatsScriptableObject = Instantiate(gunStatsScriptableObject);
-        currentAmmo = gunStatsScriptableObject.GetStat(Stat.maxAmmo);
         nextFireTime = 0f;
+    }
+
+    void Start()
+    {
+        currentAmmo = gunStatsScriptableObject.GetStat(Stat.maxAmmo);
     }
 
     protected void TriggerAmmoChanged()
