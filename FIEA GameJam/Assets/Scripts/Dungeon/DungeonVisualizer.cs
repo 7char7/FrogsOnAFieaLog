@@ -129,14 +129,67 @@ public class DungeonVisualizer : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("[DungeonVisualizer] START - Script version with exit wall debugging ACTIVE");
+        
         generator = GetComponent<DungeonGenerator>();
         crystalSpawner = GetComponent<CrystalSpawner>();
         enemySpawner = GetComponent<EnemySpawner>();
         navMeshBaker = GetComponent<DungeonNavMeshBaker>();
 
+        ValidatePrefabReferences();
+
         if (generateOnStart)
         {
             GenerateAndVisualize();
+        }
+    }
+
+    private void ValidatePrefabReferences()
+    {
+        bool hasErrors = false;
+
+        if (floorPrefab == null)
+        {
+            Debug.LogError("[DungeonVisualizer] Floor prefab is NULL! Dungeon generation will fail.");
+            hasErrors = true;
+        }
+
+        if (wallPrefab == null)
+        {
+            Debug.LogError("[DungeonVisualizer] Wall prefab is NULL! Dungeon generation will fail.");
+            hasErrors = true;
+        }
+
+        if (exitWallPrefab == null)
+        {
+            Debug.LogError("[DungeonVisualizer] Exit wall prefab is NULL! Attempting auto-recovery...");
+            
+#if UNITY_EDITOR
+            exitWallPrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/DungeonParts/ExitWall.prefab");
+            
+            if (exitWallPrefab != null)
+            {
+                Debug.LogWarning("[DungeonVisualizer] Exit wall prefab auto-recovered! Saving scene is recommended.");
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+            else
+            {
+                Debug.LogError("[DungeonVisualizer] Auto-recovery failed! Exit wall prefab not found at expected path.");
+                hasErrors = true;
+            }
+#else
+            hasErrors = true;
+#endif
+        }
+
+        if (playerPrefab == null && spawnPlayer)
+        {
+            Debug.LogWarning("[DungeonVisualizer] Player prefab is NULL but spawnPlayer is true!");
+        }
+
+        if (hasErrors)
+        {
+            Debug.LogError("[DungeonVisualizer] CRITICAL: Missing prefab references! Right-click on DungeonVisualizer component and select 'Auto-Assign Prefabs' to fix.");
         }
     }
 
@@ -258,6 +311,8 @@ public class DungeonVisualizer : MonoBehaviour
         Transform wallParent = new GameObject("Walls").transform;
         wallParent.SetParent(dungeonParent);
 
+        Debug.Log($"[DungeonVisualizer] GenerateWalls called. exitWallPrefab is {(exitWallPrefab == null ? "NULL" : "assigned")}");
+
         if (generator.Rooms == null || generator.Rooms.Count == 0)
         {
             Debug.LogError("CRITICAL: No rooms generated! Exit wall cannot be placed!");
@@ -268,6 +323,11 @@ public class DungeonVisualizer : MonoBehaviour
         Vector2Int exitWallPosition = FindBackWallPosition(startRoom);
         
         Debug.Log($"Exit wall WILL be placed in starting room at position: {exitWallPosition}, room bounds: ({startRoom.Left}, {startRoom.Bottom}) to ({startRoom.Right}, {startRoom.Top})");
+        Debug.Log($"[DungeonVisualizer] Checking grid at exit position: grid[{exitWallPosition.x}, {exitWallPosition.y}] = {(exitWallPosition.x < width && exitWallPosition.y < height ? grid[exitWallPosition.x, exitWallPosition.y].ToString() : "OUT OF BOUNDS")}");
+        if (exitWallPosition.y > 0 && exitWallPosition.x < width && exitWallPosition.y < height)
+        {
+            Debug.Log($"[DungeonVisualizer] Grid below exit position: grid[{exitWallPosition.x}, {exitWallPosition.y - 1}] = {grid[exitWallPosition.x, exitWallPosition.y - 1]}");
+        }
 
         for (int x = 0; x < width; x++)
         {
@@ -277,23 +337,29 @@ public class DungeonVisualizer : MonoBehaviour
                 {
                     if (x == 0 || !grid[x - 1, y])
                     {
-                        bool isExitWall = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Left);
-                        CreateWall(x * tileSize - tileSize / 2, y * tileSize, Vector3.forward, wallParent, x, y, isExitWall);
+                        bool isExitWallLeft = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Left);
+                        CreateWall(x * tileSize - tileSize / 2, y * tileSize, Vector3.forward, wallParent, x, y, isExitWallLeft);
                     }
                     if (x == width - 1 || !grid[x + 1, y])
                     {
-                        bool isExitWall = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Right);
-                        CreateWall(x * tileSize + tileSize / 2, y * tileSize, Vector3.forward, wallParent, x, y, isExitWall);
+                        bool isExitWallRight = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Right);
+                        CreateWall(x * tileSize + tileSize / 2, y * tileSize, Vector3.forward, wallParent, x, y, isExitWallRight);
                     }
-                    if (y == 0 || !grid[x, y - 1])
+                    
+                    bool isExitWallBottom = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Bottom);
+                    if (y == 0 || !grid[x, y - 1] || isExitWallBottom)
                     {
-                        bool isExitWall = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Bottom);
-                        CreateWall(x * tileSize, y * tileSize - tileSize / 2, Vector3.right, wallParent, x, y, isExitWall);
+                        if (isExitWallBottom)
+                        {
+                            Debug.Log($"[DungeonVisualizer] FOUND EXIT WALL POSITION! Creating exit wall at grid ({x}, {y}) - FORCING creation even if blocked");
+                        }
+                        CreateWall(x * tileSize, y * tileSize - tileSize / 2, Vector3.right, wallParent, x, y, isExitWallBottom);
                     }
+                    
                     if (y == height - 1 || !grid[x, y + 1])
                     {
-                        bool isExitWall = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Top);
-                        CreateWall(x * tileSize, y * tileSize + tileSize / 2, Vector3.right, wallParent, x, y, isExitWall);
+                        bool isExitWallTop = IsExitWallAtPosition(exitWallPosition, x, y, WallDirection.Top);
+                        CreateWall(x * tileSize, y * tileSize + tileSize / 2, Vector3.right, wallParent, x, y, isExitWallTop);
                     }
                 }
             }
@@ -305,11 +371,28 @@ public class DungeonVisualizer : MonoBehaviour
         Vector3 position = new Vector3(x, wallHeight / 2, z);
         Quaternion rotation = Quaternion.LookRotation(direction);
 
-        GameObject prefabToUse = isExitWall && exitWallPrefab != null ? exitWallPrefab : wallPrefab;
+        GameObject prefabToUse;
+        
+        if (isExitWall)
+        {
+            if (exitWallPrefab == null)
+            {
+                Debug.LogError($"CRITICAL: Exit wall prefab is NULL! Falling back to regular wall prefab. Check DungeonVisualizer component in scene.");
+                prefabToUse = wallPrefab;
+            }
+            else
+            {
+                prefabToUse = exitWallPrefab;
+            }
+        }
+        else
+        {
+            prefabToUse = wallPrefab;
+        }
         
         if (prefabToUse == null)
         {
-            Debug.LogError($"CRITICAL: {(isExitWall ? "Exit wall" : "Wall")} prefab is NULL!");
+            Debug.LogError($"CRITICAL: {(isExitWall ? "Exit wall" : "Wall")} prefab is NULL! Cannot create wall.");
             return;
         }
         
@@ -567,7 +650,12 @@ public class DungeonVisualizer : MonoBehaviour
     {
         if (direction == WallDirection.Bottom)
         {
-            return x == exitWallPos.x && y == exitWallPos.y;
+            bool isMatch = x == exitWallPos.x && y == exitWallPos.y;
+            if (isMatch)
+            {
+                Debug.Log($"[DungeonVisualizer] EXIT WALL MATCH! x={x}, y={y}, exitWallPos={exitWallPos}, direction={direction}");
+            }
+            return isMatch;
         }
         return false;
     }
