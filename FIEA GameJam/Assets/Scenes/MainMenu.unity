@@ -5539,7 +5539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
       propertyPath: quotaTarget
-      value: 2000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 1536822253271101555, guid: 4caba6cab4d8e5240a4f734153252954, type: 3}
       propertyPath: pickaxeLevel
