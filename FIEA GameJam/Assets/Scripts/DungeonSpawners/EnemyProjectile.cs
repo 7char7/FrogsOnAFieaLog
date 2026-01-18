@@ -32,10 +32,10 @@ public class EnemyProjectile : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
+            PlayerManager playerManager = other.GetComponent<PlayerManager>();
+            if (playerManager != null)
             {
-                playerHealth.TakeDamage(damage);
+                playerManager.TakeDamage(damage);
             }
             
             SpawnHitEffect(other.ClosestPoint(transform.position));
