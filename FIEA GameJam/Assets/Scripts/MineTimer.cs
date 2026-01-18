@@ -6,7 +6,12 @@ public class MineTimer : MonoBehaviour
 {
     [Header("Timer Settings")]
     [SerializeField] private float mineTimeLimit = 120f;
-    
+
+    [Header("Camera Shake")]
+    [SerializeField] private float shakeDuration = 0.2f;
+    [SerializeField] private float shakeMagnitude = 0.08f;
+    [SerializeField] private float shakeRotationMagnitude = 2f;
+
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI timerText;
     
@@ -58,6 +63,10 @@ public class MineTimer : MonoBehaviour
         if (currentTime <= 30f && currentTime > 10f)
         {
             timerText.color = Color.yellow;
+            if (CameraShake.Instance != null)
+            {
+                CameraShake.Instance.Shake(mineTimeLimit, shakeMagnitude, shakeRotationMagnitude);
+            }
         }
         else if (currentTime <= 10f)
         {
