@@ -9,7 +9,7 @@ public class MineTimer : MonoBehaviour
 
     [Header("Camera Shake")]
     [SerializeField] private float shakeDuration = 0.2f;
-    [SerializeField] private float shakeMagnitude = 0.08f;
+    [SerializeField] private float shakeMagnitude = 0.03f;
     [SerializeField] private float shakeRotationMagnitude = 2f;
 
     [Header("UI References")]
