@@ -79,10 +79,21 @@ public class Crystal : MonoBehaviour
     private void InitializeFragments(GameObject shatteredCrystal)
     {
         CrystalFragment[] fragments = shatteredCrystal.GetComponentsInChildren<CrystalFragment>();
+        
+        if (fragments.Length == 0)
+        {
+            Debug.LogWarning($"No fragments found in shattered crystal prefab for {crystalType}!");
+            return;
+        }
+        
+        int valuePerFragment = Mathf.Max(1, baseValue / fragments.Length);
+        
         foreach (CrystalFragment fragment in fragments)
         {
-            fragment.Initialize(crystalType, baseValue);
+            fragment.Initialize(crystalType, valuePerFragment);
         }
+        
+        Debug.Log($"Initialized {fragments.Length} {crystalType} fragments with {valuePerFragment} value each (total: {valuePerFragment * fragments.Length})");
     }
 
     public void OnValidate()

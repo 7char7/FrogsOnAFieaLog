@@ -3193,7 +3193,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Text
+  m_text: "You have three runs to hit 5,000 points by mining crystals in fast, procedurally
+    generated dungeons. Each run lasts two minutes\u2014dive in, mine crystals, fight
+    enemies, and get out before time runs out. Crystals and enemies scale by depth:
+    safer shallow rooms hold low-value crystals, while deeper zones are deadlier
+    but packed with high-value loot. Use your pickaxe to mine, your gun to survive,
+    and torches to light the way. Before the timer hits zero, return to the glowing
+    exit in the starting room to keep what you\u2019ve collected\u2014fail to escape
+    and you lose it all. Between runs, spend your earnings on permanent upgrades
+    to get stronger, faster, and tougher. Reach the quota to win. Miss it after three
+    runs, and it\u2019s game over."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3202,8 +3211,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3220,13 +3229,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 51.54
+  m_fontSizeBase: 51.54
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
