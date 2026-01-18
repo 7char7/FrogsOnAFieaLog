@@ -21,6 +21,7 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] float trailWidth = 0.02f;
     protected Coroutine fireCoroutine;
     protected Coroutine reloadCoroutine;
+    protected bool canReload = true;
 
     protected bool canShoot = true;
 
@@ -89,7 +90,7 @@ public abstract class Gun : MonoBehaviour
 
     public void ReloadGun(InputAction.CallbackContext context)
     {
-        if (context.performed && this.gameObject.activeSelf)
+        if (context.performed && this.gameObject.activeSelf && canReload)
         {
             if (reloadCoroutine != null)
             {
@@ -105,11 +106,10 @@ public abstract class Gun : MonoBehaviour
             yield return null;
 
         Debug.Log("Reloading...");
-
+        canReload = false;
         float elapsedTime = 0f;
         canShoot = false;
-        if (circleIndicator.gameObject.activeSelf == false)
-            circleIndicator.gameObject.SetActive(true);
+        circleIndicator.gameObject.SetActive(true);
         circleIndicator.fillAmount = 0f;
         while (elapsedTime < gunStatsScriptableObject.GetStat(Stat.reloadSpeed))
         {
@@ -122,6 +122,7 @@ public abstract class Gun : MonoBehaviour
             yield return null;
         }
         canShoot = true;
+        canReload = true;
         circleIndicator.gameObject.SetActive(false);
         currentAmmo = gunStatsScriptableObject.GetStat(Stat.maxAmmo);
         reloadCoroutine = null;

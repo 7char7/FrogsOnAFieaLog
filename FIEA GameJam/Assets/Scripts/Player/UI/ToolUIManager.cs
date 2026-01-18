@@ -9,6 +9,7 @@ public class ToolValueUI : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private Image circleIndicator;
+    [SerializeField] private Image torchIndicator;
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private TextMeshProUGUI torchText;
     [SerializeField] private GameObject ammoContainer;
@@ -23,10 +24,10 @@ public class ToolValueUI : MonoBehaviour
     {
         if (gun != null)
             gun.OnAmmoChanged += UpdateAmmoDisplay;
-        
+
         if (torch != null)
             torch.OnTorchCountChanged += UpdateTorchDisplay;
-        
+
         if (toolManager != null)
             toolManager.OnToolSwitched += OnToolSwitched;
     }
@@ -35,10 +36,10 @@ public class ToolValueUI : MonoBehaviour
     {
         if (gun != null)
             gun.OnAmmoChanged -= UpdateAmmoDisplay;
-        
+
         if (torch != null)
             torch.OnTorchCountChanged -= UpdateTorchDisplay;
-        
+
         if (toolManager != null)
             toolManager.OnToolSwitched -= OnToolSwitched;
     }

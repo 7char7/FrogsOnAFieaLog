@@ -155,11 +155,14 @@ public class UpgradeButton : MonoBehaviour
                 indicatorImage[i].color = Color.green;
             }
         }
+
+        int cost = 100 + 25 * level;
+        costText.text = "Cost: $" + cost;
     }
 
     private void UpdateCostText()
     {
-        int level = 1;
+        int level = 0;
 
         switch (upgradeType)
         {
