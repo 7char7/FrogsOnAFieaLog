@@ -61,35 +61,40 @@ public class CameraShake : MonoBehaviour
         transform.localRotation = originalRotation;
     }
 
-    public IEnumerator ShakeImpulseCoroutine(float duration, float magnitude, float rotationMagnitude)
+    public void ShakeImpulse(int pulseCount, float magnitude, float rotationMagnitude = 0f)
     {
-        originalPosition = transform.localPosition;
-        originalRotation = transform.localRotation;
+        if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
+        shakeCoroutine = StartCoroutine(PulseCoroutine(pulseCount, magnitude, rotationMagnitude));
+    }
 
-        float elapsed = 0f;
+    public IEnumerator PulseCoroutine(int pulseCount, float magnitude, float rotationMagnitude)
+    {
+        // Store the true start point
+        Vector3 startPos = transform.localPosition;
+        Quaternion startRot = transform.localRotation;
 
-        while (elapsed < duration)
+        for (int i = 0; i < pulseCount; i++)
         {
+            // 1. PERFORM THE JOLT
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
-
-            transform.localPosition = originalPosition + new Vector3(x, y, 0f);
+            transform.localPosition = startPos + new Vector3(x, y, 0f);
 
             if (rotationMagnitude > 0f)
             {
-                float rotationX = Random.Range(-1f, 1f) * rotationMagnitude;
-                float rotationY = Random.Range(-1f, 1f) * rotationMagnitude;
-                float rotationZ = Random.Range(-1f, 1f) * rotationMagnitude;
-
-                transform.localRotation = originalRotation * Quaternion.Euler(rotationX, rotationY, rotationZ);
+                float rotZ = Random.Range(-1f, 1f) * rotationMagnitude;
+                transform.localRotation = startRot * Quaternion.Euler(0, 0, rotZ);
             }
 
-            elapsed += Time.deltaTime;
-            yield return new WaitForSeconds(1f);
+            // 2. WAIT ONE FRAME (so the player actually sees the offset)
             yield return null;
-        }
 
-        transform.localPosition = originalPosition;
-        transform.localRotation = originalRotation;
+            // 3. SNAP BACK
+            transform.localPosition = startPos;
+            transform.localRotation = startRot;
+
+            // 4. WAIT FOR THE INTERVAL
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 }

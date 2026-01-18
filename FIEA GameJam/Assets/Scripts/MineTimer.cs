@@ -57,7 +57,12 @@ public class MineTimer : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(currentTime / 60);
         int seconds = Mathf.FloorToInt(currentTime % 60);
-        
+
+        float shakeMagnitude = 0.1f;
+        int shakeRotationMagnitude = 0;
+        int pulseCount = 5;
+
+
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         
         if (currentTime <= 30f && currentTime > 10f)
@@ -65,7 +70,7 @@ public class MineTimer : MonoBehaviour
             timerText.color = Color.yellow;
             if (CameraShake.Instance != null)
             {
-                CameraShake.Instance.ShakeImpulseCoroutine(mineTimeLimit, shakeMagnitude, shakeRotationMagnitude);
+                CameraShake.Instance.ShakeImpulse(pulseCount, shakeMagnitude, shakeRotationMagnitude);
             }
         }
         else if (currentTime <= 10f)
