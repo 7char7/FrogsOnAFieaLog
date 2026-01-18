@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     public bool HasLost { get; private set; }
     
     private bool isRunComplete = false;
+    public event Action OnRunCompleted;
 
     /* ======================
      * Gem Tracking (Legacy)
@@ -104,7 +106,7 @@ public class GameManager : MonoBehaviour
         else
         {
             currentRun++;
-
+            OnRunCompleted?.Invoke();
             if (currentRun > maxRuns)
             {
                 Debug.Log(
