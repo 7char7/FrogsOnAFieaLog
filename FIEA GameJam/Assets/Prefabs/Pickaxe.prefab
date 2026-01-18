@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5326113583969117287}
-  - component: {fileID: 4843309237074574402}
-  m_Layer: 0
+  - component: {fileID: 1434003596872026759}
+  m_Layer: 6
   m_Name: Pickaxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7967245850495110243}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 7672574499693756558}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4843309237074574402
+--- !u!114 &1434003596872026759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,11 +48,11 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   crystalHealthBar: {fileID: 0}
   pickaxeStatsScriptableObject: {fileID: 11400000, guid: b8ec2c6a447fa7248b24b96737dc6f03, type: 2}
-  reachDistance: 0
+  reachDistance: 2
   fortune: 0
-  miningSpeed: 0
+  miningSpeed: 5
   miningDamage: 0
-  swingAnimationDuration: 0.25
+  swingAnimationDuration: 0.3
 --- !u!1001 &7922056758959990629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103,7 +103,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 11abae8e6545f5d41aa290037e01c3c9, type: 3}
       propertyPath: m_Name
-      value: Pickaxe
+      value: Pickaxe Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 11abae8e6545f5d41aa290037e01c3c9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

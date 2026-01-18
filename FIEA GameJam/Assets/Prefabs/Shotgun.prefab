@@ -9711,7 +9711,7 @@ GameObject:
   - component: {fileID: 6398074305607548116}
   - component: {fileID: 2880183587723465119}
   - component: {fileID: 4364148287240916412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9726,7 +9726,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6003314854756465762}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9751,7 +9751,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shotgun
   cameraTransform: {fileID: 0}
-  gunStatsScriptableObject: {fileID: 0}
+  circleIndicator: {fileID: 0}
+  gunStatsScriptableObject: {fileID: 11400000, guid: 8d8a6e392fe4d8c40af80e309e0bffad, type: 2}
   currentAmmo: 10
   trailPrefab: {fileID: 3413936256727676924, guid: 8592bce747c096046b70672ea94d2923, type: 3}
   bulletSpawnPoint: {fileID: 3354751660669162420}
@@ -9762,6 +9763,9 @@ MonoBehaviour:
   muzzleFlash: {fileID: 0}
   muzzleFlashLight: {fileID: 0}
   muzzleFlashDuration: 0.05
+  shakeDuration: 0.2
+  shakeMagnitude: 0.15
+  shakeRotationMagnitude: 2
 --- !u!114 &4364148287240916412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9793,7 +9797,7 @@ GameObject:
   - component: {fileID: 9121054472548067560}
   - component: {fileID: 1010202624042490629}
   - component: {fileID: 3366988490198592836}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9901,7 +9905,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3354751660669162420}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shoot Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9917,7 +9921,7 @@ Transform:
   m_GameObject: {fileID: 7431686440805887227}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.48}
+  m_LocalPosition: {x: 0, y: 0.058, z: 0.686}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9964,6 +9968,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 6398074305607548116}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8948ec0fbe2d5894ea2d40eebb59e44c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.69
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8948ec0fbe2d5894ea2d40eebb59e44c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.69
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8948ec0fbe2d5894ea2d40eebb59e44c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.69
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8948ec0fbe2d5894ea2d40eebb59e44c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -10003,9 +10019,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8948ec0fbe2d5894ea2d40eebb59e44c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8948ec0fbe2d5894ea2d40eebb59e44c, type: 3}
       propertyPath: m_Name
-      value: Shotgun
+      value: Shotgun Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8948ec0fbe2d5894ea2d40eebb59e44c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
