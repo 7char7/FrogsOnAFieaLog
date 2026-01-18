@@ -11,8 +11,11 @@ public class ToolValueUI : MonoBehaviour
     [SerializeField] private Image circleIndicator;
     [SerializeField] private Image torchIndicator;
     [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private Sprite gunSprite;
+    [SerializeField] private Sprite pickaxeSprite;
     [SerializeField] private TextMeshProUGUI torchText;
     [SerializeField] private GameObject ammoContainer;
+    [SerializeField] private Image toolIcon;
     [SerializeField] private GameObject torchContainer;
 
     [Header("Tool References")]
@@ -86,8 +89,10 @@ public class ToolValueUI : MonoBehaviour
 
     private void ShowAmmoUI()
     {
-        if (ammoContainer != null)
-            ammoContainer.SetActive(true);
+        if (ammoText.gameObject != null)
+            ammoText.gameObject.SetActive(true);
+        
+        toolIcon.sprite = gunSprite;
     }
 
     private void ShowTorchUI()
@@ -98,7 +103,8 @@ public class ToolValueUI : MonoBehaviour
 
     private void HideAllUI()
     {
-        if (ammoContainer != null)
-            ammoContainer.SetActive(false);
+        if (ammoText.gameObject != null)
+            ammoText.gameObject.SetActive(false);
+        toolIcon.sprite = pickaxeSprite;
     }
 }

@@ -48,6 +48,7 @@ MonoBehaviour:
   torchStatsScriptableObject: {fileID: 11400000, guid: d3aa7fb25b44ca146b3e356d4f313661, type: 2}
   cameraTransform: {fileID: 0}
   circleIndicator: {fileID: 0}
+  torchIndicator: {fileID: 0}
   torch: {fileID: 371795016953712914, guid: 64495c9d8d8a2c44f9b239c95acca2a9, type: 3}
   torchHandModel: {fileID: 371795016953712914, guid: 64495c9d8d8a2c44f9b239c95acca2a9, type: 3}
   currentNumberOfTorches: 0
@@ -103,6 +104,10 @@ PrefabInstance:
     - target: {fileID: 3337021130885291032, guid: 64495c9d8d8a2c44f9b239c95acca2a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724660573753755687, guid: 64495c9d8d8a2c44f9b239c95acca2a9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

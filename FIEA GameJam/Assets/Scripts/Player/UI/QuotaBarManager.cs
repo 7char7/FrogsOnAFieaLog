@@ -7,9 +7,6 @@ public class QuotaBarManager : MonoBehaviour
     [SerializeField] private Image quotaBar;
     [SerializeField] private TMPro.TextMeshProUGUI pointsText;
     [SerializeField] private float currentPoints;
-    private Color emptyColor = Color.red;
-    private Color midColor = Color.yellow;
-    private Color fullColor = Color.green;
     private Coroutine quotaBarCoroutine;
     
     private ResourceManager resourceManager;
@@ -88,15 +85,12 @@ public class QuotaBarManager : MonoBehaviour
         float duration = 0.5f;
         float startingFill = quotaBar.fillAmount;
         float targetFillAmount = Mathf.Clamp01(currentPoints / quotaTarget);
-        Color startingColor = quotaBar.color;
-        Color targetColor = GetQuotaColor(targetFillAmount);
 
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / duration);
             quotaBar.fillAmount = Mathf.Lerp(startingFill, targetFillAmount, t);
-            quotaBar.color = Color.Lerp(startingColor, targetColor, t);
             yield return null;
         }
 
@@ -107,24 +101,5 @@ public class QuotaBarManager : MonoBehaviour
     private void EnsureProperQuotaBar(float currentPoints)
     {
         quotaBar.fillAmount = Mathf.Clamp01(currentPoints / quotaTarget);
-        quotaBar.color = GetQuotaColor(quotaBar.fillAmount);
-    }
-
-    private Color GetQuotaColor(float quotaPercent)
-    {
-        if (quotaPercent >= 0.5f)
-        {
-            float t = (quotaPercent - 0.5f) / (1f - 0.5f);
-            return Color.Lerp(midColor, fullColor, t);
-        }
-        else if (quotaPercent >= 0.25f)
-        {
-            float t = (quotaPercent - 0.25f) / (0.5f - 0.25f);
-            return Color.Lerp(emptyColor, midColor, t);
-        }
-        else
-        {
-            return emptyColor;
-        }
     }
 }
