@@ -7,6 +7,7 @@ public class UpgradeHandler : MonoBehaviour
 {
     [Header("Shotgun Upgrades")]
     [SerializeField] private List<StatsUpgrade> shotgunUpgrades = new List<StatsUpgrade>();
+    [SerializeField] private StatsUpgrade shotgunMaxAmmoUpgrade;
     [SerializeField] private int currentShotgunLevel = 0;
     [SerializeField] private int maxShotgunLevel = 10;
 
@@ -115,11 +116,17 @@ public class UpgradeHandler : MonoBehaviour
             return;
         }
 
+        Shotgun shotgun = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Shotgun>();
+        
         int upgradeIndex = level % shotgunUpgrades.Count;
         Debug.Log($"Applying Shotgun Upgrade Level {level} (Upgrade: {shotgunUpgrades[upgradeIndex].upgradeName})");
-
-        Shotgun shotgun = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Shotgun>();
         shotgun.gunStatsScriptableObject.UnlockUpgrade(shotgunUpgrades[upgradeIndex]);
+
+        if (shotgunMaxAmmoUpgrade != null)
+        {
+            Debug.Log($"Applying Shotgun MaxAmmo bonus for level {level}");
+            shotgun.gunStatsScriptableObject.UnlockUpgrade(shotgunMaxAmmoUpgrade);
+        }
     }
 
     public void ApplyPickaxeUpgrade(int level)

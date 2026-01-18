@@ -48,6 +48,8 @@ MonoBehaviour:
   quotaTarget: 5000
   maxRuns: 3
   currentRun: 1
+  winSceneName: WinScene
+  lossSceneName: LossScene
   gemsMinedRed: 0
   gemsMinedGreen: 0
   gemsMinedBlue: 0
@@ -77,6 +79,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 85386b2b5b7e1cc4aabaf2b9dd8990d5, type: 2}
   - {fileID: 11400000, guid: 8a784d7940349424ba1672fe5a71f1cf, type: 2}
   - {fileID: 11400000, guid: ce8d4ef8a30bc6248b8e655fe3de9c07, type: 2}
+  shotgunMaxAmmoUpgrade: {fileID: 11400000, guid: 8a784d7940349424ba1672fe5a71f1cf, type: 2}
   currentShotgunLevel: 0
   maxShotgunLevel: 10
   pickaxeUpgrades:
