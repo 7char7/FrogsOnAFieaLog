@@ -250,8 +250,8 @@ MonoBehaviour:
   legendaryCrystals: 0
   commonPointValue: 2
   uncommonPointValue: 5
-  rarePointValue: 10
-  legendaryPointValue: 20
+  rarePointValue: 8
+  legendaryPointValue: 12
   currentRunPoints: 0
   totalPoints: 0
 --- !u!4 &577694694

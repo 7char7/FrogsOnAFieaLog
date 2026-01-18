@@ -24,7 +24,7 @@ public class QuotaBarManager : MonoBehaviour
         }
         else
         {
-            quotaTarget = 5000f;
+            quotaTarget = 3000f;
             Debug.LogWarning("GameManager not found, using default quota target of 5000");
         }
         

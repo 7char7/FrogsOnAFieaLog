@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
      * Gameplay / Run Settings
      * ====================== */
     [Header("Gameplay Settings")]
-    [SerializeField] private int quotaTarget = 5000;
+    [SerializeField] private int quotaTarget = 3000;
     [SerializeField] private int maxRuns = 3;
     [SerializeField] private int currentRun = 1;
 

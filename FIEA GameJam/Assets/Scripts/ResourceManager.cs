@@ -12,8 +12,8 @@ public class ResourceManager : MonoBehaviour
     [Header("Point Values")]
     [SerializeField] private int commonPointValue = 2;
     [SerializeField] private int uncommonPointValue = 5;
-    [SerializeField] private int rarePointValue = 10;
-    [SerializeField] private int legendaryPointValue = 20;
+    [SerializeField] private int rarePointValue = 8;
+    [SerializeField] private int legendaryPointValue = 12;
     
     [Header("Current Session")]
     [SerializeField] private int currentRunPoints = 0;

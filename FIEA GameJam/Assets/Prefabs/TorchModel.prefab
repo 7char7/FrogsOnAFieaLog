@@ -98,7 +98,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -151,7 +151,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.67991346, b: 0.08962262, a: 1}
   m_Intensity: 10
-  m_Range: 30
+  m_Range: 50
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
