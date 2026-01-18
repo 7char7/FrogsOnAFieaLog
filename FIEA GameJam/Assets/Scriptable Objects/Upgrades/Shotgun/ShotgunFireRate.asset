@@ -18,5 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d8a6e392fe4d8c40af80e309e0bffad, type: 2}
   upgradeToApply:
   - statType: 0
-    statValue: 5
+    statValue: -10
   isPercentageUpgrade: 1

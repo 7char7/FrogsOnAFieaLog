@@ -15,7 +15,7 @@ MonoBehaviour:
   instanceStats: []
   stats:
   - statType: 0
-    statValue: 2
+    statValue: 1.5
   - statType: 1
     statValue: 10
   - statType: 2
