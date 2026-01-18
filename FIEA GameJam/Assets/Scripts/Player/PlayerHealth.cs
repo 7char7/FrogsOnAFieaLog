@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     
     [Header("Events")]
     public UnityEvent<int, int> OnHealthChanged;
+    public UnityEvent<int> OnDamageTaken;
     public UnityEvent OnPlayerDeath;
     
     private void Start()
@@ -23,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Max(0, currentHealth);
         
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        OnDamageTaken?.Invoke(damage);
         
         Debug.Log($"Player took {damage} damage. Health: {currentHealth}/{maxHealth}");
         

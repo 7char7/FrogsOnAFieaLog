@@ -38,13 +38,29 @@ public class PlayerManager : MonoBehaviour
     {
         float startingHealth = currentHealth;
         float effectiveDamage = damage * playerStatsScriptableObject.GetStat(Stat.defense);
-        effectiveDamage = Mathf.Max(effectiveDamage, 0); // Ensure damage is not negative
+        effectiveDamage = Mathf.Max(effectiveDamage, 0);
         currentHealth = Mathf.Clamp(currentHealth - effectiveDamage, 0, playerStatsScriptableObject.GetStat(Stat.maxHealth));
         healthBarManager.UpdateHealthValue(currentHealth);
         healthBarManager.StartHealthBarAnimation(startingHealth, currentHealth);
+        
+        TriggerDamageFeedback();
+        
         if (currentHealth <= 0)
         {
             //Die();
+        }
+    }
+    
+    private void TriggerDamageFeedback()
+    {
+        if (DamageFlashEffect.Instance != null)
+        {
+            DamageFlashEffect.Instance.Flash();
+        }
+        
+        if (CameraShake.Instance != null)
+        {
+            CameraShake.Instance.Shake(0.2f, 0.3f, 2f);
         }
     }
 }

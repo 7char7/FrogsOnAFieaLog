@@ -67,16 +67,19 @@ public abstract class Gun : MonoBehaviour
 
     protected void HandleBullets(Vector3 shootDirection, float damageAmount)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(cameraTransform.position, shootDirection, out hit, gunStatsScriptableObject.GetStat(Stat.range)))
+        if (Physics.Raycast(cameraTransform.position, shootDirection, out RaycastHit hit, gunStatsScriptableObject.GetStat(Stat.range)))
         {
             CreateBulletTrail(hit.point);
+            
             if (hit.transform.CompareTag("Enemy"))
             {
-                Debug.Log("Hit Enemy: " + hit.transform.name);
-                hit.transform.GetComponentInParent<Enemy>().TakeDamage(damageAmount);
+                EnemyHitbox hitbox = hit.transform.GetComponent<EnemyHitbox>();
+                if (hitbox != null && hitbox.Enemy != null)
+                {
+                    hitbox.Enemy.TakeDamage(damageAmount);
+                    BloodParticleEffect.PlayBloodEffect(hit.point, hit.normal, hitbox.Enemy.Type);
+                }
             }
-            Debug.Log("Hit " + hit.transform.name);
         }
         else
         {

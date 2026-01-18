@@ -27,6 +27,19 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        EnsureHitboxComponents();
+    }
+    
+    private void EnsureHitboxComponents()
+    {
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+        foreach (Collider col in colliders)
+        {
+            if (col.gameObject.CompareTag("Enemy") && col.GetComponent<EnemyHitbox>() == null)
+            {
+                col.gameObject.AddComponent<EnemyHitbox>();
+            }
+        }
     }
     
     public void TakeDamage(float damageAmount)
