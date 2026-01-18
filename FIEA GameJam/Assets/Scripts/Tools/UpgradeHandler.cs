@@ -45,13 +45,34 @@ public class UpgradeHandler : MonoBehaviour
         currentPlayerMaxHealthLevel = GameManager.Instance.playerHealthLevel;
         currentPlayerMovementSpeedLevel = GameManager.Instance.playerSpeedLevel;
         currentPlayerDefenseLevel = GameManager.Instance.playerDefenceLevel;
-        ApplyShotgunUpgrade();
-        ApplyPickaxeUpgrade();
-        ApplyTorchUpgrade();
-        ApplyPlayerHealthUpgrade();
-        ApplyPlayerMovementSpeedUpgrade();
-        ApplyPlayerDefenseUpgrade();
+
+        for (int i = 0; i < currentShotgunLevel; i++)
+        {
+            ApplyShotgunUpgrade();
+        }
+        for (int i = 0; i < currentPickaxeLevel; i++)
+        {
+            ApplyPickaxeUpgrade();
+        }
+        for (int i = 0; i < currentTorchLevel; i++)
+        {
+            ApplyTorchUpgrade();
+        }
+        for (int i = 0; i < currentPlayerMaxHealthLevel; i++)
+        {
+            ApplyPlayerHealthUpgrade();
+        }
+        for (int i = 0; i < currentPlayerMovementSpeedLevel; i++)
+        {
+            ApplyPlayerMovementSpeedUpgrade();
+        }
+        for (int i = 0; i < currentPlayerDefenseLevel; i++)
+        {
+            ApplyPlayerDefenseUpgrade();
+        }
     }
+
+
     public void ApplyShotgunUpgrade()
     {
         if (currentShotgunLevel >= maxShotgunLevel)

@@ -41,13 +41,13 @@ public class UpgradeButton : MonoBehaviour
                 level = shopMenu.torchLimitShopLevel;
                 break;
             case UpgradeType.Pickaxe:
-                level = shopMenu.shotgunShopLevel;
+                level = shopMenu.pickaxeShopLevel;
                 break;
             case UpgradeType.Defence:
-                level = shopMenu.shotgunShopLevel;
+                level = shopMenu.playerDefenceShopLevel;
                 break;
             case UpgradeType.Speed:
-                level = shopMenu.shotgunShopLevel;
+                level = shopMenu.playerSpeedShopLevel;
                 break;
         }
 
