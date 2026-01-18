@@ -100,7 +100,5 @@ public class ToolValueUI : MonoBehaviour
     {
         if (ammoContainer != null)
             ammoContainer.SetActive(false);
-        if (torchContainer != null)
-            torchContainer.SetActive(false);
     }
 }

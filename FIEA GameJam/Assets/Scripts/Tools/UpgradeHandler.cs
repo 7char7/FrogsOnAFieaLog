@@ -7,7 +7,6 @@ public class UpgradeHandler : MonoBehaviour
 {
     [Header("Shotgun Upgrades")]
     [SerializeField] private List<StatsUpgrade> shotgunUpgrades = new List<StatsUpgrade>();
-    [SerializeField] private StatsUpgrade shotgunMaxAmmoUpgrade;
     [SerializeField] private int currentShotgunLevel = 0;
     [SerializeField] private int maxShotgunLevel = 10;
 
@@ -37,10 +36,9 @@ public class UpgradeHandler : MonoBehaviour
     [SerializeField] private int currentPlayerDefenseLevel = 0;
     [SerializeField] private int maxPlayerDefenseLevel = 10;
 
+    //apply all upgrades
     public void ApplyUpgrades()
     {
-        ResetAllUpgrades();
-
         currentShotgunLevel = GameManager.Instance.shotgunLevel;
         currentPickaxeLevel = GameManager.Instance.pickaxeLevel;
         currentTorchLevel = GameManager.Instance.torchLimitLevel;
@@ -50,15 +48,15 @@ public class UpgradeHandler : MonoBehaviour
 
         for (int i = 0; i < currentShotgunLevel; i++)
         {
-            ApplyShotgunUpgrade(i);
+            ApplyShotgunUpgrade();
         }
         for (int i = 0; i < currentPickaxeLevel; i++)
         {
-            ApplyPickaxeUpgrade(i);
+            ApplyPickaxeUpgrade();
         }
         for (int i = 0; i < currentTorchLevel; i++)
         {
-            ApplyTorchUpgrade(i);
+            ApplyTorchUpgrade();
         }
         for (int i = 0; i < currentPlayerMaxHealthLevel; i++)
         {
@@ -74,101 +72,59 @@ public class UpgradeHandler : MonoBehaviour
         }
     }
 
-    private void ResetAllUpgrades()
+
+    public void ApplyShotgunUpgrade()
     {
-        Shotgun shotgun = GameObject.FindGameObjectWithTag("Player")?.GetComponentInChildren<Shotgun>();
-        if (shotgun != null)
+        if (currentShotgunLevel >= maxShotgunLevel)
         {
-            shotgun.gunStatsScriptableObject.ResetUpgrades();
-        }
-
-        Pickaxe pickaxe = GameObject.FindGameObjectWithTag("Player")?.GetComponentInChildren<Pickaxe>();
-        if (pickaxe != null)
-        {
-            pickaxe.pickaxeStatsScriptableObject.ResetUpgrades();
-        }
-
-        Torch torch = GameObject.FindGameObjectWithTag("Player")?.GetComponentInChildren<Torch>();
-        if (torch != null)
-        {
-            torch.torchStatsScriptableObject.ResetUpgrades();
-        }
-
-        PlayerManager playerManager = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerManager>();
-        if (playerManager != null)
-        {
-            playerManager.playerStatsScriptableObject.ResetUpgrades();
-        }
-    }
-
-
-    public void ApplyShotgunUpgrade(int level)
-    {
-        if (level >= maxShotgunLevel)
-        {
-            Debug.Log("Shotgun upgrade level out of range");
+            Debug.Log("Shotgun is already at max level");
             return;
         }
-
-        if (shotgunUpgrades.Count == 0)
-        {
-            Debug.LogWarning("No shotgun upgrades configured!");
-            return;
-        }
+        //currentShotgunLevel++;
+        Debug.Log("Applying Shotgun Upgrades");
 
         Shotgun shotgun = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Shotgun>();
-        
-        int upgradeIndex = level % shotgunUpgrades.Count;
-        Debug.Log($"Applying Shotgun Upgrade Level {level} (Upgrade: {shotgunUpgrades[upgradeIndex].upgradeName})");
-        shotgun.gunStatsScriptableObject.UnlockUpgrade(shotgunUpgrades[upgradeIndex]);
 
-        if (shotgunMaxAmmoUpgrade != null)
+        foreach (var upgrade in shotgunUpgrades)
         {
-            Debug.Log($"Applying Shotgun MaxAmmo bonus for level {level}");
-            shotgun.gunStatsScriptableObject.UnlockUpgrade(shotgunMaxAmmoUpgrade);
+            shotgun.gunStatsScriptableObject.UnlockUpgrade(upgrade);
         }
     }
 
-    public void ApplyPickaxeUpgrade(int level)
+    public void ApplyPickaxeUpgrade()
     {
-        if (level >= maxPickaxeLevel)
+        if (currentPickaxeLevel >= maxPickaxeLevel)
         {
-            Debug.Log("Pickaxe upgrade level out of range");
+            Debug.Log("Pickaxe is already at max level");
             return;
         }
-
-        if (pickaxeUpgrades.Count == 0)
-        {
-            Debug.LogWarning("No pickaxe upgrades configured!");
-            return;
-        }
-
-        int upgradeIndex = level % pickaxeUpgrades.Count;
-        Debug.Log($"Applying Pickaxe Upgrade Level {level} (Upgrade: {pickaxeUpgrades[upgradeIndex].upgradeName})");
+        //currentPickaxeLevel++;
+        Debug.Log("Applying Pickaxe Upgrades");
 
         Pickaxe pickaxe = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Pickaxe>();
-        pickaxe.pickaxeStatsScriptableObject.UnlockUpgrade(pickaxeUpgrades[upgradeIndex]);
+
+        foreach (var upgrade in pickaxeUpgrades)
+        {
+            pickaxe.pickaxeStatsScriptableObject.UnlockUpgrade(upgrade);
+        }
     }
 
-    public void ApplyTorchUpgrade(int level)
+    public void ApplyTorchUpgrade()
     {
-        if (level >= maxTorchLevel)
+        if (currentTorchLevel >= maxTorchLevel)
         {
-            Debug.Log("Torch upgrade level out of range");
+            Debug.Log("Torch is already at max level");
             return;
         }
-
-        if (torchUpgrades.Count == 0)
-        {
-            Debug.LogWarning("No torch upgrades configured!");
-            return;
-        }
-
-        int upgradeIndex = level % torchUpgrades.Count;
-        Debug.Log($"Applying Torch Upgrade Level {level} (Upgrade: {torchUpgrades[upgradeIndex].upgradeName})");
+        //currentTorchLevel++;
+        Debug.Log("Applying Torch Upgrades");
 
         Torch torch = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Torch>();
-        torch.torchStatsScriptableObject.UnlockUpgrade(torchUpgrades[upgradeIndex]);
+
+        foreach (var upgrade in torchUpgrades)
+        {
+            torch.torchStatsScriptableObject.UnlockUpgrade(upgrade);
+        }
     }
 
     public void ApplyPlayerHealthUpgrade()

@@ -19,7 +19,6 @@ public class Torch : MonoBehaviour
     void Awake()
     {
         torchStatsScriptableObject = Instantiate(torchStatsScriptableObject);
-        currentNumberOfTorches = torchStatsScriptableObject.GetStat(Stat.numberOfTorches);
 
         if (cameraTransform == null)
         {
@@ -37,6 +36,7 @@ public class Torch : MonoBehaviour
 
     void Start()
     {
+        currentNumberOfTorches = torchStatsScriptableObject.GetStat(Stat.numberOfTorches);
         OnTorchCountChanged?.Invoke();
     }
 
@@ -58,7 +58,10 @@ public class Torch : MonoBehaviour
             }
         }
 
-        torchIndicator.gameObject.SetActive(false);
+        if (torchIndicator.gameObject.activeSelf)
+        {
+            torchIndicator.gameObject.SetActive(false);
+        }
     }
 
     private void PlaceTorch()

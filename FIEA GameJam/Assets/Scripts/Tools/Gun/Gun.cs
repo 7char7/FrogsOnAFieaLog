@@ -44,8 +44,8 @@ public abstract class Gun : MonoBehaviour
             StopCoroutine(reloadCoroutine);
             reloadCoroutine = null;
             canShoot = true;
-            canReload = true;
-            circleIndicator.gameObject.SetActive(false);
+            if (currentAmmo != gunStatsScriptableObject.GetStat(Stat.maxAmmo))
+                canReload = true;
         }
 
         if (fireCoroutine != null)
@@ -104,11 +104,8 @@ public abstract class Gun : MonoBehaviour
 
     protected virtual IEnumerator Reload()
     {
-        if (currentAmmo >= gunStatsScriptableObject.GetStat(Stat.maxAmmo))
-        {
-            canReload = true;
-            yield break;
-        }
+        if (currentAmmo == gunStatsScriptableObject.GetStat(Stat.maxAmmo))
+            yield return null;
 
         Debug.Log("Reloading...");
         canReload = false;
