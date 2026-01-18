@@ -32,6 +32,8 @@ public class Torch : MonoBehaviour
                 Debug.LogError("Torch: Could not find main camera!");
             }
         }
+
+        OnTorchCountChanged?.Invoke();
     }
 
     RaycastHit hit;
@@ -76,7 +78,6 @@ public class Torch : MonoBehaviour
         if (currentNumberOfTorches <= 0)
         {
             Debug.Log("No torches left");
-            torchHandModel.SetActive(false);
             return;
         }
 
@@ -99,6 +100,10 @@ public class Torch : MonoBehaviour
 
         Instantiate(torch, spawnPosition, spawnRotation);
         currentNumberOfTorches--;
+        if (currentNumberOfTorches <= 0)
+        {
+            this.gameObject.SetActive(false);
+        }
         OnTorchCountChanged?.Invoke();
     }
 

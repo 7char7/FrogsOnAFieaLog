@@ -1013,6 +1013,7 @@ MonoBehaviour:
   wispParticlePrefab: {fileID: 0}
   shatteredCrystalPrefab: {fileID: 0}
   rotationSpeed: 30
+  shatterDelay: 0.3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
