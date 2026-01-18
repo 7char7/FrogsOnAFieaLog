@@ -47,8 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   torchStatsScriptableObject: {fileID: 11400000, guid: d3aa7fb25b44ca146b3e356d4f313661, type: 2}
   cameraTransform: {fileID: 0}
+  circleIndicator: {fileID: 0}
   torch: {fileID: 1235146065428141406, guid: db2b0e46de822a543be517bd7ab3cda3, type: 3}
-  torchHandModel: {fileID: 0}
+  torchHandModel: {fileID: 371795016953712914, guid: 64495c9d8d8a2c44f9b239c95acca2a9, type: 3}
   currentNumberOfTorches: 0
   placeDistance: 4
 --- !u!1001 &5400132969086602499
@@ -69,11 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3337021130885291032, guid: 64495c9d8d8a2c44f9b239c95acca2a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.062
       objectReference: {fileID: 0}
     - target: {fileID: 3337021130885291032, guid: 64495c9d8d8a2c44f9b239c95acca2a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.359
+      value: -1.32
       objectReference: {fileID: 0}
     - target: {fileID: 3337021130885291032, guid: 64495c9d8d8a2c44f9b239c95acca2a9, type: 3}
       propertyPath: m_LocalRotation.w
