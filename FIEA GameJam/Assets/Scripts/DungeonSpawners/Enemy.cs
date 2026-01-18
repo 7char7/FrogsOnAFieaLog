@@ -71,19 +71,19 @@ public class Enemy : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.Shallow:
-                maxHealth = 50;
+                maxHealth = 15;
                 damage = 5;
                 moveSpeed = 2f;
                 debugColor = new Color(0.8f, 0.8f, 0.8f);
                 break;
             case EnemyType.Medium:
-                maxHealth = 100;
+                maxHealth = 25;
                 damage = 10;
                 moveSpeed = 3f;
                 debugColor = new Color(0.3f, 0.6f, 1f);
                 break;
             case EnemyType.Deep:
-                maxHealth = 150;
+                maxHealth = 35;
                 damage = 20;
                 moveSpeed = 4f;
                 debugColor = new Color(1f, 0.2f, 0.2f);

@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   enemyType: 2
-  maxHealth: 150
+  maxHealth: 35
   currentHealth: 0
   damage: 20
   moveSpeed: 4

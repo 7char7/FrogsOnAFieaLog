@@ -14,6 +14,7 @@ public class CrystalSpawner : MonoBehaviour
     [SerializeField] private float crystalHeight = 0.5f;
     [SerializeField] private float minDistanceFromWalls = 1.5f;
     [SerializeField] private float minDistanceBetweenCrystals = 2f;
+    [SerializeField] private float minDistanceFromPlayer = 3f;
 
     [Header("Depth-Based Spawning")]
     [SerializeField] private bool spawnCrystals = true;
@@ -27,6 +28,7 @@ public class CrystalSpawner : MonoBehaviour
     private DungeonGenerator generator;
     private Transform crystalParent;
     private List<Vector3> spawnedPositions = new List<Vector3>();
+    private Vector3 playerSpawnPosition;
 
     public void Initialize(DungeonGenerator dungeonGenerator, Transform parent)
     {
@@ -34,6 +36,16 @@ public class CrystalSpawner : MonoBehaviour
         crystalParent = new GameObject("Crystals").transform;
         crystalParent.SetParent(parent);
         spawnedPositions.Clear();
+        playerSpawnPosition = Vector3.zero;
+    }
+
+    public void Initialize(DungeonGenerator dungeonGenerator, Transform parent, Vector3 playerPosition)
+    {
+        generator = dungeonGenerator;
+        crystalParent = new GameObject("Crystals").transform;
+        crystalParent.SetParent(parent);
+        spawnedPositions.Clear();
+        playerSpawnPosition = playerPosition;
     }
 
     public void SpawnCrystalsInDungeon()
@@ -137,6 +149,15 @@ public class CrystalSpawner : MonoBehaviour
 
     private bool IsValidSpawnPosition(Vector3 position)
     {
+        if (playerSpawnPosition != Vector3.zero)
+        {
+            float distanceToPlayer = Vector3.Distance(new Vector3(position.x, 0f, position.z), new Vector3(playerSpawnPosition.x, 0f, playerSpawnPosition.z));
+            if (distanceToPlayer < minDistanceFromPlayer)
+            {
+                return false;
+            }
+        }
+
         foreach (Vector3 existingPosition in spawnedPositions)
         {
             if (Vector3.Distance(position, existingPosition) < minDistanceBetweenCrystals)

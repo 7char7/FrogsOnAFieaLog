@@ -157,7 +157,7 @@ public class DungeonVisualizer : MonoBehaviour
 
         if (crystalSpawner != null)
         {
-            crystalSpawner.Initialize(generator, dungeonParent);
+            crystalSpawner.Initialize(generator, dungeonParent, playerPosition);
             crystalSpawner.SpawnCrystalsInDungeon();
         }
 
