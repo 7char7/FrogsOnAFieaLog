@@ -22,12 +22,12 @@ public class Shotgun : Gun
 
     public override void Shoot()
     {
-        if (Time.time < nextFireTime || currentAmmo <= 0)
+        if (Time.time < nextFireTime || currentAmmo <= 0 || !canShoot)
             return;
 
         currentAmmo--;
         TriggerAmmoChanged();
-        
+
         int pelletsPerShot = (int)gunStatsScriptableObject.GetStat(Stat.bulletsPerShot);
         for (int i = 0; i < pelletsPerShot; i++)
         { 

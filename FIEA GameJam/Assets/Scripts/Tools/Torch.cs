@@ -9,6 +9,7 @@ public class Torch : MonoBehaviour
     public Stats torchStatsScriptableObject;
     public event Action OnTorchCountChanged;
     [SerializeField] protected Transform cameraTransform;
+    [SerializeField] private Image circleIndicator;
     [SerializeField] private GameObject torch;
     [SerializeField] private GameObject torchHandModel;
     [SerializeField] private float currentNumberOfTorches;
@@ -30,6 +31,23 @@ public class Torch : MonoBehaviour
             {
                 Debug.LogError("Torch: Could not find main camera!");
             }
+        }
+    }
+
+    RaycastHit hit;
+    void Update()
+    {
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, placeDistance))
+        {
+            if (hit.transform.CompareTag("Wall") || hit.transform.CompareTag("Ground"))
+            {
+                circleIndicator.gameObject.SetActive(true);
+                return;
+            }
+        }
+        else
+        {
+            circleIndicator.gameObject.SetActive(false);
         }
     }
 

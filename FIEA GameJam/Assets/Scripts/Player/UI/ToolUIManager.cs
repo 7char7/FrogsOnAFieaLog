@@ -1,10 +1,14 @@
 using UnityEngine;
 using TMPro;
-using System;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class ToolValueUI : MonoBehaviour
 {
     [Header("UI References")]
+    [SerializeField] private Image circleIndicator;
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private TextMeshProUGUI torchText;
     [SerializeField] private GameObject ammoContainer;
@@ -41,6 +45,8 @@ public class ToolValueUI : MonoBehaviour
 
     private void OnToolSwitched(GameObject activeTool)
     {
+        ResetIndicator();
+
         if (activeTool == gun.gameObject)
         {
             ShowAmmoUI();
@@ -55,6 +61,12 @@ public class ToolValueUI : MonoBehaviour
         {
             HideAllUI();
         }
+    }
+
+    private void ResetIndicator()
+    {
+        circleIndicator.gameObject.SetActive(false);
+        circleIndicator.fillAmount = 1f;
     }
 
     private void UpdateAmmoDisplay()

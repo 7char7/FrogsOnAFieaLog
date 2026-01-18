@@ -666,6 +666,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   rb: {fileID: 5199009136126324202}
   playerStatsScriptableObject: {fileID: 0}
+  playerLook: {fileID: 0}
+  slideSpeed: 12
+  slideDecay: 5
+  minSlideSpeed: 2
+  slideDuration: 1
+  slideCameraHeight: 0.5
 --- !u!114 &8642368122609185024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,7 +807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107a145a8e3f8574baa45495be7b8d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBarManager
-  playerStatsScriptableObject: {fileID: 0}
+  playerStatsScriptableObject: {fileID: 11400000, guid: 91a6a3c701db127489f9710ea4bacf20, type: 2}
   healthBar: {fileID: 8608900498206948393}
   healthText: {fileID: 6985960623356443725}
   currentHealth: 0
@@ -817,6 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360a2695ff7695847a132a35a1abfefb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToolValueUI
+  circleIndicator: {fileID: 7031958065652696569}
   ammoText: {fileID: 4788401853085801432}
   torchText: {fileID: 2530554074676440414}
   ammoContainer: {fileID: 2354665830034727731}
@@ -824,6 +831,81 @@ MonoBehaviour:
   gun: {fileID: 4158937915156888574}
   torch: {fileID: 7280524504463826370}
   toolManager: {fileID: 5566239306450604908}
+--- !u!1 &4166289342320009038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 524761240782344647}
+  - component: {fileID: 4669199612737905591}
+  - component: {fileID: 7760662209100573233}
+  m_Layer: 6
+  m_Name: HealthIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &524761240782344647
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4166289342320009038}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25756, y: 0.25756, z: 0.25756}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2264626694774415442}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1, y: 11}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4669199612737905591
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4166289342320009038}
+  m_CullTransparentMesh: 1
+--- !u!114 &7760662209100573233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4166289342320009038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4289632327859079486
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +938,7 @@ RectTransform:
   m_Children:
   - {fileID: 7825821771762037118}
   - {fileID: 3753503193705671103}
+  - {fileID: 524761240782344647}
   m_Father: {fileID: 1531991476393289980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -1524,6 +1607,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7355968410065743519}
     - target: {fileID: 2880183587723465119, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
+      propertyPath: circleIndicator
+      value: 
+      objectReference: {fileID: 7031958065652696569}
+    - target: {fileID: 2880183587723465119, guid: 0767bb183c000fb42abe710bf7aaa329, type: 3}
       propertyPath: gunStatsScriptableObject
       value: 
       objectReference: {fileID: 11400000, guid: 8d8a6e392fe4d8c40af80e309e0bffad, type: 2}
@@ -1633,6 +1720,10 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 7355968410065743519}
+    - target: {fileID: 3115057588157383580, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
+      propertyPath: circleIndicator
+      value: 
+      objectReference: {fileID: 7031958065652696569}
     - target: {fileID: 5753843072681188369, guid: 3b64cfa22ad918142b85a00f844c31b1, type: 3}
       propertyPath: m_Name
       value: TorchModel

@@ -8,6 +8,7 @@ using UnityEngine.XR;
 public abstract class Gun : MonoBehaviour
 {
     [SerializeField] protected Transform cameraTransform;
+    [SerializeField] private Image circleIndicator;
     public Stats gunStatsScriptableObject;
     public event Action OnAmmoChanged;
     public float currentAmmo;
@@ -19,6 +20,9 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] float fadeDuration = 0.1f;
     [SerializeField] float trailWidth = 0.02f;
     protected Coroutine fireCoroutine;
+    protected Coroutine reloadCoroutine;
+
+    protected bool canShoot = true;
 
     protected virtual void Awake()
     {
@@ -32,11 +36,27 @@ public abstract class Gun : MonoBehaviour
         OnAmmoChanged?.Invoke();
     }
 
+    protected virtual void OnDisable()
+    {
+        if (reloadCoroutine != null)
+        {
+            StopCoroutine(reloadCoroutine);
+            reloadCoroutine = null;
+            canShoot = true;
+        }
+
+        if (fireCoroutine != null)
+        {
+            StopCoroutine(fireCoroutine);
+            fireCoroutine = null;
+        }
+    }
+
     public virtual void Shoot()
     {
-        if (Time.time < nextFireTime || currentAmmo <= 0)
+        if (Time.time < nextFireTime || currentAmmo <= 0 || !canShoot)
             return;
-        
+
         currentAmmo--;
         TriggerAmmoChanged();
         Vector3 shootDirection = GetShootingDirection();
@@ -66,9 +86,13 @@ public abstract class Gun : MonoBehaviour
 
     public void ReloadGun(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && this.gameObject.activeSelf)
         {
-            StartCoroutine(Reload());
+            if (reloadCoroutine != null)
+            {
+                StopCoroutine(reloadCoroutine);
+            }
+            reloadCoroutine = StartCoroutine(Reload());
         }
     }
 
@@ -78,8 +102,27 @@ public abstract class Gun : MonoBehaviour
             yield return null;
 
         Debug.Log("Reloading...");
-        yield return new WaitForSeconds(gunStatsScriptableObject.GetStat(Stat.reloadSpeed));
+
+        float elapsedTime = 0f;
+        canShoot = false;
+        if (circleIndicator.gameObject.activeSelf == false)
+            circleIndicator.gameObject.SetActive(true);
+        circleIndicator.fillAmount = 0f;
+        while (elapsedTime < gunStatsScriptableObject.GetStat(Stat.reloadSpeed))
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / gunStatsScriptableObject.GetStat(Stat.reloadSpeed);
+            if (circleIndicator != null)
+            {
+                circleIndicator.fillAmount = progress;
+            }
+            yield return null;
+        }
+        canShoot = true;
+        circleIndicator.gameObject.SetActive(false);
         currentAmmo = gunStatsScriptableObject.GetStat(Stat.maxAmmo);
+        reloadCoroutine = null;
+
         TriggerAmmoChanged();
         Debug.Log("Reloaded");
     }
@@ -87,13 +130,13 @@ public abstract class Gun : MonoBehaviour
     protected Vector3 GetShootingDirection()
     {
         float spreadAngle = gunStatsScriptableObject.GetStat(Stat.bulletSpread);
-        
+
         float randomX = UnityEngine.Random.Range(-spreadAngle, spreadAngle);
         float randomY = UnityEngine.Random.Range(-spreadAngle, spreadAngle);
-        
+
         Quaternion spreadRotation = Quaternion.Euler(randomY, randomX, 0f);
         Vector3 spreadDirection = spreadRotation * cameraTransform.forward;
-        
+
         return spreadDirection;
     }
 
@@ -110,7 +153,7 @@ public abstract class Gun : MonoBehaviour
     {
         if (this.gameObject.activeSelf == false)
             return;
-        
+
         if (context.started)
         {
             fireCoroutine = StartCoroutine(FireGun());
@@ -133,18 +176,18 @@ public abstract class Gun : MonoBehaviour
     {
         if (trailPrefab == null)
             return;
-            
+
         LineRenderer trail = Instantiate(trailPrefab).GetComponent<LineRenderer>();
         if (trail == null)
             return;
-            
+
         trail.positionCount = 2;
         trail.SetPosition(0, bulletSpawnPoint.position);
         trail.SetPosition(1, hitPoint);
-        
+
         trail.startWidth = trailWidth;
         trail.endWidth = trailWidth * 0.5f;
-        
+
         StartCoroutine(FadeTrailBackToFront(trail, bulletSpawnPoint.position, hitPoint));
     }
 
@@ -153,22 +196,22 @@ public abstract class Gun : MonoBehaviour
         float elapsedTime = 0f;
         Color startColor = trail.startColor;
         Color endColor = trail.endColor;
-        
+
         while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;
             float progress = elapsedTime / fadeDuration;
-            
+
             float newAlpha = 1f - progress;
             trail.startColor = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
             trail.endColor = new Color(endColor.r, endColor.g, endColor.b, newAlpha);
-            
+
             Vector3 newStartPos = Vector3.Lerp(startPos, endPos, progress);
             trail.SetPosition(0, newStartPos);
-            
+
             yield return null;
         }
-        
+
         Destroy(trail.gameObject);
     }
 }
