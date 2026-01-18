@@ -15,6 +15,11 @@ public class UpgradeHandler : MonoBehaviour
     [SerializeField] private int currentPickaxeLevel = 0;
     [SerializeField] private int maxPickaxeLevel = 10;
 
+    [Header("Torch Upgrades")]
+    [SerializeField] private List<StatsUpgrade> torchUpgrades = new List<StatsUpgrade>();
+    [SerializeField] private int currentTorchLevel = 0;
+    [SerializeField] private int maxTorchLevel = 10;
+
     [Header("Player Upgrades")]
     // Max Health Upgrade
     [SerializeField] private StatsUpgrade playerMaxHealthUpgrade;
@@ -78,6 +83,24 @@ public class UpgradeHandler : MonoBehaviour
         foreach (var upgrade in pickaxeUpgrades)
         {
             pickaxe.pickaxeStatsScriptableObject.UnlockUpgrade(upgrade);
+        }
+    }
+
+    public void ApplyTorchUpgrade()
+    {
+        if (currentTorchLevel >= maxTorchLevel)
+        {
+            Debug.Log("Torch is already at max level");
+            return;
+        }
+        currentTorchLevel++;
+        Debug.Log("Applying Torch Upgrades");
+
+        Torch torch = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Torch>();
+
+        foreach (var upgrade in torchUpgrades)
+        {
+            torch.torchStatsScriptableObject.UnlockUpgrade(upgrade);
         }
     }
 
