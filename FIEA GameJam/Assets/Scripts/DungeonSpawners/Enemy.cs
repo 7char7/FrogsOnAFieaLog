@@ -49,6 +49,11 @@ public class Enemy : MonoBehaviour
         
         OnDamageTaken?.Invoke(damageAmount);
         
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayEnemyHitSound();
+        }
+        
         if (currentHealth <= 0)
         {
             Die();

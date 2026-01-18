@@ -24,11 +24,18 @@ public class Crystal : MonoBehaviour
         transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
     }
 
-    public void MineCrystal(float damage)
+    public void MineCrystal(float damage, Vector3 hitPosition, Vector3 hitNormal)
     {
         if (currentCrystalHealth >= 0f)
         {
             currentCrystalHealth -= damage;
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayMiningSound();
+            }
+
+            BloodParticleEffect.PlayCrystalBloodEffect(hitPosition, hitNormal, crystalType);
 
             if (currentCrystalHealth <= 0f)
             {
@@ -49,6 +56,11 @@ public class Crystal : MonoBehaviour
     private IEnumerator ShatterCrystalAfterDelay()
     {
         yield return new WaitForSeconds(shatterDelay);
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayCrystalShatterSound();
+        }
 
         if (wispParticlePrefab != null)
         {

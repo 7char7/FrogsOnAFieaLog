@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5326113583969117287}
+  - component: {fileID: 4843309237074574402}
   m_Layer: 0
   m_Name: Pickaxe
   m_TagString: Untagged
@@ -32,6 +33,26 @@ Transform:
   - {fileID: 7672574499693756558}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4843309237074574402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7967245850495110243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df59e0182da44fc459c0144a2e0d66f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickaxe
+  cameraTransform: {fileID: 0}
+  crystalHealthBar: {fileID: 0}
+  pickaxeStatsScriptableObject: {fileID: 11400000, guid: b8ec2c6a447fa7248b24b96737dc6f03, type: 2}
+  reachDistance: 0
+  fortune: 0
+  miningSpeed: 0
+  miningDamage: 0
+  swingAnimationDuration: 0.25
 --- !u!1001 &7922056758959990629
 PrefabInstance:
   m_ObjectHideFlags: 0

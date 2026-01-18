@@ -88,6 +88,11 @@ public class CrystalFragment : MonoBehaviour
         {
             Debug.LogWarning("ResourceManager not found! Fragment collected but not tracked.");
         }
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayCrystalCollectSound();
+        }
         
         Destroy(gameObject);
     }

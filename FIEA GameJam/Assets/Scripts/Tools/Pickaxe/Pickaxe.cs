@@ -16,6 +16,10 @@ public class Pickaxe : MonoBehaviour
     [SerializeField] private float fortune;
     [SerializeField] private float miningSpeed;
     [SerializeField] private float miningDamage;
+    
+    [Header("Animation Settings")]
+    [SerializeField] private float swingAnimationDuration = 0.3f;
+    
     private Coroutine miningCoroutine;
     private float nextMineTime;
     
@@ -24,8 +28,20 @@ public class Pickaxe : MonoBehaviour
 
     void Awake()
     {
-        crystalHealthBar.gameObject.SetActive(false);
-        pickaxeStatsScriptableObject = Instantiate(pickaxeStatsScriptableObject);
+        if (crystalHealthBar != null)
+        {
+            crystalHealthBar.gameObject.SetActive(false);
+        }
+        
+        if (pickaxeStatsScriptableObject != null)
+        {
+            pickaxeStatsScriptableObject = Instantiate(pickaxeStatsScriptableObject);
+        }
+        else
+        {
+            Debug.LogError("[PICKAXE] pickaxeStatsScriptableObject is not assigned in the Inspector!");
+        }
+        
         nextMineTime = 0f;
     }
 
@@ -61,7 +77,7 @@ public class Pickaxe : MonoBehaviour
                 if (crystal != null)
                 {
                     Debug.Log($"[PICKAXE] Mining {crystal.name}");
-                    crystal.MineCrystal(pickaxeStatsScriptableObject.GetStat(Stat.miningDamage));
+                    crystal.MineCrystal(pickaxeStatsScriptableObject.GetStat(Stat.miningDamage), hit.point, hit.normal);
                     UpdateCrystalHealthBar(crystal);
 
                     //added by char
@@ -133,8 +149,7 @@ public class Pickaxe : MonoBehaviour
     {
         isSwinging = true;
 
-        float swingDuration = pickaxeStatsScriptableObject.GetStat(Stat.miningSpeed);
-        float halfDuration = swingDuration / 2f;
+        float halfDuration = swingAnimationDuration / 2f;
         float t = 0f;
 
         while (t < halfDuration)

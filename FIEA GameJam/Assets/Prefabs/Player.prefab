@@ -610,6 +610,11 @@ MonoBehaviour:
   minSlideSpeed: 2
   slideDuration: 1
   slideCameraHeight: 0.5
+  footstepInterval: 0.5
+  sprintFootstepInterval: 0.3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 129
 --- !u!114 &8642368122609185024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2018,3 +2023,4 @@ MonoBehaviour:
   fortune: 0
   miningSpeed: 5
   miningDamage: 0
+  swingAnimationDuration: 0.3

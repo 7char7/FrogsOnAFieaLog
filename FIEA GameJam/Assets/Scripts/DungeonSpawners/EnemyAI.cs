@@ -244,6 +244,11 @@ public class EnemyAI : MonoBehaviour
     {
         if (projectilePrefab == null || firePoint == null) return;
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayEnemyAttackSound();
+        }
+
         Vector3 targetPosition = player.position + Vector3.up;
         Vector3 direction = (targetPosition - firePoint.position).normalized;
 

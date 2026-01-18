@@ -45,6 +45,11 @@ public class PlayerManager : MonoBehaviour
         
         TriggerDamageFeedback();
         
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayPlayerDamagedSound();
+        }
+        
         if (currentHealth <= 0)
         {
             //Die();

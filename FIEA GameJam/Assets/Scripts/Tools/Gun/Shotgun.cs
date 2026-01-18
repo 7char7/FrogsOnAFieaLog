@@ -35,6 +35,11 @@ public class Shotgun : Gun
             HandleBullets(shootDirection, gunStatsScriptableObject.GetStat(Stat.damage) / pelletsPerShot);
         }
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayShotgunSound();
+        }
+
         if (shellParticles != null)
         {
             shellParticles.Play();

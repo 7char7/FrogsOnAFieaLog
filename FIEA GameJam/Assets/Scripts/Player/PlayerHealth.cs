@@ -26,6 +26,11 @@ public class PlayerHealth : MonoBehaviour
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
         OnDamageTaken?.Invoke(damage);
         
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayPlayerDamagedSound();
+        }
+        
         Debug.Log($"Player took {damage} damage. Health: {currentHealth}/{maxHealth}");
         
         if (currentHealth <= 0)

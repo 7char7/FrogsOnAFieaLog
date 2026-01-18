@@ -15,6 +15,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float minSlideSpeed = 2f;
     [SerializeField] private float slideDuration = 1f;
     [SerializeField] private float slideCameraHeight = 0.5f;
+    
+    [Header("Footstep Settings")]
+    [SerializeField] private float footstepInterval = 0.5f;
+    [SerializeField] private float sprintFootstepInterval = 0.3f;
+    [SerializeField] private LayerMask groundLayer;
 
     private Vector2 moveInput;
 
@@ -27,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     public bool IsSliding => isSliding;
     private float slideTimer = 0f;
     private Vector3 slideDirection;
+    
+    private float footstepTimer = 0f;
 
     void Awake()
     {
@@ -142,5 +149,35 @@ public class PlayerMovement : MonoBehaviour
         targetVel.y = rb.velocity.y;
         rb.velocity = targetVel;
 #endif
+
+        HandleFootsteps();
+    }
+    
+    void HandleFootsteps()
+    {
+        if (moveInput.magnitude > 0.1f && IsGrounded())
+        {
+            footstepTimer += Time.fixedDeltaTime;
+            float currentInterval = isSprinting ? sprintFootstepInterval : footstepInterval;
+            
+            if (footstepTimer >= currentInterval)
+            {
+                footstepTimer = 0f;
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayFootstepSound();
+                }
+            }
+        }
+        else
+        {
+            footstepTimer = 0f;
+        }
+    }
+    
+    bool IsGrounded()
+    {
+        float rayDistance = 1.1f;
+        return Physics.Raycast(transform.position, Vector3.down, rayDistance, groundLayer);
     }
 }
