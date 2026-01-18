@@ -375,7 +375,7 @@ MonoBehaviour:
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 1
-  projectilePrefab: {fileID: 6792236630467378307, guid: 1bfc7df8b9d0ba143acd13a193213613, type: 3}
+  projectilePrefab: {fileID: 6792236630467378307, guid: 48cd6ea4d0cc6a94f868c37f3d10f2e7, type: 3}
   firePoint: {fileID: 2569064010189278581}
   fireRate: 1.2
   projectileSpeed: 20
