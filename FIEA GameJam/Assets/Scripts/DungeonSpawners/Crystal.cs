@@ -101,25 +101,25 @@ public class Crystal : MonoBehaviour
         switch (crystalType)
         {
             case CrystalType.Common:
-                baseValue = 10;
+                baseValue = 30;
                 maxCrystalHealth = 20f;
                 currentCrystalHealth = maxCrystalHealth;
                 miningTime = 0.5f;
                 break;
             case CrystalType.Uncommon:
-                baseValue = 25;
+                baseValue = 55;
                 maxCrystalHealth = 50f;
                 currentCrystalHealth = maxCrystalHealth;
                 miningTime = 1f;
                 break;
             case CrystalType.Rare:
-                baseValue = 50;
+                baseValue = 70;
                 maxCrystalHealth = 100f;
                 currentCrystalHealth = maxCrystalHealth;
                 miningTime = 1.5f;
                 break;
             case CrystalType.Legendary:
-                baseValue = 100;
+                baseValue = 200;
                 maxCrystalHealth = 200f;
                 currentCrystalHealth = maxCrystalHealth;
                 miningTime = 2f;
