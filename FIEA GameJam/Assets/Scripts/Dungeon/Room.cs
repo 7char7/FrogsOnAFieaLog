@@ -5,6 +5,7 @@ public class Room
     public Vector2Int position;
     public Vector2Int size;
     public int depth;
+    public GameObject chunkPrefab;
 
     public int Left => position.x;
     public int Right => position.x + size.x;
@@ -17,6 +18,7 @@ public class Room
         this.position = position;
         this.size = size;
         this.depth = 0;
+        this.chunkPrefab = null;
     }
 
     public bool Overlaps(Room other, int padding = 0)

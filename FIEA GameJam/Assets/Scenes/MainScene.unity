@@ -794,6 +794,7 @@ GameObject:
   - component: {fileID: 1311535208}
   - component: {fileID: 1311535207}
   - component: {fileID: 1311535206}
+  - component: {fileID: 1311535211}
   m_Layer: 0
   m_Name: DungeonGenerator
   m_TagString: Untagged
@@ -872,7 +873,7 @@ MonoBehaviour:
   spawnPlayer: 1
   playerSpawnHeight: 1.5
   spawnRoomType: 0
-  generateOnStart: 1
+  generateOnStart: 0
 --- !u!114 &1311535207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -968,6 +969,30 @@ MonoBehaviour:
   grayZoneRareChance: 5
   blueZoneRareChance: 20
   redZoneRareChance: 40
+--- !u!114 &1311535211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311535203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98380502d65b9364dbcaf7f36540554c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChunkBasedDungeonGenerator
+  chunkLibrary: {fileID: 11400000, guid: 479ac0ba94af9a64186bc38d0d278b9d, type: 2}
+  numberOfRooms: 24
+  maxPlacementAttempts: 100
+  roomPadding: 0
+  useRandomSeed: 1
+  seed: 0
+  dungeonWidth: 100
+  dungeonHeight: 100
+  playerPrefab: {fileID: 2781453191828868784, guid: 9177f1e86c45bfd4d9bca84ad78ce539, type: 3}
+  spawnPlayer: 1
+  playerSpawnHeight: 1.5
+  generateOnStart: 1
 --- !u!1 &1339068077
 GameObject:
   m_ObjectHideFlags: 0
